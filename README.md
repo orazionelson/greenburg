@@ -58,6 +58,21 @@ punteggi a partire dai punti annui. Oltre agli esempi, 300 partite casuali
 complete controllano gli invarianti, e altri test verificano che le due lingue
 abbiano le stesse chiavi e che ogni immagine del catalogo esista.
 
+## Pubblicare una nuova versione
+
+GitHub Pages fa tenere i file in cache ai browser per qualche minuto. Per evitare
+che dopo un aggiornamento qualcuno si ritrovi la pagina nuova con gli script
+vecchi, ogni file JS, CSS e immagine viene richiesto con il numero di versione
+nell'indirizzo (`js/app.js?v=0.3.0`). Prima di ogni rilascio si alza la versione:
+
+```
+npm version minor     # oppure patch; aggiorna index.html e js/config.js
+```
+
+Il comando esegue `tools/set-version.js`, che copia la versione di
+`package.json` nei riferimenti di `index.html` e in `js/config.js`. Un test
+controlla che le tre versioni coincidano.
+
 ## Grafica
 
 Ogni tessera è il file `assets/tiles/<ID>.svg`. Le tessere a due facce usano
