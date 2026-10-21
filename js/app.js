@@ -9,7 +9,7 @@
   const $ = id => document.getElementById(id);
 
   let state = null;
-  let setupDraft = { playerCount: 4, names: [], seed: '' };
+  let setupDraft = { playerCount: 4, names: [], seed: '', minutes: String(C.turnTimeLimit / 60) };
 
   // ------------------------------------------------------------- storage
 
@@ -53,6 +53,9 @@
     $('app-title').textContent = t('app.title');
     $('btn-new').textContent = t('ui.newGame');
     $('btn-results').textContent = t('ui.showResults');
+    $('btn-manual').textContent = t('ui.manual');
+    $('manual-close').textContent = t('ui.close');
+    if (!$('manual').hidden) renderManual();
     $('lang-label-text').textContent = t('ui.language');
     const sel = $('lang-select');
     sel.innerHTML = BV.i18n.languages().map(code =>
@@ -86,10 +89,14 @@
           <div class="seg">${C.playerCounts.map(c => `<label><input type="radio" name="pc" value="${c}" ${c === n ? 'checked' : ''}><span>${c}</span></label>`).join('')}</div>
         </fieldset>
         ${names.join('')}
+        <label class="field"><span>${esc(t('ui.timeLimit'))}</span>
+          <input type="number" id="time-input" min="0" max="30" step="any" value="${esc(setupDraft.minutes)}">
+          <small>${esc(t('ui.timeLimitHint'))}</small></label>
         <label class="field"><span>${esc(t('ui.seed'))}</span>
           <input type="text" inputmode="numeric" id="seed-input" value="${esc(setupDraft.seed)}" placeholder="—">
           <small>${esc(t('ui.seedHint'))}</small></label>
         <button type="submit" class="btn btn-primary btn-big">${esc(t('ui.start'))}</button>
+        <button type="button" class="btn" data-setup="manual">${esc(t('ui.readManual'))}</button>
       </form>`;
   }
 
@@ -100,6 +107,7 @@
     if (pc) setupDraft.playerCount = +pc.value;
     form.querySelectorAll('[data-name]').forEach(inp => { setupDraft.names[+inp.dataset.name] = inp.value.trim(); });
     setupDraft.seed = $('seed-input').value.trim();
+    setupDraft.minutes = $('time-input').value.trim();
   }
 
   function showSetup() {
@@ -114,10 +122,12 @@
       readDraft();
       startGame();
     });
+    card.querySelector('[data-setup="manual"]').addEventListener('click', () => { readDraft(); openManual(); });
     const resume = card.querySelector('[data-setup="resume"]');
     if (resume) resume.addEventListener('click', () => {
       state = savedGame();
       closeModal();
+      resetTimer();
       BV.ui.setState(state);
       applyLanguage();
       if (state.phase === 'GAME_OVER') showResults();
@@ -129,9 +139,12 @@
     const names = [];
     for (let i = 0; i < n; i++) names.push(setupDraft.names[i] || defaultName(i));
     const seedNum = setupDraft.seed !== '' && /^\d+$/.test(setupDraft.seed) ? +setupDraft.seed : null;
-    state = E.createGame({ playerCount: n, names, seed: seedNum, autoPass: C.ui.autoPass });
+    const minutes = parseFloat(String(setupDraft.minutes).replace(',', '.'));
+    const limit = isFinite(minutes) && minutes >= 0 ? Math.round(minutes * 60) : C.turnTimeLimit;
+    state = E.createGame({ playerCount: n, names, seed: seedNum, autoPass: C.ui.autoPass, turnTimeLimit: limit });
     save();
     closeModal();
+    resetTimer();
     BV.ui.setState(state);
     applyLanguage();
   }
@@ -147,6 +160,7 @@
       return;
     }
     save();
+    resetTimer();
     BV.ui.setState(state, prev);
     if (state.phase === 'GAME_OVER') {
       $('btn-results').hidden = false;
@@ -156,20 +170,82 @@
     }
   }
 
+  // ------------------------------------------------------------- timer
+  // One timer per decision. It runs only while no window is open and the page is
+  // visible; past the limit the deciding player loses points every few seconds.
+
+  const timer = { elapsed: 0, charged: 0, last: 0 };
+
+  function resetTimer() {
+    timer.elapsed = 0;
+    timer.charged = 0;
+    timer.last = performance.now();
+  }
+
+  function tick() {
+    const now = performance.now();
+    const dt = (now - timer.last) / 1000;
+    timer.last = now;
+    const who = state && state.phase !== 'GAME_OVER' ? E.currentActor(state) : null;
+    if (who == null || !state.turnTimeLimit) { BV.ui.updateTimer(null); return; }
+    const paused = !$('modal').hidden || !$('manual').hidden || document.hidden;
+    if (!paused) timer.elapsed += Math.min(dt, 1);
+    const over = timer.elapsed - state.turnTimeLimit;
+    const due = over > 0 ? Math.floor(over / C.timePenaltyEvery) : 0;
+    if (due > timer.charged) {
+      while (timer.charged < due) {
+        state = E.applyTimePenalty(state, who);
+        timer.charged++;
+      }
+      save();
+      BV.ui.update(state);
+    }
+    BV.ui.updateTimer({
+      limit: state.turnTimeLimit,
+      elapsed: timer.elapsed,
+      penalties: timer.charged * C.timePenaltyPoints,
+      next: over > 0 ? C.timePenaltyEvery - (over % C.timePenaltyEvery) : C.timePenaltyEvery,
+      paused
+    });
+  }
+
+  // ------------------------------------------------------------ manual
+
+  function renderManual() {
+    const m = BV.MANUAL[BV.i18n.lang] || BV.MANUAL.it;
+    $('manual-title').textContent = m.title;
+    $('manual-toc').innerHTML = `<ol>${m.sections.map(sec =>
+      `<li><a href="#m-${sec.id}" data-section="m-${sec.id}">${esc(sec.title)}</a></li>`).join('')}</ol>`;
+    $('manual-content').innerHTML = m.sections.map(sec =>
+      `<section id="m-${sec.id}"><h3>${esc(sec.title)}</h3>${sec.html}</section>`).join('');
+  }
+
+  function openManual() {
+    BV.ui.hideTip();
+    renderManual();
+    $('manual').hidden = false;
+    $('manual-content').scrollTop = 0;
+    $('manual-close').focus();
+  }
+
+  function closeManual() { $('manual').hidden = true; }
+
   function showYearEnd(year) {
     const k = year - C.firstYear;
+    const pen = state.players.some(p => p.timePenalty);
     const rows = state.players.map((p, i) => `<tr style="--pc:${BV.ui.color(i)}">
         <th scope="row"><span class="dot"></span>${esc(p.name)}</th>
         <td><span class="ico cloud">${p.emissionsHistory[k]}</span></td>
         <td>+${p.yearPoints[k]}</td>
-        <td><span class="ico leaf">${p.yearPoints.slice(0, k + 1).reduce((a, b) => a + b, 0)}</span></td>
+        ${pen ? `<td>${p.timePenalty ? '−' + p.timePenalty : '—'}</td>` : ''}
+        <td><span class="ico leaf">${p.score}</span></td>
         <td><span class="ico coin">${p.credits}</span></td></tr>`).join('');
     const events = state.log.filter(e => e.year === year &&
       ['log.networkCompleted', 'log.keyPasses'].indexOf(e.key) >= 0).map(e => `<li>${BV.ui.logText(e)}</li>`).join('');
     openModal(`<h2>${esc(t('ui.yearEnd', { year }))}</h2>
       <p class="city-line">${esc(t('ui.yearEndBody', { emissions: state.cityHistory[k], threshold: state.threshold }))}</p>
       <table class="score-table"><thead><tr><th>${esc(t('ui.player'))}</th><th>${esc(t('ui.emissions'))}</th>
-        <th>${esc(t('ui.points'))}</th><th>${esc(t('ui.subtotal'))}</th><th>${esc(t('ui.credits'))}</th></tr></thead>
+        <th>${esc(t('ui.points'))}</th>${pen ? `<th>${esc(t('ui.timePenalty'))}</th>` : ''}<th>${esc(t('ui.subtotal'))}</th><th>${esc(t('ui.credits'))}</th></tr></thead>
         <tbody>${rows}</tbody></table>
       ${events ? `<ul class="events">${events}</ul>` : ''}
       <button type="button" class="btn btn-primary" id="btn-continue">${esc(t('ui.continue'))}</button>`, 'year-end');
@@ -181,13 +257,15 @@
     const o = state.outcome;
     const years = [];
     for (let y = C.firstYear; y <= C.lastYear; y++) years.push(y);
+    const pen = state.players.some(p => p.timePenalty);
     const head = `<tr><th>${esc(t('ui.rank'))}</th><th>${esc(t('ui.player'))}</th>${years.map(y => `<th>${String(y).slice(2)}</th>`).join('')}
-      <th>${esc(t('ui.satelliteBonus'))}</th><th>${esc(t('ui.subtotal'))}</th>${o.citySuccess ? '' : `<th>${esc(t('ui.halved'))}</th>`}</tr>`;
+      ${pen ? `<th>${esc(t('ui.timePenalty'))}</th>` : ''}<th>${esc(t('ui.satelliteBonus'))}</th><th>${esc(t('ui.subtotal'))}</th>${o.citySuccess ? '' : `<th>${esc(t('ui.halved'))}</th>`}</tr>`;
     const body = o.ranking.map(r => {
       const p = state.players[r.player];
       return `<tr class="${r.rank === 1 ? 'winner' : ''}" style="--pc:${BV.ui.color(r.player)}">
         <td>${r.rank}</td><th scope="row"><span class="dot"></span>${esc(p.name)}</th>
         ${years.map((y, k) => `<td>${p.yearPoints[k] != null ? p.yearPoints[k] : '—'}</td>`).join('')}
+        ${pen ? `<td>${p.timePenalty ? '−' + p.timePenalty : '—'}</td>` : ''}
         <td>${o.satelliteBonus[r.player] ? '+' + o.satelliteBonus[r.player] : '—'}</td>
         <td>${o.citySuccess ? `<b>${o.scoresBeforeHalving[r.player]}</b>` : o.scoresBeforeHalving[r.player]}</td>
         ${o.citySuccess ? '' : `<td><b>${o.finalScores[r.player]}</b></td>`}</tr>`;
@@ -233,6 +311,24 @@
       showSetup();
     });
     $('btn-results').addEventListener('click', showResults);
+    $('btn-manual').addEventListener('click', openManual);
+    $('manual-close').addEventListener('click', closeManual);
+    $('manual').addEventListener('click', e => { if (e.target === $('manual')) closeManual(); });
+    $('manual-toc').addEventListener('click', e => {
+      const a = e.target.closest('[data-section]');
+      if (!a) return;
+      e.preventDefault();
+      document.getElementById(a.dataset.section).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    $('manual-content').addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#m-"]');
+      if (!a) return;
+      e.preventDefault();
+      document.getElementById(a.getAttribute('href').slice(1)).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('manual').hidden) closeManual(); });
+    resetTimer();
+    setInterval(tick, 250);
     $('modal').addEventListener('keydown', e => {
       if (e.key === 'Escape' && state && !$('modal-card').classList.contains('setup')) closeModal();
     });
@@ -245,7 +341,8 @@
   BV.app = {
     get state() { return state; },
     dispatch: onAction,
-    load(s) { state = s; save(); closeModal(); BV.ui.setState(state); applyLanguage(); }
+    load(s) { state = s; save(); closeModal(); resetTimer(); BV.ui.setState(state); applyLanguage(); },
+    timer
   };
 
   init();

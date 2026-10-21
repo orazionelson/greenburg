@@ -34,6 +34,10 @@
     networkBonus: 1,                 // -1 emission per Municipio per completed network
     failureFactor: 0.5,              // rounded down
 
+    turnTimeLimit: 120,              // seconds per decision; 0 = no timer
+    timePenaltyEvery: 10,            // seconds over the limit per penalty
+    timePenaltyPoints: 1,            // impact points lost per penalty
+
     municipi: ['castello', 'ponte', 'mercato', 'stazione'],
     roles: ['urbanista', 'lavori', 'bilancio', 'progettista', 'sindaco'],
     networks: ['strada', 'ferrovia'],

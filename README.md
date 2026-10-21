@@ -17,6 +17,10 @@ nel browser e si riprende dalla schermata iniziale.
   tattile, per vederne nome, testo stampato e valori.
 - Chi non ha mosse possibili rinuncia in automatico, e il registro lo annota.
 - Il seme casuale, facoltativo, riproduce la stessa preparazione.
+- Il pulsante **Manuale** apre le regole per i giocatori, in italiano e in inglese.
+- Ogni decisione ha un tempo massimo, scelto a inizio partita (2 minuti di default,
+  0 per giocare senza limite). Oltre il limite si perde 1 punto impatto ogni 10
+  secondi; il timer si ferma con le finestre aperte.
 
 ## Struttura
 
@@ -27,6 +31,7 @@ nel browser e si riprende dalla schermata iniziale.
 | `js/engine.js` | Motore di gioco puro, senza DOM: lo stato è JSON, `applyAction` non modifica l'input |
 | `js/rng.js` | Generatore casuale riproducibile, con lo stato salvato nella partita |
 | `js/i18n/it.js`, `js/i18n/en.js` | Tutte le stringhe, una lingua per file |
+| `js/manual/it.js`, `js/manual/en.js` | Manuale dei giocatori |
 | `js/ui.js`, `js/app.js` | Tabellone, pannelli, scheda tessera, schermate iniziale e finale, salvataggio |
 | `assets/tiles/` | Immagini delle tessere, una per ID |
 | `tools/gen-placeholders.js` | Rigenera i segnaposto SVG |
@@ -67,6 +72,8 @@ nomi li scrive l'app nella lingua scelta. Se le illustrazioni definitive avranno
 già il cartiglio stampato, imposta `CONFIG.ui.tileOverlay = false` per non
 sovrapporre il nome.
 
-Sullo schermo i lati dell'anello sono più lunghi delle tessere rete, per fare
-posto al centro: la tessera resta in proporzione 3:1 e il resto del lato è un
-raccordo di strada o binario.
+L'esposizione, le carte ruolo e i tracciati stanno in un'area comune accanto
+al tabellone, quindi l'anello è stretto quanto le tessere rete (proporzione 3:1,
+lunghe quanto il lato di un Municipio). Nel triangolo a 3 giocatori i lati in
+alto hanno un piccolo raccordo, perché i Municipi quadrati coprono di più i lati
+obliqui.

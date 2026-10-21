@@ -90,7 +90,15 @@
       countsForSatellite: 'Counts for the satellite bonus.',
       owner: 'Owner',
       crest: 'Crest',
-      effect: 'Effect'
+      effect: 'Effect',
+      timerLeft: 'Time for this move',
+      timerOver: 'Time is up: penalty −{points}, next in {next} s',
+      timePenalty: 'Time penalty',
+      timeLimit: 'Time limit per move (minutes)',
+      timeLimitHint: '0 = no limit. Over the limit you lose 1 impact point every 10 seconds.',
+      manual: 'Rules',
+      readManual: 'Read the rules',
+      close: 'Close'
     },
 
     family: {
@@ -194,6 +202,7 @@
       networkCompleted: 'Network completed: {network}! −1 to every district\'s emissions.',
       yearPoints: '{player}: emissions {emissions}, +{points} points (total {total}).',
       cityEmissions: 'City emissions: {emissions} (threshold {threshold}).',
+      timePenalty: '{player} is over the time limit: −{points} point (total penalty {total}).',
       keyPasses: 'Nobody chose the Mayor: the Key passes to {player}.',
       citySuccess: 'The city is below the threshold: collective success!',
       cityFailure: 'End of 2030 above the threshold: the city failed, scores halved.'
