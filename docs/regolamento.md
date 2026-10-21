@@ -95,14 +95,14 @@ Le caselle T1-T6 sono spazi territoriali e accolgono le tessere grigie territori
 
 ### 4.3 Tessere grigie territoriali
 
-Ogni Municipio riceve un esemplare di ciascuno dei sei tipi. Le tessere grigie territoriali non hanno costo né rendita; rappresentano superfici impermeabili o fonti fossili, e ciascuna emette a ogni fine anno il valore indicato finché resta sulla plancia. Quando un giocatore vi posa sopra un'infrastruttura, la tessera grigia viene rimossa dal gioco e le emissioni del Municipio scendono del suo valore. Le tessere con emissione 2 sono fonti dirette di combustione; quelle con emissione 1 sono superfici impermeabili e degradate.
+Ogni Municipio riceve un esemplare di ciascuno dei sei tipi. Le tessere grigie territoriali non hanno costo né rendita; rappresentano superfici impermeabili o fonti fossili, e ciascuna emette a ogni fine anno il valore indicato finché resta sulla plancia. Quando un giocatore vi posa sopra un'infrastruttura, la tessera grigia viene rimossa dal gioco e le emissioni del Municipio scendono del suo valore. Le tessere con emissione 2 sono fonti dirette di combustione; quelle con emissione 1 sono superfici impermeabili, degradate o inquinate.
 
 | ID | Nome | Emissione | Copie |
 | --- | --- | --- | --- |
 | gr\_parcheggio | Parcheggio a raso | 1 | 4 |
 | gr\_piazzale | Piazzale asfaltato | 1 | 4 |
 | gr\_cortile | Cortile cementato | 1 | 4 |
-| gr\_terreno | Terreno degradato | 1 | 4 |
+| gr\_laghetto | Laghetto sporco | 1 | 4 |
 | gr\_distributore | Distributore di carburante | 2 | 4 |
 | gr\_deposito | Deposito di autobus diesel | 2 | 4 |
 
@@ -112,7 +112,7 @@ Ogni Municipio riceve un esemplare di ciascuno dei sei tipi. Le tessere grigie t
 
 **Cortile cementato.** Testo stampato: «Cortile interno interamente cementato, dove l'acqua piovana non viene assorbita e finisce subito in fognatura.» Disegno: un cortile racchiuso su tre lati da facciate con intonaco scrostato, finestre con persiane chiuse e parabole satellitari. Al centro una griglia di scolo da cui l'acqua trabocca formando un rigagnolo; lungo un muro, cassonetti dei rifiuti e una bicicletta arrugginita appoggiata. Il pavimento è di cemento grigio uniforme, con macchie di umidità.
 
-**Terreno degradato.** Testo stampato: «Area abbandonata con rifiuti e suolo compattato, dove non cresce più nulla.» Disegno: un lotto di terra brunastra e polverosa, recintato da una rete metallica divelta in più punti. Vi sono abbandonati pneumatici, un materasso, un carrello della spesa rovesciato e sacchi neri. Ciuffi d'erba secca, una pozza fangosa, un cartello «vendesi» scolorito.
+**Laghetto sporco.** Testo stampato: «Laghetto dimenticato, coperto di schiuma e rifiuti, dove l'acqua ferma non ospita più alcuna vita.» Disegno: uno specchio d'acqua torbida, verde-marrone, con le rive di cemento sbrecciato. Una schiuma giallastra si raccoglie lungo i bordi; dall'acqua affiorano bottiglie di plastica, uno pneumatico e un carrello della spesa capovolto. Intorno, un canneto secco e un tubo di scarico che riversa acqua scura nel laghetto. Nessun animale, nessun riflesso di cielo.
 
 **Distributore di carburante.** Testo stampato: «Stazione di servizio a benzina e gasolio, con una coda continua di auto in attesa.» Disegno: una pensilina piatta sorretta da pilastri, con quattro colonnine di erogazione senza alcun marchio e un cartello prezzi vuoto. Una fila di automobili in attesa, con sbuffi di fumo scuro dai tubi di scappamento, e un'autocisterna in manovra. Sul piazzale, chiazze d'olio e una tanica abbandonata.
 
@@ -353,7 +353,7 @@ Gli esempi seguono una partita a 3 giocatori: Anna governa il Castello, Bruno il
 
 ### 10.1 Preparazione del Municipio di Anna
 
-Le tessere grigie di Anna, disposte a caso, sono: T1 Distributore di carburante (2), T2 Parcheggio a raso (1), T3 Terreno degradato (1), T4 Deposito di autobus diesel (2), T5 Piazzale asfaltato (1), T6 Cortile cementato (1). Dal sacchetto pesca il Condominio anni Sessanta (E1) e la Scuola con caldaia a gasolio (E2). Le emissioni sono 8 dalle tessere territoriali, 4 dagli edifici e 2 dai tratti di rete, per un totale di 14. Anna ha la Chiave della città. Ogni giocatore ha 3 crediti.
+Le tessere grigie di Anna, disposte a caso, sono: T1 Distributore di carburante (2), T2 Parcheggio a raso (1), T3 Laghetto sporco (1), T4 Deposito di autobus diesel (2), T5 Piazzale asfaltato (1), T6 Cortile cementato (1). Dal sacchetto pesca il Condominio anni Sessanta (E1) e la Scuola con caldaia a gasolio (E2). Le emissioni sono 8 dalle tessere territoriali, 4 dagli edifici e 2 dai tratti di rete, per un totale di 14. Anna ha la Chiave della città. Ogni giocatore ha 3 crediti.
 
 ### 10.2 Anno 2025
 

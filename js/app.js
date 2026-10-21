@@ -27,7 +27,7 @@
     if (!raw) return null;
     try {
       const s = JSON.parse(raw);
-      return s && s.version === 1 && s.players ? s : null;
+      return s && s.version === E.STATE_VERSION && s.players ? s : null;
     } catch (e) { return null; }
   }
   function save() { store(C.ui.storageKey, state ? JSON.stringify(state) : null); }

@@ -102,12 +102,15 @@ const GREY_ART = {
     <rect x="54" y="56" width="12" height="12" fill="#444" stroke="#222"/><path d="M60 68 q4 10 -2 22" stroke="#7fa7c4" stroke-width="3" fill="none"/>
     <rect x="76" y="70" width="16" height="12" fill="#4e5b4f"/><rect x="76" y="56" width="16" height="12" fill="#5d4f3f"/>
     <circle cx="34" cy="60" r="6" fill="#7a7a7a" opacity="0.4"/><circle cx="42" cy="78" r="9" fill="#7a7a7a" opacity="0.35"/>`,
-  gr_terreno: () => `<rect x="6" y="14" width="108" height="80" fill="#8c7458"/>
-    <path d="M8 16 l104 0 l0 76 l-104 0 z" fill="none" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="6 4"/>
-    <circle cx="30" cy="40" r="7" fill="none" stroke="#222" stroke-width="4"/><circle cx="42" cy="46" r="7" fill="none" stroke="#222" stroke-width="4"/>
-    <rect x="62" y="30" width="30" height="16" rx="3" fill="#cfc4b0" transform="rotate(-8 77 38)"/>
-    <ellipse cx="78" cy="72" rx="14" ry="7" fill="#5d4a36"/><circle cx="30" cy="74" r="5" fill="#212121"/><circle cx="38" cy="78" r="5" fill="#212121"/>
-    <path d="M96 60 l2 -8 M100 62 l3 -7 M18 58 l1 -7" stroke="#b8a46a" stroke-width="1.5"/>`,
+  gr_laghetto: () => `<rect x="6" y="14" width="108" height="80" fill="#8a8170"/>
+    <path d="M18 54 C14 30 46 22 64 26 C92 30 108 44 102 66 C96 88 52 92 30 82 C18 76 20 66 18 54 Z" fill="#9c9583" stroke="#6f6a5e" stroke-width="3"/>
+    <path d="M26 54 C24 36 50 32 64 34 C88 38 98 48 94 64 C88 80 54 84 36 76 C28 72 28 64 26 54 Z" fill="#5f6b45"/>
+    <path d="M34 46 q8 -4 16 0 t16 0 M58 70 q8 -4 16 0 t14 0 M36 62 q6 -3 12 0" stroke="#d9cf8a" stroke-width="2.5" fill="none" opacity="0.85"/>
+    <ellipse cx="44" cy="54" rx="9" ry="4" fill="#c9c27a" opacity="0.7"/><ellipse cx="78" cy="58" rx="7" ry="3" fill="#c9c27a" opacity="0.6"/>
+    <rect x="62" y="44" width="5" height="11" rx="2" fill="#cfd8dc" opacity="0.85" transform="rotate(35 64 50)"/><rect x="48" y="66" width="5" height="10" rx="2" fill="#a5d6a7" opacity="0.8" transform="rotate(-50 50 70)"/>
+    <circle cx="80" cy="44" r="5" fill="none" stroke="#212121" stroke-width="3"/>
+    ${[14, 18, 22, 100, 104].map((x, i) => `<path d="M${x} ${i < 3 ? 40 : 78} l-2 -12 M${x + 3} ${i < 3 ? 40 : 78} l2 -10" stroke="#9e8f4a" stroke-width="1.6"/>`).join('')}
+    <rect x="96" y="22" width="16" height="7" fill="#616161"/><path d="M96 26 q-6 2 -10 10" stroke="#3e3a33" stroke-width="4" fill="none"/>`,
   gr_distributore: () => `<rect x="6" y="18" width="108" height="76" fill="${P.asphalt}"/>
     <rect x="22" y="30" width="76" height="24" fill="#bdbdbd" stroke="#757575"/>
     ${[0, 1, 2, 3].map(i => `<rect x="${30 + i * 17}" y="58" width="7" height="12" fill="#e0e0e0" stroke="#616161"/>`).join('')}
@@ -180,7 +183,7 @@ const BUILDINGS = {
 };
 
 // ---------------------------------------------------------------- tiles
-const GREY = { gr_parcheggio: 1, gr_piazzale: 1, gr_cortile: 1, gr_terreno: 1, gr_distributore: 2, gr_deposito: 2 };
+const GREY = { gr_parcheggio: 1, gr_piazzale: 1, gr_cortile: 1, gr_laghetto: 1, gr_distributore: 2, gr_deposito: 2 };
 for (const [id, e] of Object.entries(GREY)) {
   const smoke = e === 2 ? puff(96, 30, 1) + puff(80, 22, 0.8) : '';
   write(id, svg(120, 120, `<rect width="120" height="120" fill="${P.grey}"/>

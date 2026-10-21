@@ -17,7 +17,7 @@
       { id: 'gr_parcheggio',  emission: 1 },
       { id: 'gr_piazzale',    emission: 1 },
       { id: 'gr_cortile',     emission: 1 },
-      { id: 'gr_terreno',     emission: 1 },
+      { id: 'gr_laghetto',    emission: 1 },
       { id: 'gr_distributore', emission: 2 },
       { id: 'gr_deposito',    emission: 2 }
     ],

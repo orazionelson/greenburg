@@ -110,7 +110,7 @@
       gr_parcheggio: { name: 'Surface car park', text: 'An always-full tarmac car park that soaks up heat in summer and floods when it rains.' },
       gr_piazzale: { name: 'Tarmac square', text: 'A wide square with no shade, used for the market once a week and empty the rest of the time.' },
       gr_cortile: { name: 'Concrete courtyard', text: 'A fully concreted inner courtyard where rainwater is not absorbed and runs straight into the sewer.' },
-      gr_terreno: { name: 'Derelict land', text: 'An abandoned plot of rubbish and compacted soil where nothing grows any more.' },
+      gr_laghetto: { name: 'Polluted pond', text: 'A forgotten pond covered in scum and litter, its still water no longer home to any life.' },
       gr_distributore: { name: 'Petrol station', text: 'A petrol and diesel station with an endless queue of waiting cars.' },
       gr_deposito: { name: 'Diesel bus depot', text: 'A depot of diesel buses that leave at dawn trailing a plume of smoke.' },
 

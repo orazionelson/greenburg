@@ -12,8 +12,8 @@ const E = BV.engine;
 
 const ANNA = 0, BRUNO = 1, CARLA = 2;
 // Slot indices of the forced layout below (Anna's layout from 10.1, reused for all).
-const LAYOUT = ['gr_distributore', 'gr_parcheggio', 'gr_terreno', 'gr_deposito', 'gr_piazzale', 'gr_cortile'];
-const T = { distributore: 0, parcheggio: 1, terreno: 2, deposito: 3, piazzale: 4, cortile: 5 };
+const LAYOUT = ['gr_distributore', 'gr_parcheggio', 'gr_laghetto', 'gr_deposito', 'gr_piazzale', 'gr_cortile'];
+const T = { distributore: 0, parcheggio: 1, laghetto: 2, deposito: 3, piazzale: 4, cortile: 5 };
 
 function act(state, action) { return E.applyAction(state, action); }
 function role(state, r) { return act(state, { type: 'chooseRole', role: r }); }
@@ -158,8 +158,8 @@ function start2028() {
   // Anna 7: two 1-tiles + buildings 4 + ferrovia 1.
   s.players[ANNA].territorial = [infra('inf_bus'), grey('gr_parcheggio'), V, V, V, grey('gr_cortile')];
   s.players[ANNA].network = { strada: 'rinnovata', ferrovia: 'dissestata' };
-  // Bruno 7: cortile + terreno + buildings 4 + ferrovia 1.
-  s.players[BRUNO].territorial = [infra('inf_ciclostazione'), V, grey('gr_terreno'), V, V, grey('gr_cortile')];
+  // Bruno 7: cortile + laghetto + buildings 4 + ferrovia 1.
+  s.players[BRUNO].territorial = [infra('inf_ciclostazione'), V, grey('gr_laghetto'), V, V, grey('gr_cortile')];
   s.players[BRUNO].network = { strada: 'rinnovata', ferrovia: 'dissestata' };
   // Carla 8: piazzale + distributore + buildings 4 + strada 1.
   s.players[CARLA].territorial = [grey('gr_distributore'), V, V, V, grey('gr_piazzale'), V];

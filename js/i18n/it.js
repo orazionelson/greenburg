@@ -110,7 +110,7 @@
       gr_parcheggio: { name: 'Parcheggio a raso', text: 'Parcheggio asfaltato sempre pieno, che d\'estate accumula calore e con la pioggia si allaga.' },
       gr_piazzale: { name: 'Piazzale asfaltato', text: 'Ampio piazzale senza ombra, usato per il mercato una volta alla settimana e vuoto il resto del tempo.' },
       gr_cortile: { name: 'Cortile cementato', text: 'Cortile interno interamente cementato, dove l\'acqua piovana non viene assorbita e finisce subito in fognatura.' },
-      gr_terreno: { name: 'Terreno degradato', text: 'Area abbandonata con rifiuti e suolo compattato, dove non cresce più nulla.' },
+      gr_laghetto: { name: 'Laghetto sporco', text: 'Laghetto dimenticato, coperto di schiuma e rifiuti, dove l\'acqua ferma non ospita più alcuna vita.' },
       gr_distributore: { name: 'Distributore di carburante', text: 'Stazione di servizio a benzina e gasolio, con una coda continua di auto in attesa.' },
       gr_deposito: { name: 'Deposito di autobus diesel', text: 'Rimessa di autobus a gasolio che escono all\'alba lasciando dietro di sé una scia di fumo.' },
 

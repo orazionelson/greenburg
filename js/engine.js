@@ -9,6 +9,9 @@
   var CAT = BV.CATALOG;
   var R = BV.rng;
 
+  // Bump when the catalogue or the state shape changes: older saves are ignored.
+  var STATE_VERSION = 2;
+
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
 
   function fail(msg) { throw new Error(msg); }
@@ -80,7 +83,7 @@
     C.roles.forEach(function (r) { roleCredits[r] = 0; });
 
     var state = {
-      version: 1,
+      version: STATE_VERSION,
       seed: seed,
       rng: seed,
       autoPass: opts.autoPass !== false,
@@ -503,6 +506,7 @@
   }
 
   BV.engine = {
+    STATE_VERSION: STATE_VERSION,
     createGame: createGame,
     applyAction: applyAction,
     legalActions: legalActions,
