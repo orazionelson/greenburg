@@ -56,6 +56,16 @@
     });
   }
 
+  // All grey tiles of a given emission value, one entry per copy.
+  function greyPool(emission) {
+    var pool = [];
+    CAT.grey.forEach(function (g) {
+      if (g.emission !== emission) return;
+      for (var k = 0; k < g.copies; k++) pool.push(g.id);
+    });
+    return pool;
+  }
+
   function greySlot(id) {
     var g = CAT.greyById[id];
     if (!g) fail('Unknown grey tile ' + id);
@@ -117,10 +127,30 @@
     for (var i = 0; i < n; i++) if (forcedB[i]) takeFrom(bag, forcedB[i], 'buildings');
     bag = R.shuffle(state, bag);
 
+    // Grey tiles: forced layouts first, then each Municipio draws the same
+    // number of tiles per emission value from the shuffled pools.
+    var forcedT = forced.territorial || [];
+    var pools = {};
+    Object.keys(CAT.greyPerMunicipio).forEach(function (e) { pools[e] = greyPool(+e); });
     for (i = 0; i < n; i++) {
-      var terr = forced.territorial && forced.territorial[i]
-        ? forced.territorial[i].slice()
-        : R.shuffle(state, CAT.grey.map(function (g) { return g.id; }));
+      if (!forcedT[i]) continue;
+      Object.keys(pools).forEach(function (e) {
+        takeFrom(pools[e], forcedT[i].filter(function (id) { return CAT.greyById[id] && CAT.greyById[id].emission === +e; }), 'territorial');
+      });
+    }
+    Object.keys(pools).forEach(function (e) { pools[e] = R.shuffle(state, pools[e]); });
+
+    for (i = 0; i < n; i++) {
+      var terr;
+      if (forcedT[i]) {
+        terr = forcedT[i].slice();
+      } else {
+        terr = [];
+        Object.keys(CAT.greyPerMunicipio).forEach(function (e) {
+          terr = terr.concat(pools[e].splice(0, CAT.greyPerMunicipio[e]));
+        });
+        terr = R.shuffle(state, terr);
+      }
       if (terr.length !== 6) fail('Territorial layout must have 6 tiles');
       var blds = forcedB[i] ? forcedB[i].slice() : [bag.shift(), bag.shift()];
 

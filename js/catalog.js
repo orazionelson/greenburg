@@ -12,15 +12,23 @@
       stazione: { id: 'mun_stazione', color: '#1f5b3f' }   // verde bottiglia
     },
 
-    // One copy per type per Municipio.
+    // Same values, different pictures: each Municipio draws 4 tiles of
+    // emission 1 and 2 of emission 2 (sum 8), so it always starts at 14.
     grey: [
-      { id: 'gr_parcheggio',  emission: 1 },
-      { id: 'gr_piazzale',    emission: 1 },
-      { id: 'gr_cortile',     emission: 1 },
-      { id: 'gr_laghetto',    emission: 1 },
-      { id: 'gr_distributore', emission: 2 },
-      { id: 'gr_deposito',    emission: 2 }
+      { id: 'gr_parcheggio',      emission: 1, copies: 2 },
+      { id: 'gr_piazzale',        emission: 1, copies: 2 },
+      { id: 'gr_cortile',         emission: 1, copies: 2 },
+      { id: 'gr_laghetto',        emission: 1, copies: 2 },
+      { id: 'gr_bosco',           emission: 1, copies: 2 },
+      { id: 'gr_sfasciacarrozze', emission: 1, copies: 2 },
+      { id: 'gr_cantiere',        emission: 1, copies: 2 },
+      { id: 'gr_argine',          emission: 1, copies: 2 },
+      { id: 'gr_distributore',    emission: 2, copies: 2 },
+      { id: 'gr_deposito',        emission: 2, copies: 2 },
+      { id: 'gr_discarica',       emission: 2, copies: 2 },
+      { id: 'gr_fornace',         emission: 2, copies: 2 }
     ],
+    greyPerMunicipio: { 1: 4, 2: 2 },   // tiles drawn per emission value
 
     buildings: [
       { id: 'ed_condominio', copies: 2 },

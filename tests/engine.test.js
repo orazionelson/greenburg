@@ -11,8 +11,10 @@ const BV = globalThis.BV;
 const E = BV.engine;
 
 const ANNA = 0, BRUNO = 1, CARLA = 2;
-// Slot indices of the forced layout below (Anna's layout from 10.1, reused for all).
+// Slot indices of the forced layouts below: Anna's layout from 10.1, the same for
+// Bruno, and for Carla other tiles with the same emission in the same slots.
 const LAYOUT = ['gr_distributore', 'gr_parcheggio', 'gr_laghetto', 'gr_deposito', 'gr_piazzale', 'gr_cortile'];
+const LAYOUT_C = ['gr_fornace', 'gr_bosco', 'gr_sfasciacarrozze', 'gr_discarica', 'gr_cantiere', 'gr_argine'];
 const T = { distributore: 0, parcheggio: 1, laghetto: 2, deposito: 3, piazzale: 4, cortile: 5 };
 
 function act(state, action) { return E.applyAction(state, action); }
@@ -32,7 +34,7 @@ function exampleGame() {
     seed: 42,
     keyHolder: ANNA,
     forced: {
-      territorial: [LAYOUT, LAYOUT, LAYOUT],
+      territorial: [LAYOUT, LAYOUT, LAYOUT_C],
       buildings: [['ed_condominio', 'ed_scuola'], null, null],
       deck: ['inf_parco', 'inf_orto', 'inf_bus', 'inf_fotovoltaico',
         'inf_bosco', 'inf_giardino', 'inf_ciclostazione', 'inf_eolico']
@@ -86,8 +88,29 @@ test('4-player setup: city 56, threshold 13, 5 tiles revealed, 8 buildings', () 
   assert.equal(blds.length, 8);
   ['ed_capannone', 'ed_condominio', 'ed_scuola', 'ed_uffici'].forEach(id =>
     assert.equal(blds.filter(b => b === id).length, 2));
-  s.players.forEach(p => assert.deepEqual(
-    p.territorial.map(t => t.tileId).sort(), LAYOUT.slice().sort()));
+  // Each Municipio: four tiles of emission 1 and two of emission 2; all 24 tiles used.
+  s.players.forEach(p => assert.deepEqual(p.territorial.map(t => t.emission).sort(), [1, 1, 1, 1, 2, 2]));
+  const ids = s.players.flatMap(p => p.territorial.map(t => t.tileId));
+  assert.equal(ids.length, 24);
+  BV.CATALOG.grey.forEach(g => assert.equal(ids.filter(id => id === g.id).length, 2, g.id));
+});
+
+test('grey tiles vary between games but every Municipio starts at 14', () => {
+  const layouts = new Set();
+  for (let seed = 1; seed <= 50; seed++) {
+    const s = E.createGame({ playerCount: seed % 2 ? 3 : 4, seed });
+    s.players.forEach((p, i) => {
+      assert.equal(E.computeEmissions(s, i), 14);
+      layouts.add(p.territorial.map(t => t.tileId).slice().sort().join());
+    });
+    const ids = s.players.flatMap(p => p.territorial.map(t => t.tileId));
+    BV.CATALOG.grey.forEach(g => assert.ok(ids.filter(id => id === g.id).length <= g.copies, g.id));
+  }
+  assert.ok(layouts.size > 50, 'compositions seen: ' + layouts.size);
+});
+
+test('forced layouts cannot use more copies than exist', () => {
+  assert.throws(() => E.createGame({ playerCount: 3, seed: 1, forced: { territorial: [LAYOUT, LAYOUT, LAYOUT] } }));
 });
 
 test('10.2 year 2025 matches the end-of-year table', () => {

@@ -119,6 +119,12 @@
       gr_piazzale: { name: 'Tarmac square', text: 'A wide square with no shade, used for the market once a week and empty the rest of the time.' },
       gr_cortile: { name: 'Concrete courtyard', text: 'A fully concreted inner courtyard where rainwater is not absorbed and runs straight into the sewer.' },
       gr_laghetto: { name: 'Polluted pond', text: 'A forgotten pond covered in scum and litter, its still water no longer home to any life.' },
+      gr_bosco: { name: 'Neglected woodland', text: 'A copse left to itself, choked by brambles and invasive plants and used as an illegal dump.' },
+      gr_sfasciacarrozze: { name: 'Scrapyard', text: 'Piles of wrecked cars leaking oil and fluids into the ground.' },
+      gr_cantiere: { name: 'Abandoned building site', text: 'The concrete skeleton of a block of flats never finished, standing still for years.' },
+      gr_argine: { name: 'Concreted stream', text: 'A stream boxed in by concrete walls, where water rushes away without soaking into the ground.' },
+      gr_discarica: { name: 'Unsorted landfill', text: 'Heaps of unsorted rubbish that ferment and give off methane and smoke.' },
+      gr_fornace: { name: 'Brick kiln', text: 'An old brickworks with diesel-fired kilns that never go out.' },
       gr_distributore: { name: 'Petrol station', text: 'A petrol and diesel station with an endless queue of waiting cars.' },
       gr_deposito: { name: 'Diesel bus depot', text: 'A depot of diesel buses that leave at dawn trailing a plume of smoke.' },
 

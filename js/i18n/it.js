@@ -119,6 +119,12 @@
       gr_piazzale: { name: 'Piazzale asfaltato', text: 'Ampio piazzale senza ombra, usato per il mercato una volta alla settimana e vuoto il resto del tempo.' },
       gr_cortile: { name: 'Cortile cementato', text: 'Cortile interno interamente cementato, dove l\'acqua piovana non viene assorbita e finisce subito in fognatura.' },
       gr_laghetto: { name: 'Laghetto sporco', text: 'Laghetto dimenticato, coperto di schiuma e rifiuti, dove l\'acqua ferma non ospita più alcuna vita.' },
+      gr_bosco: { name: 'Bosco abbandonato', text: 'Boschetto lasciato a sé stesso, soffocato da rovi e piante infestanti e usato come discarica abusiva.' },
+      gr_sfasciacarrozze: { name: 'Sfasciacarrozze', text: 'Cataste di auto demolite che perdono olio e liquidi nel terreno.' },
+      gr_cantiere: { name: 'Cantiere abbandonato', text: 'Scheletro di cemento di un palazzo mai finito, fermo da anni.' },
+      gr_argine: { name: 'Argine cementato', text: 'Torrente chiuso fra muri di cemento, dove l\'acqua corre via veloce senza infiltrarsi nel suolo.' },
+      gr_discarica: { name: 'Discarica indifferenziata', text: 'Cumuli di rifiuti non separati che fermentano e liberano metano e fumo.' },
+      gr_fornace: { name: 'Fornace di laterizi', text: 'Vecchia fornace per mattoni con i forni a gasolio sempre accesi.' },
       gr_distributore: { name: 'Distributore di carburante', text: 'Stazione di servizio a benzina e gasolio, con una coda continua di auto in attesa.' },
       gr_deposito: { name: 'Deposito di autobus diesel', text: 'Rimessa di autobus a gasolio che escono all\'alba lasciando dietro di sé una scia di fumo.' },
 
