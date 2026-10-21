@@ -12,6 +12,8 @@
   const S = M / 3;        // network lane width = slot side
   const TAG = 42;         // room above/below for name tags
   const ASSETS = 'assets/tiles/';
+  // The version in the URL makes browsers fetch new images after a release.
+  const asset = name => `${ASSETS}${name}.svg?v=${C.version}`;
 
   const ui = {
     state: null,
@@ -88,7 +90,7 @@
   function tip(...parts) { return `data-tip="${esc(parts.join('|'))}"`; }
 
   function tileImg(file, alt) {
-    return `<img src="${ASSETS}${file}.svg" alt="${esc(alt)}" draggable="false">`;
+    return `<img src="${asset(file)}" alt="${esc(alt)}" draggable="false">`;
   }
 
   function slotTile(slot) {
@@ -156,10 +158,10 @@
 
     const top = cy - M / 2, left = cx - M / 2;
     const tagAbove = cy < g.H / 2;
-    const flags = (st.keyHolder === pi ? `<img class="flag" src="${ASSETS}token_chiave.svg" alt="${esc(t('ui.keyHolder'))}" title="${esc(t('ui.keyHolder'))}">` : '') +
-      (st.satelliteOwner === pi ? `<img class="flag" src="${ASSETS}sat_monitoraggio.svg" alt="${esc(t('ui.satellite'))}" title="${esc(t('tile.sat_monitoraggio.name'))}">` : '');
+    const flags = (st.keyHolder === pi ? `<img class="flag" src="${asset(`token_chiave`)}" alt="${esc(t('ui.keyHolder'))}" title="${esc(t('ui.keyHolder'))}">` : '') +
+      (st.satelliteOwner === pi ? `<img class="flag" src="${asset(`sat_monitoraggio`)}" alt="${esc(t('ui.satellite'))}" title="${esc(t('tile.sat_monitoraggio.name'))}">` : '');
     return `<div class="municipio ${cur ? 'current' : ''}" style="left:${left}px;top:${top}px;--pc:${color(pi)}">
-        <img class="mun-bg" src="${ASSETS}mun_${p.municipio}.svg" alt="">
+        <img class="mun-bg" src="${asset(`mun_${p.municipio}`)}" alt="">
         <div class="mun-grid">${cells}</div>
       </div>
       <div class="name-tag ${tagAbove ? 'above' : 'below'} ${cur ? 'current' : ''}" style="left:${left - 50}px;top:${tagAbove ? top - TAG + 2 : top + M + 4}px;width:${M + 100}px;--pc:${color(pi)}">
@@ -232,7 +234,7 @@
       return `<div class="role-card ${chosen ? 'chosen' : ''} ${active ? 'active' : ''} ${action ? 'selectable' : ''}"
           ${tip('role', r)} ${action ? `${actAttr(action)} role="button" tabindex="0"` : ''}
           ${by != null ? `style="--pc:${color(by)}"` : ''} aria-label="${esc(roleName(r))}">
-          <img src="${ASSETS}ruolo_${r}.svg" alt="" draggable="false">
+          <img src="${asset(`ruolo_${r}`)}" alt="" draggable="false">
           <span class="role-name">${esc(roleShort(r))}</span>
           ${st.roleCredits[r] ? `<span class="role-credits">${coin(st.roleCredits[r])}</span>` : ''}
           ${by != null ? `<span class="role-by">${esc(playerName(by))}</span>` : ''}
@@ -244,7 +246,7 @@
       ? `<div class="tile sat ${satAct ? 'selectable' : ''}" ${tip('satellite')} ${satAct ? `${actAttr(satAct)} role="button" tabindex="0"` : ''} aria-label="${esc(t('tile.sat_monitoraggio.name'))}">${tileImg('sat_monitoraggio', t('tile.sat_monitoraggio.name'))}</div>`
       : `<div class="tile sat owned" ${tip('satellite')} style="--pc:${color(st.satelliteOwner)}">${tileImg('sat_monitoraggio', '')}<span class="owner">${esc(playerName(st.satelliteOwner))}</span></div>`;
     const tokens = C.networks.map(net => `<div class="token ${st.networkCompleted[net] ? 'done' : ''}" ${tip('token', net)}>
-        <img src="${ASSETS}token_rete_${net}.svg" alt="${esc(t(`network.${net}.token`))}"></div>`).join('');
+        <img src="${asset(`token_rete_${net}`)}" alt="${esc(t(`network.${net}.token`))}"></div>`).join('');
 
     // Below 1200px the roles move to the top of the sidebar, next to the action panel.
     const rolesHtml = `<h3>${esc(t('ui.roles'))}</h3><div class="cp-cards">${roles}</div>`;
@@ -384,8 +386,8 @@
       return `<div class="player ${a === i ? 'current' : ''}" style="--pc:${color(i)}">
         <div class="p-head"><span class="p-name">${esc(p.name)}</span>
           <span class="p-mun">${esc(t(`municipio.${p.municipio}.short`))}</span>
-          ${st.keyHolder === i ? `<img class="flag" src="${ASSETS}token_chiave.svg" alt="${esc(t('ui.keyHolder'))}" title="${esc(t('ui.keyHolder'))}">` : ''}
-          ${st.satelliteOwner === i ? `<img class="flag" src="${ASSETS}sat_monitoraggio.svg" alt="${esc(t('ui.satellite'))}" title="${esc(t('tile.sat_monitoraggio.name'))}">` : ''}
+          ${st.keyHolder === i ? `<img class="flag" src="${asset(`token_chiave`)}" alt="${esc(t('ui.keyHolder'))}" title="${esc(t('ui.keyHolder'))}">` : ''}
+          ${st.satelliteOwner === i ? `<img class="flag" src="${asset(`sat_monitoraggio`)}" alt="${esc(t('ui.satellite'))}" title="${esc(t('tile.sat_monitoraggio.name'))}">` : ''}
           ${a === i ? `<span class="p-turn">${esc(t('ui.current'))}</span>` : ''}</div>
         <dl class="p-stats">
           <div><dt>${esc(t('ui.credits'))}</dt><dd><span class="ico coin">${p.credits}</span></dd></div>

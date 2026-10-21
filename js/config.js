@@ -5,6 +5,8 @@
   var BV = root.BV = root.BV || {};
 
   BV.CONFIG = {
+    version: '0.3.0',                // kept in sync with package.json by tools/set-version.js
+
     playerCounts: [3, 4],
     firstYear: 2025,
     lastYear: 2030,
