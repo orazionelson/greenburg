@@ -28,7 +28,7 @@
 <p>The districts form a ring: <b>Castle</b>, <b>Bridge</b>, <b>Market</b> and <b>Station</b>, clockwise (with 3 players the first three are used, in a triangle). Between one district and the next run two network sections: the <b>road</b> on the outside and the <b>railway</b> on the inside. Each player owns the two sections linking their district to the next one clockwise.</p>
 <p>Each district has a 3 × 3 grid:</p>
 <ul>
-  <li>six land spaces (T1-T6) holding the <b>grey tiles</b>: Surface car park, Tarmac square, Concrete courtyard and Polluted pond emit 1; Petrol station and Diesel bus depot emit 2;</li>
+  <li>six land spaces (T1-T6) holding the <b>grey tiles</b>: four emit 1 (degraded surfaces such as car parks, squares, concrete courtyards, polluted ponds, neglected woodland, scrapyards, abandoned building sites, concreted streams) and two emit 2 (direct sources such as petrol stations, diesel bus depots, landfills, brick kilns). The pictures change from game to game, the values do not;</li>
   <li>two building spaces (E1, E2) holding the <b>buildings</b>, which emit 2 on their grey side;</li>
   <li>the crest in the middle.</li>
 </ul>
@@ -41,7 +41,7 @@
         html: `
 <p>The app sets the game up for you:</p>
 <ul>
-  <li>each district's six grey tiles are laid out at random; each district gets two random buildings, grey side up;</li>
+  <li>each district draws four grey tiles worth 1 and two worth 2 at random, laid out at random; each district gets two random buildings, grey side up;</li>
   <li>all roads and railways start run-down;</li>
   <li>every player has 3 credits and 0 points;</li>
   <li>as many infrastructure tiles as players plus one are revealed;</li>

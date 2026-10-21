@@ -17,7 +17,7 @@ Le quantità si riferiscono alla partita a 4 giocatori; con 3 giocatori si usano
 | Componente | Quantità totale | In uso a 3 giocatori | In uso a 4 giocatori |
 | --- | --- | --- | --- |
 | Tessere Municipio | 4 | 3 | 4 |
-| Tessere grigie territoriali (6 tipi) | 24 | 18 | 24 |
+| Tessere grigie territoriali (12 tipi, 2 copie ciascuno) | 24 | 18, pescate a caso | 24 |
 | Tessere edificio a due facce (4 tipi) | 8 | 6, pescate a caso | 8 |
 | Tessere strada a due facce | 4 | 3 | 4 |
 | Tessere ferrovia a due facce | 4 | 3 | 4 |
@@ -95,16 +95,22 @@ Le caselle T1-T6 sono spazi territoriali e accolgono le tessere grigie territori
 
 ### 4.3 Tessere grigie territoriali
 
-Ogni Municipio riceve un esemplare di ciascuno dei sei tipi. Le tessere grigie territoriali non hanno costo né rendita; rappresentano superfici impermeabili o fonti fossili, e ciascuna emette a ogni fine anno il valore indicato finché resta sulla plancia. Quando un giocatore vi posa sopra un'infrastruttura, la tessera grigia viene rimossa dal gioco e le emissioni del Municipio scendono del suo valore. Le tessere con emissione 2 sono fonti dirette di combustione; quelle con emissione 1 sono superfici impermeabili, degradate o inquinate.
+Le tessere grigie sono di dodici tipi, in due copie ciascuno: otto tipi emettono 1 e quattro emettono 2. I tipi con lo stesso valore hanno lo stesso effetto e cambiano solo nel disegno e nel testo, per rendere ogni partita diversa senza aggiungere regole. Ogni Municipio riceve quattro tessere da 1 e due da 2 pescate a caso, quindi la somma è sempre 8 e ogni Municipio parte da 14 di emissione. Sul retro la tessera mostra solo il valore di emissione, per poterle separare prima di pescarle. Le tessere grigie territoriali non hanno costo né rendita; rappresentano superfici impermeabili o fonti fossili, e ciascuna emette a ogni fine anno il valore indicato finché resta sulla plancia. Quando un giocatore vi posa sopra un'infrastruttura, la tessera grigia viene rimossa dal gioco e le emissioni del Municipio scendono del suo valore. Le tessere con emissione 2 sono fonti dirette di emissione (combustione o rifiuti che fermentano); quelle con emissione 1 sono superfici impermeabili, degradate o inquinate.
 
 | ID | Nome | Emissione | Copie |
 | --- | --- | --- | --- |
-| gr\_parcheggio | Parcheggio a raso | 1 | 4 |
-| gr\_piazzale | Piazzale asfaltato | 1 | 4 |
-| gr\_cortile | Cortile cementato | 1 | 4 |
-| gr\_laghetto | Laghetto sporco | 1 | 4 |
-| gr\_distributore | Distributore di carburante | 2 | 4 |
-| gr\_deposito | Deposito di autobus diesel | 2 | 4 |
+| gr\_parcheggio | Parcheggio a raso | 1 | 2 |
+| gr\_piazzale | Piazzale asfaltato | 1 | 2 |
+| gr\_cortile | Cortile cementato | 1 | 2 |
+| gr\_laghetto | Laghetto sporco | 1 | 2 |
+| gr\_bosco | Bosco abbandonato | 1 | 2 |
+| gr\_sfasciacarrozze | Sfasciacarrozze | 1 | 2 |
+| gr\_cantiere | Cantiere abbandonato | 1 | 2 |
+| gr\_argine | Argine cementato | 1 | 2 |
+| gr\_distributore | Distributore di carburante | 2 | 2 |
+| gr\_deposito | Deposito di autobus diesel | 2 | 2 |
+| gr\_discarica | Discarica indifferenziata | 2 | 2 |
+| gr\_fornace | Fornace di laterizi | 2 | 2 |
 
 **Parcheggio a raso.** Testo stampato: «Parcheggio asfaltato sempre pieno, che d'estate accumula calore e con la pioggia si allaga.» Disegno: un rettangolo d'asfalto grigio scuro, crepato in più punti, con le strisce bianche dei posti auto sbiadite e interrotte. Tre file di automobili parcheggiate in colori spenti (grigio, beige, un rosso scolorito), un parchimetro all'angolo, una pozzanghera con riflessi iridescenti di olio. In un vaso di cemento cresce un alberello stentato con poche foglie gialle. Sopra l'asfalto si vedono le linee ondulate del calore.
 
@@ -117,6 +123,18 @@ Ogni Municipio riceve un esemplare di ciascuno dei sei tipi. Le tessere grigie t
 **Distributore di carburante.** Testo stampato: «Stazione di servizio a benzina e gasolio, con una coda continua di auto in attesa.» Disegno: una pensilina piatta sorretta da pilastri, con quattro colonnine di erogazione senza alcun marchio e un cartello prezzi vuoto. Una fila di automobili in attesa, con sbuffi di fumo scuro dai tubi di scappamento, e un'autocisterna in manovra. Sul piazzale, chiazze d'olio e una tanica abbandonata.
 
 **Deposito di autobus diesel.** Testo stampato: «Rimessa di autobus a gasolio che escono all'alba lasciando dietro di sé una scia di fumo.» Disegno: un capannone con il tetto in lamiera ondulata e un ampio portone aperto, da cui escono tre autobus di vecchio modello, di un giallo sbiadito, con fumo nero dagli scarichi. Accanto, un serbatoio cilindrico di gasolio, pneumatici accatastati e un'officina con attrezzi in disordine.
+
+**Bosco abbandonato.** Testo stampato: «Boschetto lasciato a sé stesso, soffocato da rovi e piante infestanti e usato come discarica abusiva.» Disegno: una macchia fitta di alberi spogli e storti, con rami spezzati a terra e un tronco caduto che sbarra un sentiero ormai invisibile. Rovi e ailanti invadono ogni spazio; fra i tronchi sono abbandonati sacchi neri, un frigorifero e un materasso. Le chiome hanno un verde spento, quasi grigio, sotto il velo di foschia giallognola.
+
+**Sfasciacarrozze.** Testo stampato: «Cataste di auto demolite che perdono olio e liquidi nel terreno.» Disegno: un piazzale di terra battuta recintato da lamiere ondulate, con pile di carcasse d'auto arrugginite in colori spenti. Una gru con il magnete solleva una vettura; pneumatici accatastati, portiere e paraurti ammucchiati, chiazze d'olio iridescenti sul terreno.
+
+**Cantiere abbandonato.** Testo stampato: «Scheletro di cemento di un palazzo mai finito, fermo da anni.» Disegno: pilastri e solai di cemento armato grezzo, con i ferri arrugginiti che spuntano dalla sommità. Una gru ferma e scolorita, sacchi di cemento induriti, transenne bianche e rosse cadute a terra e un cartello di cantiere sbiadito; erbacce fra le macerie.
+
+**Argine cementato.** Testo stampato: «Torrente chiuso fra muri di cemento, dove l'acqua corre via veloce senza infiltrarsi nel suolo.» Disegno: un canale rettilineo con sponde verticali di cemento grigio macchiato, acqua bassa e torbida, un carrello della spesa incastrato sul fondo e tubi di scarico che sporgono dalle pareti. Una ringhiera arrugginita corre lungo il bordo; nessuna pianta.
+
+**Discarica indifferenziata.** Testo stampato: «Cumuli di rifiuti non separati che fermentano e liberano metano e fumo.» Disegno: una collina di sacchi neri e rifiuti misti, con un bulldozer giallo al lavoro alla base e gabbiani in volo. Su un fianco del cumulo cova un piccolo incendio da cui sale fumo scuro; ai piedi, una pozza di percolato nerastro.
+
+**Fornace di laterizi.** Testo stampato: «Vecchia fornace per mattoni con i forni a gasolio sempre accesi.» Disegno: un capannone in mattoni rossi con le bocche dei forni illuminate di arancione e un'alta ciminiera che emette fumo nero. Nel piazzale bancali di mattoni impilati e un camion diesel in carico; una polvere rossastra vela tutta la scena.
 
 ### 4.4 Tessere edificio
 
@@ -253,7 +271,7 @@ Disegni:
 
 1. Si scelgono i Municipi in gioco: Castello, Ponte e Mercato con 3 giocatori, tutti e quattro con 4 giocatori. Ogni giocatore prende un Municipio con il cubo e la pedina del colore corrispondente.
 2. Si compone l'anello come descritto nella sezione 3, con tutte le tessere strada e ferrovia sul lato dissestato.
-3. Ogni giocatore prende le sei tessere grigie territoriali del proprio Municipio (un esemplare per tipo), le mescola coperte e le dispone a caso sulle caselle T1-T6.
+3. Si separano le tessere grigie territoriali in base al valore sul retro e si mescolano coperte. Ogni giocatore pesca quattro tessere da 1 e due da 2 e le dispone a caso sulle caselle T1-T6. Con 3 giocatori le tessere rimaste tornano nella scatola.
 4. Si mescolano le otto tessere edificio in un sacchetto e se ne assegnano due a caso a ogni Municipio, sulle caselle E1 ed E2, con il lato grigio verso l'alto. Con 3 giocatori le due tessere rimaste tornano nella scatola.
 5. Ogni giocatore colloca il proprio cubo sul valore 14 del tracciato personale delle emissioni. Sul tracciato della città si segna il totale (42 con 3 giocatori, 56 con 4) e si colloca il segnale di soglia sul valore 10 con 3 giocatori o 13 con 4 giocatori.
 6. Ogni giocatore riceve 3 crediti; le pedine segnapunti partono da 0.

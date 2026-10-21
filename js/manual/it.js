@@ -28,7 +28,7 @@
 <p>I Municipi formano un anello: <b>Castello</b>, <b>Ponte</b>, <b>Mercato</b> e <b>Stazione</b> in senso orario (con 3 giocatori si usano i primi tre, a triangolo). Fra un Municipio e il successivo corrono due tratti di rete: la <b>strada</b> all'esterno e la <b>ferrovia</b> all'interno. Ogni giocatore possiede i due tratti che collegano il proprio Municipio a quello successivo in senso orario.</p>
 <p>Ogni Municipio ha una griglia 3 × 3:</p>
 <ul>
-  <li>sei caselle territoriali (T1-T6) con le <b>tessere grigie</b>: Parcheggio a raso, Piazzale asfaltato, Cortile cementato e Laghetto sporco emettono 1; Distributore di carburante e Deposito di autobus diesel emettono 2;</li>
+  <li>sei caselle territoriali (T1-T6) con le <b>tessere grigie</b>: quattro emettono 1 (superfici degradate come parcheggi, piazzali, cortili cementati, laghetti sporchi, boschi abbandonati, sfasciacarrozze, cantieri abbandonati, argini cementati) e due emettono 2 (fonti dirette come distributori, depositi di autobus diesel, discariche, fornaci). I disegni cambiano da partita a partita, i valori no;</li>
   <li>due caselle edilizie (E1, E2) con gli <b>edifici</b>, che sul lato grigio emettono 2;</li>
   <li>al centro lo stemma.</li>
 </ul>
@@ -41,7 +41,7 @@
         html: `
 <p>L'app prepara la partita da sola:</p>
 <ul>
-  <li>le sei tessere grigie di ogni Municipio sono disposte a caso; ogni Municipio riceve due edifici pescati a caso, sul lato grigio;</li>
+  <li>ogni Municipio pesca a caso quattro tessere grigie da 1 e due da 2, disposte a caso; ogni Municipio riceve due edifici pescati a caso, sul lato grigio;</li>
   <li>tutte le strade e le ferrovie partono dissestate;</li>
   <li>ogni giocatore ha 3 crediti e 0 punti;</li>
   <li>si scoprono tante tessere infrastruttura quanti sono i giocatori più uno;</li>

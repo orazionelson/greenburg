@@ -111,6 +111,52 @@ const GREY_ART = {
     <circle cx="80" cy="44" r="5" fill="none" stroke="#212121" stroke-width="3"/>
     ${[14, 18, 22, 100, 104].map((x, i) => `<path d="M${x} ${i < 3 ? 40 : 78} l-2 -12 M${x + 3} ${i < 3 ? 40 : 78} l2 -10" stroke="#9e8f4a" stroke-width="1.6"/>`).join('')}
     <rect x="96" y="22" width="16" height="7" fill="#616161"/><path d="M96 26 q-6 2 -10 10" stroke="#3e3a33" stroke-width="4" fill="none"/>`,
+  gr_bosco: () => `<rect x="6" y="14" width="108" height="80" fill="#7d7558"/>
+    ${[[24, 32, 13], [52, 26, 12], [82, 34, 14], [34, 66, 12], [70, 70, 13], [100, 66, 9]].map(([x, y, r], i) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${i % 2 ? '#6d6a45' : '#7a7348'}"/><path d="M${x - r / 2} ${y - r / 3} l${r / 2} ${r / 2} M${x} ${y - r / 2} l${r / 3} ${r}" stroke="#4e4a33" stroke-width="1.5"/>`).join('')}
+    ${[[14, 50], [60, 48], [90, 52], [20, 86], [52, 88]].map(([x, y]) => `<path d="M${x} ${y} q4 -6 8 0 q4 -6 8 0" stroke="#5d5a3a" stroke-width="2" fill="none"/>`).join('')}
+    <path d="M10 56 L56 50" stroke="#5a4632" stroke-width="5" stroke-linecap="round"/>
+    <rect x="70" y="44" width="12" height="16" fill="#e8e3d6" stroke="#8a8578"/><ellipse cx="44" cy="80" rx="7" ry="5" fill="#2b2b2b"/><ellipse cx="54" cy="82" rx="6" ry="4" fill="#3a3a3a"/>`,
+  gr_sfasciacarrozze: () => `<rect x="6" y="14" width="108" height="80" fill="#8a8170"/>
+    <rect x="8" y="16" width="104" height="76" fill="none" stroke="#7a7f86" stroke-width="3" stroke-dasharray="10 2"/>
+    ${[[14, 22, '#8d5a4a'], [14, 32, '#7f8a8f'], [14, 42, '#a08a5a'], [42, 26, '#6f6f6f'], [42, 36, '#8d5a4a']].map(([x, y, c]) => `<rect x="${x}" y="${y}" width="24" height="9" rx="2" fill="${c}" stroke="#3d3d3d"/><rect x="${x + 4}" y="${y + 2}" width="9" height="4" fill="#9fb0b8" opacity="0.6"/>`).join('')}
+    <path d="M86 92 L86 30 L66 30" stroke="#c9a227" stroke-width="4" fill="none"/><line x1="66" y1="30" x2="66" y2="46" stroke="#555" stroke-width="1.5"/><rect x="58" y="46" width="16" height="5" fill="#444"/>
+    <rect x="54" y="52" width="26" height="9" rx="2" fill="#7f8a8f" stroke="#3d3d3d" transform="rotate(-8 67 56)"/>
+    ${[0, 1, 2].map(i => `<circle cx="${22 + i * 4}" cy="${74 - i * 6}" r="6" fill="none" stroke="#222" stroke-width="3.5"/>`).join('')}
+    <ellipse cx="50" cy="82" rx="12" ry="4" fill="#4d5a66" opacity="0.7"/><path d="M42 82 q8 -3 16 0" stroke="#b39ddb" stroke-width="1" fill="none"/>`,
+  gr_cantiere: () => `<rect x="6" y="14" width="108" height="80" fill="#968f80"/>
+    <g fill="#b9b4aa" stroke="#7a756c" stroke-width="1.5">
+      <rect x="22" y="26" width="64" height="6"/><rect x="22" y="46" width="64" height="6"/><rect x="22" y="66" width="64" height="6"/>
+      ${[22, 42, 62, 80].map(x => `<rect x="${x}" y="26" width="6" height="58"/>`).join('')}
+    </g>
+    ${[25, 45, 65, 83].map(x => `<path d="M${x} 26 l-1 -8 M${x + 2} 26 l2 -7" stroke="#8d4b2b" stroke-width="1.4"/>`).join('')}
+    <path d="M98 92 L98 18 L64 18 M98 26 L106 18" stroke="#b7a46a" stroke-width="3" fill="none"/><line x1="70" y1="18" x2="70" y2="30" stroke="#666"/>
+    <rect x="12" y="80" width="12" height="8" fill="#cfc8b8"/><rect x="26" y="82" width="10" height="7" fill="#cfc8b8"/>
+    <path d="M40 90 l18 -6 M42 92 l18 -6" stroke="#d84315" stroke-width="2.5" stroke-dasharray="4 4"/>
+    ${[16, 56, 92].map(x => `<path d="M${x} 92 l2 -8 M${x + 4} 92 l1 -6" stroke="#9e8f4a" stroke-width="1.6"/>`).join('')}`,
+  gr_argine: () => `<rect x="6" y="14" width="108" height="80" fill="#8f8b83"/>
+    <rect x="6" y="38" width="108" height="34" fill="#a7a39a"/><rect x="6" y="44" width="108" height="22" fill="#6f7a6a"/>
+    <path d="M6 50 q14 -4 28 0 t28 0 t28 0 t26 0 M6 59 q14 -4 28 0 t28 0 t28 0 t26 0" stroke="#9bb0a0" stroke-width="1.5" fill="none" opacity="0.7"/>
+    ${[18, 50, 86].map(x => `<rect x="${x}" y="34" width="8" height="6" fill="#555"/><path d="M${x + 4} 40 l0 6" stroke="#4a4235" stroke-width="3"/>`).join('')}
+    <line x1="6" y1="34" x2="114" y2="34" stroke="#8d4b2b" stroke-width="2"/>${Array.from({ length: 12 }, (_, i) => `<line x1="${8 + i * 9}" y1="28" x2="${8 + i * 9}" y2="34" stroke="#8d4b2b" stroke-width="1.5"/>`).join('')}
+    <line x1="6" y1="28" x2="114" y2="28" stroke="#8d4b2b" stroke-width="1.5"/>
+    <g transform="translate(64,50) rotate(20)"><rect width="16" height="10" fill="none" stroke="#bdbdbd" stroke-width="1.5"/><circle cx="3" cy="12" r="2" fill="#bdbdbd"/><circle cx="13" cy="12" r="2" fill="#bdbdbd"/></g>
+    <rect x="6" y="76" width="108" height="18" fill="#7f7a70"/>`,
+  gr_discarica: () => `<rect x="6" y="18" width="108" height="76" fill="#7c776f"/>
+    <path d="M10 88 C18 50 34 34 52 38 C66 30 84 40 92 56 C100 66 108 78 110 88 Z" fill="#5d5a52"/>
+    ${[[30, 70, '#2b2b2b'], [44, 56, '#3a3a3a'], [60, 48, '#2b2b2b'], [76, 60, '#444'], [54, 72, '#3a3a3a'], [88, 76, '#2b2b2b'], [22, 82, '#444']].map(([x, y, c]) => `<ellipse cx="${x}" cy="${y}" rx="8" ry="6" fill="${c}"/>`).join('')}
+    ${[[38, 64, '#a0524c'], [68, 54, '#c8b99a'], [82, 70, '#6f8fa0'], [48, 80, '#d4b94a']].map(([x, y, c]) => `<rect x="${x}" y="${y}" width="7" height="5" fill="${c}"/>`).join('')}
+    <g transform="translate(14,70)"><rect width="18" height="10" fill="#d4b94a" stroke="#6d5f1f"/><rect x="-6" y="4" width="6" height="8" fill="#6d5f1f"/><circle cx="4" cy="12" r="3" fill="#222"/><circle cx="14" cy="12" r="3" fill="#222"/></g>
+    <path d="M70 44 q2 -6 6 -2 q0 -6 5 -3" stroke="#ff7043" stroke-width="2.5" fill="none"/>
+    ${[[30, 26], [50, 22], [90, 30]].map(([x, y]) => `<path d="M${x} ${y} q3 -3 6 0 q3 -3 6 0" stroke="#eeeeee" stroke-width="1.5" fill="none"/>`).join('')}
+    <ellipse cx="96" cy="90" rx="12" ry="3" fill="#3b3226"/>`,
+  gr_fornace: () => `<rect x="6" y="18" width="108" height="76" fill="#8a7f72"/>
+    <rect x="12" y="40" width="62" height="36" fill="#9a5a44" stroke="#5d3326" stroke-width="2"/>
+    ${[0, 1, 2, 3, 4].map(r => `<line x1="12" y1="${46 + r * 6}" x2="74" y2="${46 + r * 6}" stroke="#7a4434" stroke-width="0.8"/>`).join('')}
+    ${[0, 1, 2].map(i => `<path d="M${20 + i * 18} 76 l0 -10 a5 5 0 0 1 10 0 l0 10" fill="#2b1e18"/><circle cx="${25 + i * 18}" cy="71" r="2.5" fill="#ff8a50" opacity="0.8"/>`).join('')}
+    <rect x="80" y="14" width="10" height="62" fill="#8d4b3b" stroke="#5d3326"/>
+    ${[[78, 84], [92, 84], [78, 76], [92, 76]].map(([x, y]) => `<rect x="${x}" y="${y}" width="12" height="7" fill="#b5654a" stroke="#6d3a2a"/>`).join('')}
+    <g transform="translate(16,80)"><rect width="22" height="10" rx="2" fill="#bdbdbd" stroke="#666"/><circle cx="5" cy="11" r="2.5" fill="#222"/><circle cx="17" cy="11" r="2.5" fill="#222"/></g>
+    <rect x="6" y="18" width="108" height="76" fill="#c26a4a" opacity="0.12"/>`,
   gr_distributore: () => `<rect x="6" y="18" width="108" height="76" fill="${P.asphalt}"/>
     <rect x="22" y="30" width="76" height="24" fill="#bdbdbd" stroke="#757575"/>
     ${[0, 1, 2, 3].map(i => `<rect x="${30 + i * 17}" y="58" width="7" height="12" fill="#e0e0e0" stroke="#616161"/>`).join('')}
@@ -183,7 +229,11 @@ const BUILDINGS = {
 };
 
 // ---------------------------------------------------------------- tiles
-const GREY = { gr_parcheggio: 1, gr_piazzale: 1, gr_cortile: 1, gr_laghetto: 1, gr_distributore: 2, gr_deposito: 2 };
+const GREY = {
+  gr_parcheggio: 1, gr_piazzale: 1, gr_cortile: 1, gr_laghetto: 1,
+  gr_bosco: 1, gr_sfasciacarrozze: 1, gr_cantiere: 1, gr_argine: 1,
+  gr_distributore: 2, gr_deposito: 2, gr_discarica: 2, gr_fornace: 2
+};
 for (const [id, e] of Object.entries(GREY)) {
   const smoke = e === 2 ? puff(96, 30, 1) + puff(80, 22, 0.8) : '';
   write(id, svg(120, 120, `<rect width="120" height="120" fill="${P.grey}"/>
