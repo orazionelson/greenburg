@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" width="360" height="360">
+<rect width="360" height="360" fill="#efe4c8"/>
+  <g stroke="#cdbb92" stroke-width="3" fill="none">
+    <path d="M0 120 L360 120 M0 240 L360 240 M120 0 L120 360 M240 0 L240 360"/>
+    <path d="M0 60 L40 60 M320 300 L360 300 M60 0 L60 30 M300 330 L300 360" stroke-width="2"/>
+  </g>
+  <rect x="6" y="6" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="12" y="22" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">T1</text><rect x="126" y="6" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="132" y="22" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">T2</text><rect x="246" y="6" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="252" y="22" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">T3</text><rect x="6" y="126" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="12" y="142" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">E1</text><rect x="246" y="126" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="252" y="142" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">E2</text><rect x="6" y="246" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="12" y="262" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">T4</text><rect x="126" y="246" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="132" y="262" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">T5</text><rect x="246" y="246" width="108" height="108" rx="4" fill="#f7f0de" stroke="#b9a77d" stroke-width="1.5"/><text x="252" y="262" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#9b8a63">T6</text>
+  <g transform="translate(180,170)">
+    <path d="M-34 -38 L34 -38 L34 4 C34 28 0 42 0 42 C0 42 -34 28 -34 4 Z" fill="#3f8f3a" stroke="#fff" stroke-width="3"/>
+    <path d="M0 -38 L34 -38 L34 4 C34 28 0 42 0 42 Z" fill="#fff" opacity="0.18"/>
+    <g transform="translate(0,-2)"><path d="M-20 6 L20 6 M-20 6 a6.6 7 0 0 1 13.3 0 a6.6 7 0 0 1 13.3 0 a6.6 7 0 0 1 13.3 0" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M-20 6 L-20 -4 L20 -4 L20 6" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M-18 14 q4 -3 8 0 t8 0 t8 0 t8 0" stroke="#9fd3f5" stroke-width="2" fill="none"/></g>
+  </g>
+  <path d="M132 218 L228 218 L222 232 L228 246 L132 246 L138 232 Z" fill="#3a7fb8" stroke="#fff" stroke-width="1.5"/>
+  <rect x="4" y="4" width="352" height="352" rx="10" fill="none" stroke="#3a7fb8" stroke-width="8"/>
+</svg>

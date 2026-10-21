@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<rect width="120" height="120" fill="#e8f5e9"/>
+  <rect width="120" height="96" fill="#a5d27a"/><ellipse cx="60" cy="50" rx="44" ry="28" fill="#6aa65a"/><ellipse cx="60" cy="52" rx="30" ry="16" fill="#7fc4e8"/>
+    <circle cx="22" cy="76" r="4" fill="#2e7d32"/><circle cx="33" cy="26" r="4" fill="#8e7cc3"/><circle cx="44" cy="76" r="4" fill="#8e7cc3"/><circle cx="55" cy="26" r="4" fill="#2e7d32"/><circle cx="66" cy="76" r="4" fill="#8e7cc3"/><circle cx="77" cy="26" r="4" fill="#8e7cc3"/><circle cx="88" cy="76" r="4" fill="#2e7d32"/><circle cx="99" cy="26" r="4" fill="#8e7cc3"/>
+    <rect x="104" y="4" width="6" height="40" fill="#90a4ae"/><path d="M107 44 q-10 4 -18 8" stroke="#7fc4e8" stroke-width="3" fill="none"/>
+  <defs><radialGradient id="sk" cx="0.9" cy="0.05" r="0.7"><stop offset="0" stop-color="#fff6c8" stop-opacity="0.8"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></radialGradient></defs>
+  <rect width="120" height="120" fill="url(#sk)"/>
+  <rect x="0" y="96" width="120" height="24" fill="#7cc461"/><rect x="0" y="96" width="120" height="1.5" fill="#000" opacity="0.25"/>
+  <g transform="translate(4,4)">
+  <circle cx="13" cy="13" r="12" fill="#e0b43a" stroke="#a87f12" stroke-width="2"/>
+  <text x="13" y="18" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle" stroke="#a87f12" stroke-width="0.6">1</text></g><g transform="translate(91,4)">
+  <circle cx="13" cy="13" r="12" fill="#3f9a4a" stroke="#22652b" stroke-width="2"/>
+  <path d="M21 4 l4 0 l0 4 M25 4 l-5 5" stroke="#fff" stroke-width="2" fill="none"/>
+  <text x="12" y="18" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">0</text></g>
+  <rect x="1" y="1" width="118" height="118" rx="6" fill="none" stroke="#2b2b2b" stroke-width="2"/>
+</svg>

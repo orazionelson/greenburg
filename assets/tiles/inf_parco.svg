@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<rect width="120" height="120" fill="#e8f5e9"/>
+  <rect width="120" height="96" fill="#9fd36f"/><path d="M0 70 C30 50 60 80 120 40" stroke="#efe3c2" stroke-width="8" fill="none"/>
+    <g><ellipse cx="28" cy="33" rx="14" ry="8.4" fill="#000" opacity="0.15"/><circle cx="26" cy="30" r="14" fill="#3d8b3d"/><circle cx="21.333333333333332" cy="25.333333333333332" r="6.363636363636363" fill="#fff" opacity="0.18"/></g><g><ellipse cx="88" cy="69" rx="13" ry="7.8" fill="#000" opacity="0.15"/><circle cx="86" cy="66" r="13" fill="#3d8b3d"/><circle cx="81.66666666666667" cy="61.666666666666664" r="5.909090909090908" fill="#fff" opacity="0.18"/></g><g><ellipse cx="94" cy="25" rx="11" ry="6.6" fill="#000" opacity="0.15"/><circle cx="92" cy="22" r="11" fill="#4f9d45"/><circle cx="88.33333333333333" cy="18.333333333333332" r="5" fill="#fff" opacity="0.18"/></g><rect x="44" y="62" width="14" height="4" fill="#d9b88a"/><circle cx="66" cy="38" r="4" fill="#7fc4e8"/><g><circle cx="56" cy="50" r="2.2" fill="#455a64"/><rect x="54.2" y="52" width="3.6" height="5" rx="1.5" fill="#455a64"/></g><g><circle cx="36" cy="68" r="2.2" fill="#8d6e63"/><rect x="34.2" y="70" width="3.6" height="5" rx="1.5" fill="#8d6e63"/></g>
+  <defs><radialGradient id="sk" cx="0.9" cy="0.05" r="0.7"><stop offset="0" stop-color="#fff6c8" stop-opacity="0.8"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></radialGradient></defs>
+  <rect width="120" height="120" fill="url(#sk)"/>
+  <rect x="0" y="96" width="120" height="24" fill="#7cc461"/><rect x="0" y="96" width="120" height="1.5" fill="#000" opacity="0.25"/>
+  <g transform="translate(4,4)">
+  <circle cx="13" cy="13" r="12" fill="#e0b43a" stroke="#a87f12" stroke-width="2"/>
+  <text x="13" y="18" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle" stroke="#a87f12" stroke-width="0.6">1</text></g><g transform="translate(91,4)">
+  <circle cx="13" cy="13" r="12" fill="#3f9a4a" stroke="#22652b" stroke-width="2"/>
+  <path d="M21 4 l4 0 l0 4 M25 4 l-5 5" stroke="#fff" stroke-width="2" fill="none"/>
+  <text x="12" y="18" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="14" fill="#fff" text-anchor="middle">0</text></g>
+  <rect x="1" y="1" width="118" height="118" rx="6" fill="none" stroke="#2b2b2b" stroke-width="2"/>
+</svg>
