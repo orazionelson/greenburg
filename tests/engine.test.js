@@ -317,7 +317,7 @@ test('random full games respect the invariants', () => {
     assert.equal(o.citySuccess, s.cityEmissions <= s.threshold);
     if (!o.citySuccess) assert.equal(s.year, 2030);
     s.players.forEach((p, i) => {
-      assert.equal(p.score, p.yearPoints.reduce((a, b) => a + b, 0));
+      assert.equal(p.score, p.yearPoints.reduce((a, b) => a + b, 0) - p.timePenalty);
       assert.equal(p.yearPoints.length, s.year - 2024);
       assert.ok(o.finalScores[i] >= 0);
     });
@@ -325,4 +325,19 @@ test('random full games respect the invariants', () => {
       s.players.reduce((n, p) => n + p.territorial.filter(t => t.kind === 'infrastruttura').length, 0);
     assert.equal(tiles, 36);
   }
+});
+
+test('time penalty: -1 point to the deciding player, logged, counted in the final score', () => {
+  let s = exampleGame();
+  assert.equal(s.turnTimeLimit, 120);
+  assert.throws(() => E.applyTimePenalty(s, BRUNO));       // Anna is choosing
+  s = E.applyTimePenalty(s, ANNA);
+  s = E.applyTimePenalty(s, ANNA);
+  assert.equal(s.players[ANNA].score, -2);
+  assert.equal(s.players[ANNA].timePenalty, 2);
+  assert.equal(s.log.filter(l => l.key === 'log.timePenalty').length, 2);
+  s = play2025(s);
+  assert.deepEqual(col(s, 'score'), [1, 3, 2]);            // 3 - 2, 3, 2
+  const g = E.createGame({ playerCount: 3, seed: 1, turnTimeLimit: 0 });
+  assert.equal(g.turnTimeLimit, 0);
 });

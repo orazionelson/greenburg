@@ -8,9 +8,9 @@
   const E = BV.engine;
   const t = (k, p) => BV.i18n.t(k, p);
 
-  const M = 210;          // Municipio side (3 x 3 slots)
-  const S = 70;           // network lane width = slot side
-  const TAG = 34;         // room above/below for name tags
+  const M = 270;          // Municipio side (3 x 3 slots)
+  const S = M / 3;        // network lane width = slot side
+  const TAG = 42;         // room above/below for name tags
   const ASSETS = 'assets/tiles/';
 
   const ui = {
@@ -63,22 +63,22 @@
 
   // ------------------------------------------------------------ geometry
 
+  // The common area lives outside the ring, so the ring is as tight as the
+  // network tiles allow: on each side the gap between Municipi is one tile.
   function geometry(n) {
     const o = M / 2;
     if (n === 4) {
-      const D = 680;
+      const D = 2 * M;
       return {
         W: D + M, H: D + M + 2 * TAG,
-        v: [[o, o + TAG], [o + D, o + TAG], [o + D, o + D + TAG], [o, o + D + TAG]],
-        box: { x: M + 12, y: M + 12 + TAG, w: D - M - 24, h: D - M - 24 }
+        v: [[o, o + TAG], [o + D, o + TAG], [o + D, o + D + TAG], [o, o + D + TAG]]
       };
     }
-    // The triangle narrows downwards: the centre rows are ordered widest first.
-    const D = 920, h = D * Math.sqrt(3) / 2, bw = 446, bh = 345;
+    // On the 60° sides a square Municipio covers M/√3 of the line instead of M/2.
+    const D = 2 * M + 2 * (M / Math.sqrt(3) - M / 2), h = D * Math.sqrt(3) / 2;
     return {
       W: D + M, H: h + M + 2 * TAG,
-      v: [[o, o + TAG], [o + D, o + TAG], [o + D / 2, o + h + TAG]],
-      box: { x: o + D / 2 - bw / 2, y: o + TAG + S + 16, w: bw, h: bh }
+      v: [[o, o + TAG], [o + D, o + TAG], [o + D / 2, o + h + TAG]]
     };
   }
 
@@ -199,10 +199,9 @@
     return `<div class="side" style="left:${mx - L / 2}px;top:${my - S}px;width:${L}px;height:${2 * S}px;transform:rotate(${ang}rad);--pc:${color(pi)}">${lanes}</div>`;
   }
 
-  function renderCenter(g) {
+  function renderCityPanel() {
     const st = ui.state;
     const acts = legal();
-    const b = g.box;
 
     const years = [];
     for (let y = C.firstYear; y <= C.lastYear; y++) {
@@ -247,14 +246,28 @@
     const tokens = C.networks.map(net => `<div class="token ${st.networkCompleted[net] ? 'done' : ''}" ${tip('token', net)}>
         <img src="${ASSETS}token_rete_${net}.svg" alt="${esc(t(`network.${net}.token`))}"></div>`).join('');
 
-    return `<div class="center" style="left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px">
-        <div class="center-row tracks"><ol class="year-track" aria-label="${esc(t('ui.year'))}">${years.join('')}</ol>${city}</div>
-        <div class="center-row display-row" aria-label="${esc(t('ui.display'))}">${display || '<span class="empty">—</span>'}
-          <span class="deck-count">${esc(t('ui.deck', { n: st.infraDeck.length }))}</span></div>
-        <div class="center-row roles-row">${roles}</div>
-        <div class="center-row extras-row">${sat}<div class="tokens">${tokens}</div></div>
-      </div>`;
+    // Below 1200px the roles move to the top of the sidebar, next to the action panel.
+    const rolesHtml = `<h3>${esc(t('ui.roles'))}</h3><div class="cp-cards">${roles}</div>`;
+    const side = compact();
+    $('roles-side').hidden = !side;
+    $('roles-side').innerHTML = side ? rolesHtml : '';
+    $('city-panel').innerHTML = `
+      <div class="cp-block cp-time">
+        <ol class="year-track" aria-label="${esc(t('ui.year'))}">${years.join('')}</ol>${city}
+      </div>
+      <div class="cp-block cp-extras">
+        <h3>${esc(t('ui.satellite'))} · ${esc(t('ui.networks'))}</h3>
+        <div class="cp-row">${sat}<div class="tokens">${tokens}</div></div>
+      </div>
+      <div class="cp-block cp-display">
+        <h3>${esc(t('ui.display'))} <span class="deck-count">${esc(t('ui.deck', { n: st.infraDeck.length }))}</span></h3>
+        <div class="cp-tiles" aria-label="${esc(t('ui.display'))}">${display || '<span class="empty">—</span>'}</div>
+      </div>
+      ${side ? '' : `<div class="cp-block cp-roles">${rolesHtml}</div>`}`;
   }
+
+  const compactQuery = window.matchMedia('(max-width: 1199px)');
+  function compact() { return compactQuery.matches; }
 
   function chooserOf(role) {
     // The log records who chose each role this year.
@@ -273,10 +286,11 @@
     const board = $('board');
     board.style.width = g.W + 'px';
     board.style.height = g.H + 'px';
+    board.style.setProperty('--m', M + 'px');
+    board.style.setProperty('--s', S + 'px');
     let html = '';
     for (let i = 0; i < st.playerCount; i++) html += renderSide(g, i);
     for (let i = 0; i < st.playerCount; i++) html += renderMunicipio(g, i);
-    html += renderCenter(g);
     board.innerHTML = html;
     board.dataset.players = st.playerCount;
     fitBoard();
@@ -355,8 +369,9 @@
     if (acts.some(x => x.type === 'pass')) {
       body += `<button type="button" class="btn btn-pass" ${actAttr({ type: 'pass' })}>${esc(t('ui.pass'))}</button>`;
     }
-    el.innerHTML = head + body;
+    el.innerHTML = head + `<div id="turn-timer" class="turn-timer" hidden></div>` + body;
     el.style.setProperty('--pc', a != null ? color(a) : 'transparent');
+    updateTimer(ui.timer);
   }
 
   // -------------------------------------------------------------- players
@@ -378,6 +393,7 @@
           <div><dt>${esc(t('ui.points'))}</dt><dd><span class="ico leaf">${p.score}</span></dd></div>
           <div><dt>${esc(t('ui.income'))}</dt><dd><span class="ico income">${E.incomeOf(p)}</span></dd></div>
         </dl>
+        ${p.timePenalty ? `<p class="p-penalty">${esc(t('ui.timePenalty'))}: −${p.timePenalty}</p>` : ''}
         <div class="em-bar" title="${esc(t('ui.emissionsTrack', { value: e }))}"><div style="width:${(100 * e / C.baseEmissions).toFixed(1)}%"></div></div>
       </div>`;
     }).join('');
@@ -541,7 +557,7 @@
   }
 
   function bindInteraction() {
-    ['board', 'action-panel'].forEach(id => {
+    ['board', 'city-panel', 'roles-side', 'action-panel'].forEach(id => {
       $(id).addEventListener('click', e => handleActivate(e.target));
       $(id).addEventListener('keydown', e => {
         if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"]')) {
@@ -552,6 +568,7 @@
     });
     $('log-toggle').addEventListener('click', () => { ui.logAll = !ui.logAll; renderLog(); });
     window.addEventListener('resize', fitBoard);
+    compactQuery.addEventListener('change', render);
     if (window.ResizeObserver) new ResizeObserver(fitBoard).observe($('board-area'));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { hideTip(); if (ui.selectedDisplay != null) { ui.selectedDisplay = null; render(); } } });
   }
@@ -566,9 +583,33 @@
       ui.selectedDisplay = null;
     }
     renderBoard();
+    renderCityPanel();
     renderActionPanel();
     renderPlayers();
     renderLog();
+  }
+
+  const clock = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+
+  // info: null (no timer) or { limit, elapsed, penalties, next, paused } in seconds.
+  function updateTimer(info) {
+    ui.timer = info;
+    const el = $('turn-timer');
+    if (!el) return;
+    if (!info) { el.hidden = true; return; }
+    const remaining = info.limit - info.elapsed;
+    const over = remaining < 0;
+    el.hidden = false;
+    el.className = 'turn-timer' + (over ? ' over' : remaining <= 20 ? ' warn' : '') + (info.paused ? ' paused' : '');
+    el.innerHTML = `<span class="tt-clock" role="timer">${over ? '+' + clock(-remaining) : clock(Math.ceil(remaining))}</span>
+      <span class="tt-bar"><span style="width:${(100 * Math.max(0, remaining) / info.limit).toFixed(1)}%"></span></span>
+      <span class="tt-note">${esc(over ? t('ui.timerOver', { points: info.penalties, next: Math.ceil(info.next) }) : t('ui.timerLeft'))}</span>`;
+  }
+
+  // New state from the same decision (e.g. a time penalty): keeps the selection.
+  function update(state) {
+    ui.state = state;
+    render();
   }
 
   function setState(state, prev) {
@@ -587,6 +628,8 @@
       bindTooltips();
     },
     setState,
+    update,
+    updateTimer,
     render,
     fitBoard,
     hideTip,

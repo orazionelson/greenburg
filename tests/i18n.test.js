@@ -81,3 +81,20 @@ test('every tile image referenced by the catalogue exists', () => {
     .concat(['sat_monitoraggio', 'token_chiave']);
   files.forEach(f => assert.ok(fs.existsSync(path.join(dir, f + '.svg')), f));
 });
+
+test('the players\' manual has the same sections in every language', () => {
+  require('../js/manual/it.js');
+  require('../js/manual/en.js');
+  const ids = BV.MANUAL.it.sections.map(s => s.id);
+  assert.ok(ids.length >= 8);
+  for (const code of Object.keys(BV.LANG)) {
+    const m = BV.MANUAL[code];
+    assert.ok(m && m.title, 'manual ' + code);
+    assert.deepEqual(m.sections.map(s => s.id), ids, 'sections ' + code);
+    m.sections.forEach(s => {
+      assert.ok(s.title && s.html.length > 100, `${code}.${s.id}`);
+      // internal links point to existing sections
+      [...s.html.matchAll(/href="#m-(\w+)"/g)].forEach(l => assert.ok(ids.includes(l[1]), `${code}.${s.id} -> ${l[1]}`));
+    });
+  }
+});

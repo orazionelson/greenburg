@@ -10,7 +10,7 @@
   var R = BV.rng;
 
   // Bump when the catalogue or the state shape changes: older saves are ignored.
-  var STATE_VERSION = 2;
+  var STATE_VERSION = 3;
 
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
 
@@ -87,6 +87,7 @@
       seed: seed,
       rng: seed,
       autoPass: opts.autoPass !== false,
+      turnTimeLimit: opts.turnTimeLimit != null ? Math.max(0, +opts.turnTimeLimit) : C.turnTimeLimit,
       playerCount: n,
       threshold: C.threshold[n],
       year: C.firstYear,
@@ -135,7 +136,8 @@
         }),
         network: { strada: 'dissestata', ferrovia: 'dissestata' },
         yearPoints: [],
-        emissionsHistory: []
+        emissionsHistory: [],
+        timePenalty: 0
       });
     }
 
@@ -491,6 +493,17 @@
     log(state, success ? 'log.citySuccess' : 'log.cityFailure', { emissions: state.cityEmissions });
   }
 
+  // Time penalty for the player who must decide now (the timer lives in the UI).
+  function applyTimePenalty(stateIn, playerIndex) {
+    if (currentActor(stateIn) !== playerIndex) fail('Time penalty for a player who is not deciding');
+    var state = clone(stateIn);
+    var p = state.players[playerIndex];
+    p.timePenalty += C.timePenaltyPoints;
+    p.score -= C.timePenaltyPoints;
+    log(state, 'log.timePenalty', { player: playerIndex, points: C.timePenaltyPoints, total: p.timePenalty });
+    return state;
+  }
+
   function applyAction(stateIn, action) {
     if (!isLegal(stateIn, action)) fail('Illegal action ' + JSON.stringify(action));
     var state = clone(stateIn);
@@ -509,6 +522,7 @@
     STATE_VERSION: STATE_VERSION,
     createGame: createGame,
     applyAction: applyAction,
+    applyTimePenalty: applyTimePenalty,
     legalActions: legalActions,
     isLegal: isLegal,
     currentActor: currentActor,

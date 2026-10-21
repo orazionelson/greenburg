@@ -316,12 +316,17 @@ Un Municipio che non ha ancora rinnovato il proprio tratto continua a pagarne l'
 - Il Monitoraggio satellitare non può essere ceduto.
 - Le informazioni sono tutte pubbliche: crediti, punti e tessere di ogni giocatore sono visibili a tutti.
 
+### 6.5 Tempo per mossa
+
+Ogni volta che un giocatore deve decidere (scegliere un ruolo, oppure svolgere la propria azione da Urbanista o da Assessore ai lavori pubblici) ha a disposizione un tempo massimo, stabilito a inizio partita: 2 minuti salvo diverso accordo, oppure nessun limite. Superato il tempo massimo, il giocatore perde 1 punto impatto ogni 10 secondi finché non compie la sua mossa. Il malus si sottrae subito dal punteggio e non modifica le emissioni del Municipio né quelle della città. Nell'applicazione il tempo si ferma mentre è aperta una finestra (riepilogo d'anno, manuale) e riparte da zero a ogni nuova decisione.
+
 ## 7. Punteggio
 
 I punti impatto si guadagnano in due modi.
 
 - **A ogni chiusura d'anno**, ogni giocatore guadagna 14 meno le emissioni correnti del proprio Municipio, cioè la riduzione totale ottenuta rispetto all'inizio della partita, comprensiva del bonus delle reti completate. Il valore va da 0 (nessun intervento) a 14 (Municipio a emissioni zero).
 - **A fine partita**, il possessore del Monitoraggio satellitare guadagna 3 punti per ogni edificio decarbonizzato del proprio Municipio (al massimo 6).
+- **Malus di tempo**: 1 punto per ogni 10 secondi oltre il tempo massimo per mossa (sezione 6.5), sottratto subito.
 
 Se la città ha fallito l'obiettivo cooperativo, il totale di ogni giocatore, comprensivo del bonus satellitare, viene dimezzato e arrotondato per difetto.
 
@@ -452,6 +457,8 @@ Questa sezione traduce il regolamento in indicazioni per lo sviluppo dell'applic
 | Accumulo per ruolo non scelto | 1 per anno |
 | Bonus rete completata | −1 emissione per Municipio, per rete |
 | Fattore in caso di fallimento | 0,5, arrotondato per difetto |
+| Tempo massimo per mossa | 120 secondi, modificabile a inizio partita; 0 = nessun limite |
+| Malus di tempo | 1 punto ogni 10 secondi oltre il tempo massimo |
 
 Conviene raccogliere questi valori in un unico oggetto di configurazione, perché saranno tarati con le prove di gioco.
 
@@ -521,7 +528,9 @@ Il proprietario dei tratti di rete coincide con il Municipio del giocatore: nell
 
 ### 11.6 Interfaccia
 
-- Il tabellone occupa la parte centrale dello schermo e riproduce l'anello della sezione 3, con le tessere centrali (esposizione, carte ruolo con i crediti accumulati, satellite, segnalini rete, tracciato annuale, tracciato della città con la soglia evidenziata).
+- Il tabellone occupa la parte centrale dello schermo e riproduce l'anello della sezione 3. Gli elementi che sul tavolo stanno al centro dell'anello (esposizione, carte ruolo con i crediti accumulati, satellite, segnalini rete, tracciato annuale, tracciato della città con la soglia evidenziata) sono in un'area comune a sinistra del tabellone, oppure sopra di esso sugli schermi meno larghi; l'anello è quindi stretto quanto le tessere rete e i Municipi sono più grandi.
+- Un pulsante apre il manuale dei giocatori, in italiano e in inglese.
+- Il pannello del giocatore di turno mostra il tempo rimasto per la mossa e, oltre il limite, il malus accumulato.
 - Le tessere che cambiano stato (posa di un'infrastruttura, riconversione di un edificio, rinnovo di un tratto) hanno una breve animazione: la tessera grigia rimossa svanisce, le tessere a due facce si girano.
 - Al passaggio del puntatore, o con un tocco prolungato su schermi tattili, ogni tessera mostra nome, testo stampato e valori.
 - Un pannello per ogni giocatore riporta crediti, emissioni correnti, punti e rendita totale; il giocatore di turno è evidenziato.

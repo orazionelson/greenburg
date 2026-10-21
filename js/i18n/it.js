@@ -90,7 +90,15 @@
       countsForSatellite: 'Conta per il bonus del satellite.',
       owner: 'Proprietario',
       crest: 'Stemma',
-      effect: 'Effetto'
+      effect: 'Effetto',
+      timerLeft: 'Tempo per la mossa',
+      timerOver: 'Tempo scaduto: malus −{points}, il prossimo tra {next} s',
+      timePenalty: 'Malus tempo',
+      timeLimit: 'Tempo massimo per mossa (minuti)',
+      timeLimitHint: '0 = senza limite. Oltre il limite si perde 1 punto impatto ogni 10 secondi.',
+      manual: 'Manuale',
+      readManual: 'Leggi il manuale',
+      close: 'Chiudi'
     },
 
     family: {
@@ -194,6 +202,7 @@
       networkCompleted: 'Rete completata: {network}! −1 alle emissioni di ogni Municipio.',
       yearPoints: '{player}: emissioni {emissions}, +{points} punti (totale {total}).',
       cityEmissions: 'Emissioni della città: {emissions} (soglia {threshold}).',
+      timePenalty: '{player} supera il tempo massimo: −{points} punto (malus totale {total}).',
       keyPasses: 'Nessuno ha scelto il Sindaco: la Chiave passa a {player}.',
       citySuccess: 'La città è sotto la soglia: successo collettivo!',
       cityFailure: 'Fine del 2030 sopra la soglia: la città ha fallito, punteggi dimezzati.'
