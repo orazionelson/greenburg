@@ -33,7 +33,7 @@
   <li>the crest in the middle.</li>
 </ul>
 <p>Each run-down network section emits 1. In total: 8 from land tiles, 4 from buildings and 2 from networks, that is 14.</p>
-<p>Next to the board is the common area: current year, city emissions with the threshold, satellite and network tokens, the face-up infrastructure tiles (the display) and the five role cards.</p>`
+<p>Next to the board is the common area: current year, city emissions with the threshold, investment cards and network tokens, the face-up infrastructure tiles (the display) and the five role cards.</p>`
       },
       {
         id: 'preparazione',
@@ -74,7 +74,7 @@
   <dt>Urban Planner</dt>
   <dd>Each player may take a tile from the display, pay its cost and place it on one of their own grey land tiles, which is removed. Whoever chose the role pays 1 less (minimum 0). The display is not refilled during the year.</dd>
   <dt>Public Works Councillor</dt>
-  <dd>Each player may do one of these: retrofit one of their buildings (4 credits, the tile flips to its decarbonised side); renew one of their network sections (2 credits, the tile flips); buy Satellite monitoring (5 credits, if nobody has it yet). Whoever chose the role pays 1 less.</dd>
+  <dd>Each player may do one of these: retrofit one of their buildings (4 credits, the tile flips to its decarbonised side); renew one of their network sections (2 credits, the tile flips); buy one of the investment cards on the table not yet taken. Whoever chose the role pays 1 less.</dd>
   <dt>Budget Councillor</dt>
   <dd>Each player collects the income of their infrastructure. Whoever chose the role collects 1 extra credit.</dd>
   <dt>EU Grant Writer</dt>
@@ -97,9 +97,20 @@
     <tr><td>Energy (solar farm, micro-wind, community storage)</td><td>3</td><td>2</td></tr>
   </tbody>
 </table>
-<p><b>Buildings:</b> the grey side emits 2, the decarbonised side 0. Decarbonised buildings count for the satellite.</p>
+<p><b>Buildings:</b> the grey side emits 2, the decarbonised side 0. Decarbonised buildings count for Satellite monitoring.</p>
 <p><b>Networks:</b> a run-down section emits 1, a renewed one 0. When <b>every</b> section of a network (road or railway) is renewed, the network is completed and every district emits 1 less for the rest of the game.</p>
-<p><b>Satellite monitoring:</b> only one copy. At the end of the game its owner scores 3 points for each decarbonised building in their district (6 at most).</p>`
+<p><b>Investment cards:</b> at the start, as many as the players plus one are revealed at random. They are bought with the Public Works Councillor; each card exists once and each player may own at most 2. They score at the end of the game:</p>
+<table class="manual-table">
+  <thead><tr><th>Investment</th><th>Cost</th><th>Points at the end</th></tr></thead>
+  <tbody>
+    <tr><td>Satellite monitoring</td><td>5</td><td>4 per decarbonised building (8 max)</td></tr>
+    <tr><td>Civic participation</td><td>5</td><td>2 per Green infrastructure (8 max)</td></tr>
+    <tr><td>Health and education</td><td>5</td><td>7 minus your district's emissions</td></tr>
+    <tr><td>Circular economy</td><td>5</td><td>3 per area worth 2 turned into Mobility or Energy (6 max)</td></tr>
+    <tr><td>Covenant of Mayors</td><td>4</td><td>if the city reaches the threshold: 4, plus 2 per year ahead of 2030 (8 max)</td></tr>
+    <tr><td>Digital city and open data</td><td>5</td><td>2 per kind of intervention: Green, Mobility, Energy, building, network (10 max)</td></tr>
+  </tbody>
+</table>`
       },
       {
         id: 'emissioni',
@@ -128,7 +139,7 @@
         html: `
 <ul>
   <li><b>At the end of each year</b> each player scores 14 minus their district's emissions: from 0 (no intervention) to 14 (zero-emission district).</li>
-  <li><b>At the end of the game</b> the satellite owner scores 3 points per decarbonised building.</li>
+  <li><b>At the end of the game</b> each player adds the points of their investment cards.</li>
   <li>Time penalties are subtracted from the total.</li>
 </ul>
 <p><b>City success:</b> if at the end of a year the city's emissions are at or below the threshold, the game ends at once, even before 2030, and scores stay whole.</p>
@@ -144,7 +155,7 @@
   <li><b>Where to build:</b> a 1-credit Green tile on a Petrol station cuts 2. Pricier infrastructure only pays back through income, that is if the Budget Councillor is chosen again.</li>
   <li><b>Choosing roles:</b> every role helps everyone, but whoever chooses it gets the privilege and decides when it happens. The Urban Planner when the others are out of credits is almost all yours; ignored roles build up credits and grow more tempting.</li>
   <li><b>Networks:</b> renewing your section scores 1 point a year right away and brings the bonus closer for all. Holding back to deny the bonus costs you more than the others.</li>
-  <li><b>The satellite</b> is worth up to 6 points, but only if you retrofit your buildings: an investment for players whose economy is already running.</li>
+  <li><b>Investments</b> are usually worth 4–7 points: buy one when the card rewards something you are already doing, or can still do in the years left. The Covenant of Mayors only pays if the city succeeds: a bet on cooperation.</li>
   <li><b>Cooperate and compete:</b> the leader wants to end the game early by reaching the threshold; those behind can only catch up by cutting their own emissions faster.</li>
 </ul>`
       },

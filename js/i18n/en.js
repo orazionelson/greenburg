@@ -35,6 +35,10 @@
       roleCredits: 'Credits on the card: {n}',
       chosenBy: 'Chosen by {player}',
       satellite: 'Satellite',
+      investments: 'Investments',
+      valueNow: 'Now for {player}',
+      pointsN: '{n} points',
+      investmentNote: 'Each player may own at most 2 investments.',
       ownedBy: 'Owned by {player}',
       available: 'Available',
       networks: 'Networks',
@@ -52,10 +56,10 @@
       chooseRolePrompt: '{player}, choose a role.',
       urbanistaPrompt: '{player}: pick a tile from the display, then one of your grey tiles to build on.',
       urbanistaSlotPrompt: '{player}: pick the grey tile to build {tile} on (cost {cost}).',
-      lavoriPrompt: '{player}: retrofit a building, renew a network section or buy the satellite.',
+      lavoriPrompt: '{player}: retrofit a building, renew a network section or buy an investment.',
       reconvertOption: 'Retrofit {tile} · {cost}',
       renewOption: 'Renew {network} · {cost}',
-      satelliteOption: 'Buy the satellite · {cost}',
+      investmentOption: 'Buy {name} · {cost}',
       privilegeNote: 'You chose this role: −1 to the cost.',
       roleAction: 'Everyone',
       rolePrivilege: 'Privilege',
@@ -72,7 +76,7 @@
       winner: '{names} wins',
       winners: 'Shared victory: {names}',
       partialWin: 'An individual victory in a city that failed is only a partial result.',
-      satelliteBonus: 'Satellite',
+      investmentBonus: 'Investments',
       subtotal: 'Total',
       halved: 'Halved',
       final: 'Final',
@@ -160,7 +164,32 @@
       sat_monitoraggio: {
         name: 'Satellite monitoring',
         text: 'The satellite watches the district\'s roofs and heat and certifies its decarbonised buildings.',
-        effect: 'At the end of the game, 3 points for each decarbonised building in the owner\'s district.'
+        effect: 'At the end of the game, 4 points for each decarbonised building in your district (8 at most).'
+      },
+      inv_partecipazione: {
+        name: 'Civic participation',
+        text: 'Neighbourhood assemblies and care agreements: residents look after the green spaces.',
+        effect: 'At the end of the game, 2 points for each Green infrastructure in your district (8 at most).'
+      },
+      inv_sanita: {
+        name: 'Health and education',
+        text: 'Cleaner air, less illness: clinics and schools measure the benefits in the district.',
+        effect: 'At the end of the game, 7 points minus your district\'s emissions (0 at least).'
+      },
+      inv_circolare: {
+        name: 'Circular economy',
+        text: 'Reuse, recycling and recovered materials: the worst polluters become resources.',
+        effect: 'At the end of the game, 3 points for each area worth 2 turned into Mobility or Energy (6 at most).'
+      },
+      inv_patto: {
+        name: 'Covenant of Mayors',
+        text: 'The city commits, together with other European cities, to cutting its emissions.',
+        effect: 'If the city reaches the threshold: 4 points, plus 2 for each year ahead of 2030 (8 at most).'
+      },
+      inv_digitale: {
+        name: 'Digital city and open data',
+        text: 'Sensors and open data show everyone, in real time, how the district is changing.',
+        effect: 'At the end of the game, 2 points for each kind of intervention done: Green, Mobility, Energy, retrofitted building, renewed network (10 at most).'
       }
     },
 
@@ -185,7 +214,7 @@
 
     role: {
       urbanista: { name: 'Urban Planner', action: 'Build an infrastructure on a grey land tile.', privilege: '−1 to the cost.' },
-      lavori: { name: 'Public Works Councillor', short: 'Public Works', action: 'Retrofit a building, or renew a network section, or buy the satellite.', privilege: '−1 to the cost.' },
+      lavori: { name: 'Public Works Councillor', short: 'Public Works', action: 'Retrofit a building, or renew a network section, or buy an investment.', privilege: '−1 to the cost.' },
       bilancio: { name: 'Budget Councillor', short: 'Budget', action: 'Collect infrastructure income.', privilege: '+1 credit.' },
       progettista: { name: 'EU Grant Writer', short: 'Grant Writer', action: 'None.', privilege: '2 credits.' },
       sindaco: { name: 'Mayor', action: 'None.', privilege: '1 credit and the Key to the City.' }
@@ -202,7 +231,7 @@
       placeInfra: '{player} builds {tile} on {grey} ({slot}) for {cost}: emissions −{reduction}.',
       reconvert: '{player} retrofits {tile} for {cost}.',
       renew: '{player} renews their {network} section for {cost}.',
-      buySatellite: '{player} buys Satellite monitoring for {cost}.',
+      buyInvestment: '{player} buys the {investment} investment for {cost}.',
       pass: '{player} passes.',
       autoPass: '{player} has no possible action and passes.',
       networkCompleted: 'Network completed: {network}! −1 to every district\'s emissions.',

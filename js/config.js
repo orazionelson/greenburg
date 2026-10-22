@@ -5,7 +5,7 @@
   var BV = root.BV = root.BV || {};
 
   BV.CONFIG = {
-    version: '0.4.0',                // kept in sync with package.json by tools/set-version.js
+    version: '0.5.0',                // kept in sync with package.json by tools/set-version.js
 
     playerCounts: [3, 4],
     firstYear: 2025,
@@ -25,8 +25,8 @@
     networkEmission: 1,
     reconvertCost: 4,
     renewCost: 2,
-    satelliteCost: 5,
-    satellitePointsPerBuilding: 3,
+    investmentsExtra: 1,             // investment cards on the table = players + this
+    investmentsPerPlayer: 2,         // most investment cards one player may own
 
     privilegeDiscount: 1,            // Urbanista, Lavori pubblici (minimum cost 0)
     bilancioBonus: 1,

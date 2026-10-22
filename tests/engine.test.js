@@ -229,19 +229,19 @@ test('10.4 variant: Bruno does not renew his railway', () => {
   assert.deepEqual(lastYearPoints(s), [8, 8, 7]);
 });
 
-test('10.5 final scoring: satellite bonus, city success', () => {
+// 10.5 predates the investment cards: Carla's 6-point satellite bonus is passed as-is.
+test('10.5 final scoring: end-of-game bonus, city success', () => {
   const years = [[3, 4, 7, 9, 11, 12], [3, 5, 7, 10, 11, 11], [2, 4, 6, 8, 9, 10]];
   const sum = a => a.reduce((x, y) => x + y, 0);
   const o = E.computeOutcome({
     citySuccess: true,
-    satelliteOwner: CARLA,
     players: [
-      { score: sum(years[0]), emissions: 2, credits: 0, decarbonized: 0 },
-      { score: sum(years[1]), emissions: 3, credits: 0, decarbonized: 0 },
-      { score: sum(years[2]), emissions: 4, credits: 0, decarbonized: 2 }
+      { score: sum(years[0]), emissions: 2, credits: 0 },
+      { score: sum(years[1]), emissions: 3, credits: 0 },
+      { score: sum(years[2]), emissions: 4, credits: 0, bonus: 6 }
     ]
   });
-  assert.deepEqual(o.satelliteBonus, [0, 0, 6]);
+  assert.deepEqual(o.investmentBonus, [0, 0, 6]);
   assert.deepEqual(o.finalScores, [46, 47, 45]);
   assert.deepEqual(o.ranking.map(r => r.player), [BRUNO, ANNA, CARLA]);
   assert.deepEqual(o.winners, [BRUNO]);
@@ -250,11 +250,10 @@ test('10.5 final scoring: satellite bonus, city success', () => {
 test('10.5 variant: city failure halves scores, tie broken by emissions', () => {
   const o = E.computeOutcome({
     citySuccess: false,
-    satelliteOwner: CARLA,
     players: [
-      { score: 44, emissions: 3, credits: 0, decarbonized: 0 },
-      { score: 45, emissions: 4, credits: 0, decarbonized: 0 },
-      { score: 37, emissions: 5, credits: 0, decarbonized: 2 }
+      { score: 44, emissions: 3, credits: 0 },
+      { score: 45, emissions: 4, credits: 0 },
+      { score: 37, emissions: 5, credits: 0, bonus: 6 }
     ]
   });
   assert.deepEqual(o.scoresBeforeHalving, [44, 45, 43]);
@@ -264,11 +263,11 @@ test('10.5 variant: city failure halves scores, tie broken by emissions', () => 
 });
 
 test('ties: credits break, full ties share the victory', () => {
-  const base = { score: 10, emissions: 3, decarbonized: 0 };
-  let o = E.computeOutcome({ citySuccess: true, satelliteOwner: null,
+  const base = { score: 10, emissions: 3 };
+  let o = E.computeOutcome({ citySuccess: true,
     players: [{ ...base, credits: 1 }, { ...base, credits: 2 }, { ...base, credits: 0 }] });
   assert.deepEqual(o.ranking.map(r => r.player), [1, 0, 2]);
-  o = E.computeOutcome({ citySuccess: true, satelliteOwner: null,
+  o = E.computeOutcome({ citySuccess: true,
     players: [{ ...base, credits: 2 }, { ...base, credits: 2 }, { ...base, credits: 0 }] });
   assert.deepEqual(o.winners, [0, 1]);
   assert.deepEqual(o.ranking.map(r => r.rank), [1, 1, 3]);
@@ -289,17 +288,84 @@ test('illegal actions are rejected and state is not mutated', () => {
   assert.equal(E.isLegal(s3, { type: 'chooseRole', role: 'urbanista' }), false);
 });
 
-test('satellite: only one owner, privilege discount applies', () => {
-  let s = exampleGame();
-  s.players.forEach(p => { p.credits = 5; });
-  s = role(s, 'lavori');                        // Anna chooses
-  s = act(s, { type: 'buySatellite' });         // 4 with privilege
-  assert.equal(s.satelliteOwner, ANNA);
-  assert.equal(s.players[ANNA].credits, 1);
-  assert.equal(E.isLegal(s, { type: 'buySatellite' }), false);
-  s = act(s, { type: 'reconvert', slot: 0 });   // Bruno pays 4
-  assert.equal(s.players[BRUNO].credits, 1);
-  assert.equal(s.players[BRUNO].buildings[0].side, 'decarbonizzato');
+const INV = ['sat_monitoraggio', 'inv_partecipazione', 'inv_sanita', 'inv_circolare'];
+function investGame() {
+  return E.createGame({ playerCount: 3, seed: 5, keyHolder: ANNA, forced: { investments: INV } });
+}
+
+test('investments: players + 1 cards on the table, all different', () => {
+  for (const n of [3, 4]) {
+    const s = E.createGame({ playerCount: n, seed: 11 });
+    assert.equal(s.investmentsOnTable.length, n + 1);
+    assert.equal(new Set(s.investmentsOnTable).size, n + 1);
+    s.investmentsOnTable.forEach(id => assert.equal(s.investmentOwners[id], null));
+  }
+});
+
+test('investments: one owner per card, privilege discount, at most two per player', () => {
+  let s = investGame();
+  s.players.forEach(p => { p.credits = 20; });
+  s = role(s, 'lavori');                                        // Anna chooses
+  s = act(s, { type: 'buyInvestment', id: 'sat_monitoraggio' }); // 5 - 1
+  assert.equal(s.investmentOwners.sat_monitoraggio, ANNA);
+  assert.equal(s.players[ANNA].credits, 16);
+  assert.equal(E.isLegal(s, { type: 'buyInvestment', id: 'sat_monitoraggio' }), false);
+  s = act(s, { type: 'buyInvestment', id: 'inv_sanita' });       // Bruno pays 5
+  assert.equal(s.players[BRUNO].credits, 15);
+  assert.equal(E.isLegal(s, { type: 'buyInvestment', id: 'inv_patto' }), false); // not on the table
+  s = act(s, { type: 'pass' });                                  // Carla
+  // Next Public works: Anna can buy a second card, not a third.
+  s.investmentOwners.inv_partecipazione = ANNA;
+  s.phase = 'ROLE_EXECUTION'; s.activeRole = 'lavori'; s.roleChooser = ANNA; s.executionQueue = [ANNA];
+  assert.equal(E.legalActions(s).some(a => a.type === 'buyInvestment'), false);
+});
+
+test('investment scoring follows the card rules', () => {
+  const s = investGame();
+  const grey = id => ({ kind: 'grigia', tileId: id, emission: BV.CATALOG.greyById[id].emission });
+  const infra = (id, replaced) => ({ kind: 'infrastruttura', tileId: id, family: BV.CATALOG.infraById[id].family, replaced });
+  const p = s.players[ANNA];
+  p.territorial = [infra('inf_parco', 'gr_parcheggio'), infra('inf_orto', 'gr_piazzale'), infra('inf_bosco', 'gr_cortile'),
+    infra('inf_giardino', 'gr_laghetto'), infra('inf_bus', 'gr_distributore'), grey('gr_deposito')];
+  p.buildings[0].side = 'decarbonizzato';
+  p.network.strada = 'rinnovata';
+  // emissions: deposito 2 + one grey building 2 + ferrovia 1 = 5
+  assert.equal(E.computeEmissions(s, ANNA), 5);
+  assert.equal(E.investmentPoints(s, ANNA, 'sat_monitoraggio'), 4);    // 1 building x 4
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_partecipazione'), 8);  // 4 Green x 2, capped at 8
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_sanita'), 2);          // 7 - 5
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_circolare'), 3);       // bus on a petrol station
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_digitale'), 8);        // Green, Mobility, building, network
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_patto'), 0);           // city has not succeeded
+  s.successYear = 2030;
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_patto'), 4);          // success in the last year
+  s.successYear = 2028;
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_patto'), 8);          // 4 + 2 years ahead x 2
+  s.successYear = 2026;
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_patto'), 8);           // capped
+  p.buildings[1].side = 'decarbonizzato';
+  p.territorial[5] = infra('inf_fotovoltaico', 'gr_deposito');
+  assert.equal(E.investmentPoints(s, ANNA, 'sat_monitoraggio'), 8);
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_circolare'), 6);
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_digitale'), 10);
+  assert.equal(E.investmentPoints(s, ANNA, 'inv_sanita'), 6);          // 7 - 1 (ferrovia)
+});
+
+test('investment points are added at the end and halved with the rest on failure', () => {
+  let s = investGame();
+  s.investmentOwners.inv_sanita = BRUNO;
+  // jump to the last role of 2030 and let the year close
+  s.year = 2030;
+  let t = role(s, 'progettista');
+  t = role(t, 'sindaco');
+  t = role(t, 'bilancio');
+  assert.equal(t.phase, 'GAME_OVER');
+  const pts = t.outcome.investmentDetail[BRUNO][0];
+  assert.equal(pts.id, 'inv_sanita');
+  assert.equal(pts.points, Math.max(0, 7 - t.players[BRUNO].emissions));
+  assert.equal(t.outcome.investmentBonus[BRUNO], pts.points);
+  assert.equal(t.outcome.citySuccess, false);
+  assert.equal(t.outcome.finalScores[BRUNO], Math.floor((t.players[BRUNO].score + pts.points) / 2));
 });
 
 test('deck reshuffles the discard pile when exhausted', () => {

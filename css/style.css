@@ -76,7 +76,10 @@ button, input, select { font: inherit; color: inherit; }
   display: flex; justify-content: space-between; align-items: baseline;
 }
 .cp-row { display: flex; align-items: center; gap: 14px; }
-.cp-tiles { display: grid; grid-template-columns: repeat(3, 76px); gap: 10px; justify-content: center; min-height: 76px; }
+.cp-extras .cp-row { justify-content: space-between; gap: 8px; }
+.cp-extras .tokens { flex-direction: column; gap: 6px; }
+.cp-extras .token img { width: 38px; height: 38px; }
+.cp-tiles { display: grid; grid-template-columns: repeat(3, 72px); gap: 10px; justify-content: center; min-height: 72px; }
 .cp-cards { display: grid; grid-template-columns: repeat(3, 80px); gap: 8px; justify-content: center; }
 
 .roles-side[hidden] { display: none; }
@@ -85,7 +88,7 @@ button, input, select { font: inherit; color: inherit; }
   .play-col { flex-direction: column; }
   /* Strip above the board: time and satellite stacked, display beside them. */
   .city-panel {
-    flex: 0 0 auto; display: grid; grid-template-columns: 220px auto; grid-template-areas: "time display" "extras display";
+    flex: 0 0 auto; display: grid; grid-template-columns: 220px auto; grid-template-areas: "time display" "extras extras";
     gap: 8px 10px; justify-content: center; overflow-x: auto; padding: 10px 12px 0;
   }
   .cp-time { grid-area: time; }
@@ -98,6 +101,11 @@ button, input, select { font: inherit; color: inherit; }
   .cp-tiles { grid-template-columns: none; grid-auto-flow: column; gap: 8px; min-height: 0; }
   .cp-tiles .tile.disp { width: 62px; height: 62px; }
   .city-panel .tile.sat { width: 44px; height: 44px; }
+  .cp-invest { grid-template-columns: none; grid-auto-flow: column; gap: 6px; }
+  .city-panel .tile.inv { width: 44px; height: 44px; }
+  .cp-extras .cp-row { justify-content: flex-start; }
+  .cp-extras .tokens { flex-direction: row; }
+  .cp-extras .token img { width: 34px; height: 34px; }
   .city-panel .token img { width: 34px; height: 34px; }
   .roles-side .cp-cards { grid-template-columns: repeat(5, 1fr); gap: 5px; }
   .roles-side .role-card { width: 100%; height: auto; aspect-ratio: 160 / 220; }
@@ -145,6 +153,7 @@ button, input, select { font: inherit; color: inherit; }
 }
 .name-tag.current span { outline: 3px solid var(--sel); }
 .flag { width: 24px; height: 24px; border-radius: 50%; }
+.flag.inv { border-radius: 4px; }
 .name-tag .flag { width: 30px; height: 30px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
 .side { position: absolute; z-index: 1; transform-origin: 50% 50%; }
@@ -197,7 +206,7 @@ button, input, select { font: inherit; color: inherit; }
 .bar .fill.ok { background: linear-gradient(90deg, #6cbf55, #2f7d3a); }
 .bar .threshold { position: absolute; top: -4px; bottom: -4px; width: 3px; margin-left: -1.5px; background: #b04a2f; border-radius: 2px; }
 
-.tile.disp { width: 76px; height: 76px; flex: 0 0 auto; transition: transform 0.15s; }
+.tile.disp { width: 72px; height: 72px; flex: 0 0 auto; transition: transform 0.15s; }
 .tile.disp .pay { position: absolute; bottom: -8px; right: -8px; }
 .deck-count { font-size: 0.72rem; text-transform: none; letter-spacing: 0; font-weight: 500; }
 .empty { color: var(--muted); }
@@ -220,6 +229,13 @@ button, input, select { font: inherit; color: inherit; }
 .role-card.chosen { opacity: 0.85; }
 .role-card.active { opacity: 1; box-shadow: 0 0 0 3px var(--pc); }
 
+.cp-invest { display: grid; grid-template-columns: repeat(3, 58px); gap: 8px; }
+.tile.inv { width: 58px; height: 58px; flex: 0 0 auto; }
+.tile.inv.owned { box-shadow: 0 0 0 3px var(--pc); }
+.tile.inv .owner {
+  position: absolute; left: 0; right: 0; bottom: 0; background: var(--pc); color: #fff; font-size: 10px; text-align: center;
+  font-weight: 700; border-radius: 0 0 6px 6px; padding: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .tile.sat { width: 72px; height: 72px; flex: 0 0 auto; }
 .tile.sat.owned { box-shadow: 0 0 0 3px var(--pc); }
 .tile.sat .owner {

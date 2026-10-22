@@ -65,6 +65,8 @@ test('catalogue ids all have names and texts', () => {
     CAT.buildings.forEach(b => ['front', 'back'].forEach(s =>
       assert.notEqual(t(`tile.${b.id}.${s}.text`), `tile.${b.id}.${s}.text`)));
     BV.CONFIG.roles.forEach(r => assert.notEqual(t(`role.${r}.name`), `role.${r}.name`));
+    CAT.investments.forEach(c => ['name', 'text', 'effect'].forEach(k =>
+      assert.notEqual(t(`tile.${c.id}.${k}`), `tile.${c.id}.${k}`)));
     BV.CONFIG.municipi.forEach(m => assert.notEqual(t(`municipio.${m}.name`), `municipio.${m}.name`));
   }
   BV.i18n.setLang('it');
@@ -78,7 +80,7 @@ test('every tile image referenced by the catalogue exists', () => {
     .concat(CAT.buildings.flatMap(b => [b.id + '_front', b.id + '_back']))
     .concat(BV.CONFIG.networks.flatMap(n => [`rete_${n}_front`, `rete_${n}_back`, `token_rete_${n}`]))
     .concat(BV.CONFIG.roles.map(r => 'ruolo_' + r), BV.CONFIG.municipi.map(m => 'mun_' + m))
-    .concat(['sat_monitoraggio', 'token_chiave']);
+    .concat(CAT.investments.map(c => c.id), ['token_chiave']);
   files.forEach(f => assert.ok(fs.existsSync(path.join(dir, f + '.svg')), f));
 });
 

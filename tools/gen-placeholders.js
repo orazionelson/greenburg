@@ -350,8 +350,42 @@ write('sat_monitoraggio', svg(120, 120, `<rect width="120" height="120" fill="#1
   <path d="M0 96 L120 62 L120 96 Z" fill="#e53935"/><path d="M60 79 L120 62 L120 79 Z" fill="#ffb300"/><path d="M0 96 L40 85 L50 96 Z" fill="#1e88e5"/>
   ${[0, 1, 2, 3].map(i => `<rect x="${8 + i * 28}" y="${68 + (i % 2) * 10}" width="14" height="10" fill="#fff" opacity="0.35"/>`).join('')}
   ${band('#c5cae9')}
-  ${coin(4, 4, 5)}${leaf(80, 2, '3×')}
+  ${coin(4, 4, 5)}${leaf(80, 2, '4×')}
   ${frame()}`));
+
+// Investment cards: same frame as the satellite (cost coin, points leaf, name band).
+function investment(id, bg, art, cost, pts) {
+  write(id, svg(120, 120, `<rect width="120" height="120" fill="${bg}"/>
+  ${art}
+  ${band('#ece3cf')}
+  ${coin(4, 4, cost)}${leaf(80, 2, pts)}
+  ${frame()}`));
+}
+investment('inv_partecipazione', '#dcefd0', `
+  <rect x="0" y="58" width="120" height="38" fill="#9fd36f"/>${tree(20, 66, 9)}${tree(100, 70, 8)}
+  ${[[38, 52, '#e57373'], [50, 46, '#64b5f6'], [62, 44, '#ffb74d'], [74, 46, '#9575cd'], [86, 52, '#4db6ac']].map(([x, y, c]) => `<circle cx="${x}" cy="${y}" r="5" fill="${c}"/><rect x="${x - 5}" y="${y + 5}" width="10" height="14" rx="4" fill="${c}"/>`).join('')}
+  <ellipse cx="62" cy="80" rx="26" ry="8" fill="#7a5a3a"/><path d="M50 80 l4 -8 M62 80 l0 -10 M74 80 l-4 -8" stroke="#43a047" stroke-width="3"/>
+  <rect x="44" y="26" width="36" height="12" rx="6" fill="#fff" stroke="#2e7d32"/><path d="M52 32 h20" stroke="#2e7d32" stroke-width="2"/>`, 5, '2×');
+investment('inv_sanita', '#e3f0f7', `
+  <rect x="14" y="36" width="48" height="54" fill="#fff" stroke="#90a4ae" stroke-width="2"/><rect x="31" y="46" width="14" height="34" fill="#e53935"/><rect x="21" y="56" width="34" height="14" fill="#e53935"/>
+  <rect x="66" y="46" width="44" height="44" fill="#f3e2c4" stroke="#9c6b3c" stroke-width="2"/><path d="M62 48 L88 30 L114 48 Z" fill="#c9a26b"/>
+  ${[0, 1, 2].map(i => `<rect x="${72 + i * 12}" y="56" width="8" height="10" fill="#90caf9"/>`).join('')}<rect x="82" y="72" width="12" height="18" fill="#8d6e63"/>
+  <path d="M6 30 q10 -8 20 0 t20 0" stroke="#4fc3f7" stroke-width="2" fill="none"/>`, 5, '7−');
+investment('inv_circolare', '#eef3e3', `
+  <g transform="translate(60,56)" fill="none" stroke-width="7" stroke-linecap="round">
+    <path d="M-26 -8 A28 28 0 0 1 10 -26" stroke="#43a047"/><path d="M22 -14 A28 28 0 0 1 14 22" stroke="#1e88e5"/><path d="M2 28 A28 28 0 0 1 -28 4" stroke="#fbc02d"/>
+  </g>
+  <path d="M68 26 l8 4 l-6 6 Z M76 76 l-8 4 l0 -8 Z M30 62 l-2 -9 l8 2 Z" fill="#37474f"/>
+  <rect x="50" y="46" width="20" height="20" rx="3" fill="#8d6e63"/><path d="M50 52 h20 M56 46 v20" stroke="#6d4c41"/>`, 5, '3×');
+investment('inv_patto', '#1f3f7a', `
+  ${Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6; return `<path d="M${(60 + 30 * Math.cos(a)).toFixed(1)} ${(54 + 30 * Math.sin(a)).toFixed(1)} l2 5 l5 0 l-4 3 l2 5 l-5 -3 l-5 3 l2 -5 l-4 -3 l5 0 z" fill="#ffcc00"/>`; }).join('')}
+  <path d="M40 62 q10 -10 20 -2 q10 -8 20 2" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M44 66 l8 8 M76 66 l-8 8" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`, 4, '4+');
+investment('inv_digitale', '#1c2b3a', `
+  <rect x="20" y="30" width="80" height="50" rx="4" fill="#263238" stroke="#4fc3f7" stroke-width="2"/>
+  ${[0, 1, 2, 3, 4].map(i => `<rect x="${30 + i * 13}" y="${70 - (i + 1) * 7}" width="8" height="${(i + 1) * 7}" fill="${['#66bb6a', '#4fc3f7', '#ffca28', '#ab47bc', '#26a69a'][i]}"/>`).join('')}
+  <circle cx="98" cy="28" r="10" fill="none" stroke="#4fc3f7" stroke-width="2"/><path d="M93 28 a5 5 0 0 1 10 0 M90 28 a8 8 0 0 1 16 0" stroke="#4fc3f7" fill="none"/>
+  <path d="M10 88 h100" stroke="#4fc3f7" stroke-dasharray="3 3"/>`, 5, '2×');
 
 // Role cards: illustration on top, the app writes the texts below.
 const ROLE_ART = {
