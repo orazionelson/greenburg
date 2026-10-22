@@ -97,6 +97,7 @@
           <small>${esc(t('ui.seedHint'))}</small></label>
         <button type="submit" class="btn btn-primary btn-big">${esc(t('ui.start'))}</button>
         <button type="button" class="btn" data-setup="manual">${esc(t('ui.readManual'))}</button>
+        <a class="btn" href="print.html?lang=${BV.i18n.lang}">${esc(t('print.link'))}</a>
       </form>`;
   }
 

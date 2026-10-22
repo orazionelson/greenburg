@@ -23,6 +23,32 @@ from the start screen.
   default, 0 to play without a limit). Past the limit you lose 1 impact point
   every 10 seconds; the timer stops while a window is open.
 
+## Print and play
+
+To play at the table, print the pieces and cut them out:
+[`print-and-play/greenburg-print-and-play.pdf`](print-and-play/greenburg-print-and-play.pdf)
+(Italian: [`borgo-verde-stampa-e-gioca.pdf`](print-and-play/borgo-verde-stampa-e-gioca.pdf)).
+The same sheets are generated live by `print.html`, also linked from the app's
+start screen, and can be printed straight from the browser.
+
+- Ten A4 pages: tiles, cards, tokens, credits and tracks for a 4-player game
+  (the 3-player game uses a subset). The first page has the printing
+  instructions and the list of contents.
+- Pages 2–7 are double-sided: each back follows its front, mirrored for
+  long-edge duplex printing. Grey tiles show their emission value on the back,
+  as setup requires; infrastructure tiles and Investment cards share a common
+  back.
+- Print at 100% (actual size). Land tiles are 32 mm, so a district is 96 mm and
+  a network tile 96 × 32 mm, as in the rulebook's proportions.
+
+After changing tiles, texts or layout, regenerate the PDFs (needs Playwright
+with Chromium, which the game itself does not depend on):
+
+```
+npm install --no-save playwright
+npm run print-pdf
+```
+
 ## Structure
 
 | Path | Contents |
@@ -34,8 +60,11 @@ from the start screen.
 | `js/i18n/it.js`, `js/i18n/en.js` | All the strings, one language per file |
 | `js/manual/it.js`, `js/manual/en.js` | Players' rules |
 | `js/ui.js`, `js/app.js` | Board, panels, tile card, start and final screens, saving |
+| `print.html`, `js/print.js`, `css/print.css` | Print-and-play sheets |
+| `print-and-play/` | Ready-made print-and-play PDFs, one per language |
 | `assets/tiles/` | Tile images, one per ID |
 | `tools/gen-placeholders.js` | Regenerates the SVG placeholders |
+| `tools/build-print.js` | Regenerates the print-and-play PDFs |
 | `tests/` | Engine and language tests |
 
 ## Tests
@@ -64,15 +93,15 @@ and that every image in the catalogue exists.
 GitHub Pages lets browsers cache files for a few minutes. To avoid anyone
 getting the new page with the old scripts after an update, every JS, CSS and
 image file is requested with the version number in its address
-(`js/app.js?v=0.5.0`). Bump the version before each release:
+(`js/app.js?v=0.6.0`). Bump the version before each release:
 
 ```
 npm version minor     # or patch; updates index.html and js/config.js
 ```
 
 The command runs `tools/set-version.js`, which copies the version from
-`package.json` into the references in `index.html` and into `js/config.js`. A
-test checks that the three versions match.
+`package.json` into the references in `index.html` and `print.html` and into
+`js/config.js`. A test checks that the versions match.
 
 ## Graphics
 

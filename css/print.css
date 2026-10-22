@@ -1,0 +1,154 @@
+/* Borgo Verde – print-and-play sheets (print.html). Sizes in mm match js/print.js. */
+@page { size: A4; margin: 0; }
+
+:root {
+  --bg: #e9e4d8;
+  --paper: #fbf7ee;
+  --ink: #2a2a26;
+  --muted: #6c675c;
+  --line: #d6cdb9;
+  --accent: #2f7d3a;
+  --cut: #8f8f8f;
+  --gold: #e0b43a;
+  --gold-ring: #a87f12;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); }
+
+/* ------------------------------------------------------------ toolbar */
+.pp-toolbar {
+  position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+  padding: 10px 16px; background: var(--accent); color: #fff;
+}
+.pp-toolbar h1 { margin: 0 auto 0 0; font-size: 1.15rem; }
+.pp-toolbar label { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; }
+.pp-toolbar select { padding: 5px 8px; border-radius: 8px; border: 0; background: #fff; color: var(--ink); }
+.btn {
+  display: inline-block; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--paper); color: var(--ink); font: inherit; font-size: 0.9rem; text-decoration: none; cursor: pointer;
+}
+.btn-primary { background: #fff; color: var(--accent); font-weight: 700; border-color: #fff; }
+
+/* -------------------------------------------------------------- sheets */
+.sheets { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; overflow-x: auto; }
+.sheet {
+  position: relative; flex: none; width: 210mm; height: 297mm; overflow: hidden;
+  background: #fff; box-shadow: 0 2px 10px rgba(40, 30, 10, 0.2);
+}
+.sheet-head {
+  position: absolute; left: 8mm; right: 8mm; top: 3.5mm; display: flex; justify-content: space-between;
+  font-size: 7pt; color: var(--muted);
+}
+.pp-label {
+  position: absolute; display: flex; align-items: center; font-size: 7.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);
+}
+
+@media print {
+  body { background: #fff; }
+  .pp-toolbar { display: none; }
+  .sheets { display: block; padding: 0; overflow: visible; }
+  .sheet { box-shadow: none; break-after: page; }
+}
+
+/* ------------------------------------------------------- cut-out pieces */
+.pp-item { position: absolute; }
+.pp-item::after {
+  content: ''; position: absolute; inset: 0; border: 0.2mm solid var(--cut); pointer-events: none;
+}
+.pp-item.round::after { border-radius: 50%; }
+.pp-item img, .pp-img { display: block; width: 100%; height: 100%; }
+
+.pp-tile, .pp-mun, .pp-role, .pp-card-img { position: relative; width: 100%; height: 100%; }
+/* Name band over the bottom fifth of the tile art, as in the app. */
+.pp-band {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 20%; padding: 0 1mm;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-variant: small-caps; font-weight: 700; font-size: 6.3pt; line-height: 1;
+}
+.pp-ribbon {
+  position: absolute; left: 36.7%; top: 60.6%; width: 26.7%; height: 7.8%;
+  display: flex; align-items: center; justify-content: center;
+  font-variant: small-caps; font-weight: 700; font-size: 7.5pt; color: #fff;
+}
+
+.pp-card { display: flex; flex-direction: column; width: 100%; height: 100%; background: var(--paper); }
+.pp-card-img { height: auto; aspect-ratio: 1; flex: none; }
+.pp-card .pp-band { font-size: 7.5pt; }
+.pp-card p { margin: 0; padding: 1.2mm 1.8mm; font-size: 6.3pt; line-height: 1.2; }
+
+.pp-role-text { position: absolute; left: 2.4mm; right: 2.4mm; top: 57.5%; bottom: 2mm; font-size: 6.6pt; line-height: 1.22; }
+.pp-role-text b { display: block; margin-bottom: 1mm; font-size: 8.5pt; color: #2e7d32; }
+.pp-role-text p { margin: 0 0 0.9mm; }
+.pp-role-text em { font-style: normal; font-weight: 700; }
+
+/* Backs: one design per deck, so face-down tiles give nothing away
+ * except the grey tiles' emission value, which setup needs. */
+.pp-back {
+  width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8mm;
+  color: #fff; text-align: center;
+}
+.pp-back b { font-size: 6.5pt; letter-spacing: 0.02em; }
+.pp-back span { font-size: 5.5pt; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.9; }
+.pp-back-grey { background: radial-gradient(circle at 80% 15%, #8a8170, #5d5a55 70%); }
+.pp-back-infra { background: radial-gradient(circle at 30% 25%, #6abf4b, #2f7d3a 75%); }
+.pp-back-inv { background: radial-gradient(circle at 50% 35%, #2c5aa0, #13234a 80%); }
+.pp-cloud { width: 15mm; height: 12.5mm; }
+.pp-leaf { width: 11mm; height: 10mm; }
+.pp-stars { width: 22mm; height: 22mm; }
+
+.pp-disc {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-weight: 700; line-height: 1;
+}
+.pp-coin { background: var(--gold); border: 0.6mm solid var(--gold-ring); color: #fff; font-size: 13pt; text-shadow: 0 0 1px var(--gold-ring); }
+.pp-coin.five { background: #b9c2c9; border-color: #6d7a84; font-size: 14pt; text-shadow: 0 0 1px #4d5860; }
+.pp-cube, .pp-pawn { background: var(--c); color: #fff; font-size: 6pt; }
+.pp-cube { border-radius: 1mm; }
+.pp-year { background: #fff; border: 0.5mm solid var(--muted); font-size: 5.5pt; }
+.pp-threshold { background: #fff; border: 0.8mm solid #e53935; color: #b71c1c; font-size: 5.5pt; }
+
+/* ------------------------------------------------------------- tracks */
+.pp-track { width: 100%; height: 100%; display: flex; flex-direction: column; background: var(--paper); }
+.pp-track h4 {
+  flex: none; height: 5mm; margin: 0; padding: 0 2mm; display: flex; align-items: center;
+  font-size: 7pt; font-weight: 700; color: #fff; background: var(--accent);
+}
+.pp-cells { flex: 1; display: grid; grid-auto-rows: 1fr; }
+.pp-cells span {
+  display: flex; align-items: flex-start; justify-content: flex-start; padding: 0.8mm 1.2mm;
+  border-right: 0.2mm solid var(--line); border-bottom: 0.2mm solid var(--line); font-size: 7.5pt; color: var(--muted);
+}
+.pp-cells .five { font-weight: 700; color: var(--ink); }
+.pp-cells .ten { font-weight: 700; color: var(--ink); background: #e8f2e3; }
+.pp-years .pp-cells span { align-items: center; justify-content: center; font-size: 10pt; font-weight: 700; color: var(--ink); }
+
+.pp-ptrack { width: 100%; height: 100%; display: grid; grid-template-columns: 24mm repeat(15, 1fr); background: var(--paper); }
+.pp-ptrack b {
+  display: flex; align-items: center; justify-content: center; background: var(--c); color: #fff;
+  font-size: 7.5pt; font-variant: small-caps;
+}
+.pp-ptrack span {
+  display: flex; align-items: center; justify-content: center; border-left: 0.2mm solid var(--line);
+  font-size: 7.5pt; font-weight: 700; color: var(--muted);
+}
+
+/* -------------------------------------------------------- instructions */
+.pp-intro { position: absolute; padding: 6mm 4mm; font-size: 10pt; line-height: 1.4; }
+.pp-intro h2 { margin: 0 0 3mm; font-size: 20pt; color: var(--accent); }
+.pp-intro h3 { margin: 5mm 0 1.5mm; font-size: 12pt; color: var(--accent); }
+.pp-intro p, .pp-intro ol { margin: 0 0 2mm; }
+.pp-intro ol { padding-left: 6mm; }
+.pp-intro li { margin-bottom: 1mm; }
+.pp-intro table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.pp-intro th, .pp-intro td { padding: 1.2mm 2mm; border-bottom: 0.2mm solid var(--line); text-align: left; }
+.pp-intro th { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.pp-intro td:nth-child(2) { text-align: right; width: 22mm; }
+.pp-intro th:nth-child(2) { text-align: right; }
+.pp-intro td:nth-child(3) { width: 30mm; }
+.pp-note { margin-top: 4mm !important; font-size: 9pt; color: var(--muted); }
+.pp-card .pp-printed { padding-bottom: 0; font-style: italic; color: var(--muted); }

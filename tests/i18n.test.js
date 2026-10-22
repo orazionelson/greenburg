@@ -42,7 +42,7 @@ test('placeholders match between languages', () => {
 
 test('literal keys used in the code exist', () => {
   const root = path.join(__dirname, '..', 'js');
-  const src = ['ui.js', 'app.js'].map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n');
+  const src = ['ui.js', 'app.js', 'print.js'].map(f => fs.readFileSync(path.join(root, f), 'utf8')).join('\n');
   const used = [...src.matchAll(/\bt\('([a-z]+\.[\w.]+)'/g)].map(m => m[1]);
   const engine = fs.readFileSync(path.join(root, 'engine.js'), 'utf8');
   const logs = [...engine.matchAll(/'(log\.\w+)'/g)].map(m => m[1]);
@@ -98,5 +98,14 @@ test('the players\' manual has the same sections in every language', () => {
       // internal links point to existing sections
       [...s.html.matchAll(/href="#m-(\w+)"/g)].forEach(l => assert.ok(ids.includes(l[1]), `${code}.${s.id} -> ${l[1]}`));
     });
+  }
+});
+
+test('every print-and-play group has a label', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'js', 'print.js'), 'utf8');
+  const groups = [...src.matchAll(/\{ key: '(\w+)'/g)].map(m => m[1]);
+  assert.ok(groups.length >= 10);
+  for (const g of groups) {
+    for (const code of Object.keys(BV.LANG)) assert.ok(has(code, 'print.group.' + g), `${code}: missing print.group.${g}`);
   }
 });
