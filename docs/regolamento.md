@@ -1,7 +1,5 @@
 # Borgo Verde
 
-Oct 20, 2026 · @Alfredo
-
 ## 1. Premessa
 
 Borgo Verde è un gioco da tavolo per 3 o 4 giocatori, con una durata massima di 20 minuti e un'età consigliata a partire da 10 anni. Ogni giocatore governa un Municipio di una città immaginaria, Borgo Verde, che all'inizio della partita è inquinata, impermeabile e collegata da strade e ferrovie in cattivo stato. Nel corso di sei anni di gioco, dal 2025 al 2030, i giocatori trasformano i propri Municipi sostituendo le superfici e gli impianti inquinanti con infrastrutture verdi, mobilità sostenibile ed energia rinnovabile, riqualificando gli edifici e rinnovando le reti di trasporto che attraversano la città.
@@ -245,7 +243,7 @@ Senso nel gioco: ogni carta premia una scelta diversa. Satellite ed Economia cir
 
 Le carte hanno lo stesso formato della tessera satellite: moneta del costo nell'angolo superiore sinistro, foglia dei punti in quello superiore destro, cartiglio con nome e testo stampato.
 
-**Monitoraggio satellitare.** Testo stampato: «Il satellite osserva i tetti e il calore del Municipio e certifica gli edifici decarbonizzati.» Disegno: nella metà superiore, un satellite per l'osservazione della Terra con due ali di pannelli solari blu e un sensore cilindrico rivolto verso il basso, su un fondo blu notte punteggiato di stelle. Nella metà inferiore, la pianta di un quartiere vista dall'alto, divisa in diagonale: la parte sinistra in colori naturali, la parte destra in falsi colori termici, dal blu delle aree verdi al rosso dei tetti caldi. Un fascio di luce tenue collega il sensore alla pianta. Nell'angolo superiore sinistro la moneta del costo, in quello superiore destro la foglia con l'indicazione «3 × edificio».
+**Monitoraggio satellitare.** Testo stampato: «Il satellite osserva i tetti e il calore del Municipio e certifica gli edifici decarbonizzati.» Disegno: nella metà superiore, un satellite per l'osservazione della Terra con due ali di pannelli solari blu e un sensore cilindrico rivolto verso il basso, su un fondo blu notte punteggiato di stelle. Nella metà inferiore, la pianta di un quartiere vista dall'alto, divisa in diagonale: la parte sinistra in colori naturali, la parte destra in falsi colori termici, dal blu delle aree verdi al rosso dei tetti caldi. Un fascio di luce tenue collega il sensore alla pianta. Nell'angolo superiore sinistro la moneta del costo, in quello superiore destro la foglia con l'indicazione «4 × edificio».
 
 **Partecipazione civica.** Testo stampato: «Assemblee di quartiere e patti di collaborazione: sono i cittadini a curare gli spazi verdi.» Disegno: un piccolo prato pubblico dove un gruppo di abitanti di età diverse pianta un albero e sistema un'aiuola; un tavolo all'aperto con fogli e un cartellone colorato, bambini che innaffiano, una panchina appena verniciata. Luce del mattino, colori pieni.
 

@@ -2,7 +2,7 @@
 
 Prototipo digitale del gioco da tavolo *Borgo Verde* (nome provvisorio): 3 o 4
 giocatori sullo stesso dispositivo, a turno, per sei anni di gioco (2025-2030).
-Il regolamento di riferimento è in [`docs/regolamento.md`](docs/regolamento.md),
+Il regolamento di riferimento è in [`docs/regolamento.md`](docs/regolamento.md) (versione inglese in [`docs/rulebook.md`](docs/rulebook.md)),
 il piano di lavoro in [`docs/PLAN.md`](docs/PLAN.md).
 
 ## Come si gioca
