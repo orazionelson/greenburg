@@ -40,6 +40,7 @@ button, input, select { font: inherit; color: inherit; }
   padding: 7px 14px; cursor: pointer; font-weight: 600;
 }
 .btn:hover { background: #fff; }
+a.btn { display: inline-block; color: var(--ink); text-decoration: none; text-align: center; }
 .btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn-primary:hover { background: #276a31; }
 .btn-small { padding: 3px 8px; font-size: 0.8rem; font-weight: 500; }
