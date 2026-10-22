@@ -51,7 +51,17 @@
       { id: 'inf_accumulo',     family: 'energia',  copies: 3 }
     ],
 
-    satellite: { id: 'sat_monitoraggio' },
+    // Investment cards: bought with Public works, one copy each, scored at the
+    // end of the game. `per`/`max`/`base` are the scoring numbers (engine:
+    // investmentPoints), kept here so they can be tuned by playtesting.
+    investments: [
+      { id: 'sat_monitoraggio',   cost: 5, per: 4, max: 8 },   // per decarbonised building
+      { id: 'inv_partecipazione', cost: 5, per: 2, max: 8 },   // per Green infrastructure
+      { id: 'inv_sanita',         cost: 5, base: 7 },          // base - own emissions
+      { id: 'inv_circolare',      cost: 5, per: 3, max: 6 },   // per emission-2 area turned into Mobility/Energy
+      { id: 'inv_patto',          cost: 4, base: 4, per: 2, max: 8 }, // if the city succeeds, + per year ahead of 2030
+      { id: 'inv_digitale',       cost: 5, per: 2, max: 10 }   // per kind of intervention done
+    ],
 
     slotLabels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'],
     buildingLabels: ['E1', 'E2']
@@ -59,6 +69,8 @@
 
   BV.CATALOG.greyById = {};
   BV.CATALOG.grey.forEach(function (g) { BV.CATALOG.greyById[g.id] = g; });
+  BV.CATALOG.investmentById = {};
+  BV.CATALOG.investments.forEach(function (c) { BV.CATALOG.investmentById[c.id] = c; });
   BV.CATALOG.infraById = {};
   BV.CATALOG.infra.forEach(function (t) { BV.CATALOG.infraById[t.id] = t; });
 })(typeof globalThis !== 'undefined' ? globalThis : this);

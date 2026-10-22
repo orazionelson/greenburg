@@ -22,7 +22,7 @@ Le quantità si riferiscono alla partita a 4 giocatori; con 3 giocatori si usano
 | Tessere strada a due facce | 4 | 3 | 4 |
 | Tessere ferrovia a due facce | 4 | 3 | 4 |
 | Tessere infrastruttura (3 famiglie, 11 soggetti) | 36 | 36 | 36 |
-| Tessera Monitoraggio satellitare | 1 | 1 | 1 |
+| Carte Investimento (6 tipi, 1 copia ciascuno) | 6 | 4, pescate a caso | 5, pescate a caso |
 | Carte ruolo | 5 | 5 | 5 |
 | Segnalini Rete completata (strada, ferrovia) | 2 | 2 | 2 |
 | Segnalino Chiave della città (primo giocatore) | 1 | 1 | 1 |
@@ -54,7 +54,7 @@ Schema della disposizione a 4 giocatori (S = strada, F = ferrovia, la lettera fr
 [STAZIONE] ====== S (Mercato) ======= [MERCATO]
 ```
 
-Nel centro dell'anello si collocano l'esposizione delle tessere infrastruttura, le cinque carte ruolo, la tessera Monitoraggio satellitare, i due segnalini Rete completata, il tracciato annuale e il tracciato delle emissioni della città. Davanti a ogni giocatore stanno la sua riserva di crediti e il suo tracciato personale delle emissioni; la pista segnapunti si colloca a lato.
+Nel centro dell'anello si collocano l'esposizione delle tessere infrastruttura, le cinque carte ruolo, le carte Investimento scoperte, i due segnalini Rete completata, il tracciato annuale e il tracciato delle emissioni della città. Davanti a ogni giocatore stanno la sua riserva di crediti e il suo tracciato personale delle emissioni; la pista segnapunti si colloca a lato.
 
 ## 4. Catalogo delle tessere
 
@@ -228,17 +228,34 @@ Le tessere rete sono rettangolari, lunghe quanto il lato di una tessera Municipi
 
 **Ferrovia rinnovata.** Testo stampato: «Binari nuovi, linea elettrificata e un treno ogni quindici minuti.» Disegno: un doppio binario lucido su massicciata pulita, i pali della linea aerea a intervalli regolari e un treno elettrico moderno, bianco e verde, con il pantografo alzato. A metà tessera una piccola fermata con pensilina, panchina e passeggeri in attesa; lungo la linea una siepe e un percorso ciclopedonale.
 
-### 4.7 Monitoraggio satellitare
+### 4.7 Carte Investimento
 
-| ID | Nome | Costo | Effetto | Copie |
-| --- | --- | --- | --- | --- |
-| sat\_monitoraggio | Monitoraggio satellitare | 5 | A fine partita, 3 punti per ogni edificio decarbonizzato del Municipio proprietario | 1 |
+Le carte Investimento rappresentano politiche pubbliche che il Municipio finanzia oltre agli interventi sul territorio. Ne esistono sei tipi, in una sola copia ciascuno. A inizio partita se ne scoprono a caso tante quanti sono i giocatori più uno; le altre tornano nella scatola. Si acquistano con l'Assessore ai lavori pubblici, ogni giocatore può possederne al massimo due e non si possono cedere. Danno punti solo a fine partita, prima dell'eventuale dimezzamento.
 
-Testo stampato: «Il satellite osserva i tetti e il calore del Municipio e certifica gli edifici decarbonizzati.»
+| ID | Nome | Costo | Punti a fine partita |
+| --- | --- | --- | --- |
+| sat\_monitoraggio | Monitoraggio satellitare | 5 | 4 per ogni edificio decarbonizzato del proprio Municipio (massimo 8) |
+| inv\_partecipazione | Partecipazione civica | 5 | 2 per ogni infrastruttura Verde del proprio Municipio (massimo 8) |
+| inv\_sanita | Sanità e istruzione | 5 | 7 meno le emissioni del proprio Municipio (minimo 0) |
+| inv\_circolare | Economia circolare | 5 | 3 per ogni area da 2 trasformata con un'infrastruttura Mobilità o Energia (massimo 6) |
+| inv\_patto | Patto dei sindaci | 4 | Se la città raggiunge la soglia: 4, più 2 per ogni anno di anticipo sul 2030 (massimo 8) |
+| inv\_digitale | Città digitale e dati aperti | 5 | 2 per ogni tipo di intervento fatto almeno una volta: Verde, Mobilità, Energia, edificio riqualificato, tratto di rete rinnovato (massimo 10) |
 
-Senso nel gioco: è l'unica fonte di punti di fine partita e premia chi investe nella riconversione degli edifici, che è l'intervento più costoso. Ha effetto solo sul Municipio che lo acquista e ne esiste una sola copia.
+Senso nel gioco: ogni carta premia una scelta diversa. Satellite ed Economia circolare spingono verso gli interventi più costosi, Partecipazione civica verso il Verde a basso costo, Sanità e istruzione premia il risultato finale, Città digitale una trasformazione equilibrata, Patto dei sindaci la cooperazione per raggiungere presto la soglia. Le simulazioni indicano un valore tipico di 4–7 punti per carta acquistata.
 
-Disegno: nella metà superiore, un satellite per l'osservazione della Terra con due ali di pannelli solari blu e un sensore cilindrico rivolto verso il basso, su un fondo blu notte punteggiato di stelle. Nella metà inferiore, la pianta di un quartiere vista dall'alto, divisa in diagonale: la parte sinistra in colori naturali, la parte destra in falsi colori termici, dal blu delle aree verdi al rosso dei tetti caldi. Un fascio di luce tenue collega il sensore alla pianta. Nell'angolo superiore sinistro la moneta del costo, in quello superiore destro la foglia con l'indicazione «3 × edificio».
+Le carte hanno lo stesso formato della tessera satellite: moneta del costo nell'angolo superiore sinistro, foglia dei punti in quello superiore destro, cartiglio con nome e testo stampato.
+
+**Monitoraggio satellitare.** Testo stampato: «Il satellite osserva i tetti e il calore del Municipio e certifica gli edifici decarbonizzati.» Disegno: nella metà superiore, un satellite per l'osservazione della Terra con due ali di pannelli solari blu e un sensore cilindrico rivolto verso il basso, su un fondo blu notte punteggiato di stelle. Nella metà inferiore, la pianta di un quartiere vista dall'alto, divisa in diagonale: la parte sinistra in colori naturali, la parte destra in falsi colori termici, dal blu delle aree verdi al rosso dei tetti caldi. Un fascio di luce tenue collega il sensore alla pianta. Nell'angolo superiore sinistro la moneta del costo, in quello superiore destro la foglia con l'indicazione «3 × edificio».
+
+**Partecipazione civica.** Testo stampato: «Assemblee di quartiere e patti di collaborazione: sono i cittadini a curare gli spazi verdi.» Disegno: un piccolo prato pubblico dove un gruppo di abitanti di età diverse pianta un albero e sistema un'aiuola; un tavolo all'aperto con fogli e un cartellone colorato, bambini che innaffiano, una panchina appena verniciata. Luce del mattino, colori pieni.
+
+**Sanità e istruzione.** Testo stampato: «Aria più pulita, meno malattie: ambulatori e scuole misurano i benefici del quartiere.» Disegno: un ambulatorio di quartiere con la croce rossa sulla facciata accanto a una scuola con le finestre aperte; davanti, bambini che giocano all'aperto e un medico che parla con una famiglia. Nel cielo, un indicatore stilizzato della qualità dell'aria sul verde.
+
+**Economia circolare.** Testo stampato: «Riuso, riciclo e materiali recuperati: le fonti più inquinanti diventano risorse.» Disegno: un centro del riuso in un ex capannone, con scaffali di oggetti riparati, biciclette rimesse a nuovo e balle di materiali riciclati; al centro le tre frecce del riciclo in verde, blu e giallo che si inseguono.
+
+**Patto dei sindaci.** Testo stampato: «La città si impegna con le altre città europee a ridurre le proprie emissioni.» Disegno: su fondo blu, il cerchio di dodici stelle gialle e al centro due mani che si stringono; sotto, in miniatura, le sagome di alcune città europee collegate da una linea tratteggiata.
+
+**Città digitale e dati aperti.** Testo stampato: «Sensori e dati aperti mostrano a tutti, in tempo reale, come cambia il quartiere.» Disegno: un grande schermo pubblico in una piazza con grafici a barre colorati e una mappa del quartiere; sensori sui lampioni, un ragazzo che consulta i dati sul telefono, linee luminose che collegano gli edifici al cruscotto.
 
 ### 4.8 Carte ruolo
 
@@ -247,7 +264,7 @@ Le carte ruolo sono carte verticali con l'illustrazione nella parte superiore e,
 | ID | Ruolo | Azione per tutti | Privilegio |
 | --- | --- | --- | --- |
 | ruolo\_urbanista | Urbanista | Posa un'infrastruttura su una tessera grigia territoriale | −1 al costo |
-| ruolo\_lavori | Assessore ai lavori pubblici | Riconverte un edificio, oppure rinnova un tratto di rete, oppure acquista il satellite | −1 al costo |
+| ruolo\_lavori | Assessore ai lavori pubblici | Riconverte un edificio, oppure rinnova un tratto di rete, oppure acquista una carta Investimento | −1 al costo |
 | ruolo\_bilancio | Assessore al bilancio | Incassa la rendita delle infrastrutture | +1 credito |
 | ruolo\_progettista | Progettista europeo | Nessuna | 2 crediti |
 | ruolo\_sindaco | Sindaco | Nessuna | 1 credito e Chiave della città |
@@ -276,7 +293,7 @@ Disegni:
 5. Ogni giocatore colloca il proprio cubo sul valore 14 del tracciato personale delle emissioni. Sul tracciato della città si segna il totale (42 con 3 giocatori, 56 con 4) e si colloca il segnale di soglia sul valore 10 con 3 giocatori o 13 con 4 giocatori.
 6. Ogni giocatore riceve 3 crediti; le pedine segnapunti partono da 0.
 7. Si mescola il mazzo delle tessere infrastruttura e se ne scoprono al centro tante quanti sono i giocatori più uno (4 con 3 giocatori, 5 con 4).
-8. Si dispongono al centro le cinque carte ruolo senza crediti, la tessera Monitoraggio satellitare e i due segnalini Rete completata.
+8. Si dispongono al centro le cinque carte ruolo senza crediti e i due segnalini Rete completata. Si mescolano le sei carte Investimento e se ne scoprono tante quanti sono i giocatori più uno; le altre tornano nella scatola.
 9. Il segnalino Anno si colloca sul 2025. La Chiave della città va a un giocatore scelto a caso.
 
 ## 6. Regolamento
@@ -303,7 +320,7 @@ La partita dura al massimo sei anni, dal 2025 al 2030. Ogni anno si compone di d
 
 - riconvertire un proprio edificio grigio, pagando 4 crediti e girando la tessera sul lato decarbonizzato;
 - rinnovare uno dei due tratti di rete del proprio Municipio ancora dissestati, pagando 2 crediti e girando la tessera sul lato rinnovato;
-- acquistare il Monitoraggio satellitare, pagando 5 crediti, se nessuno lo ha ancora acquistato; la tessera si colloca accanto al Municipio dell'acquirente.
+- acquistare una carta Investimento scoperta che nessuno ha ancora preso, pagandone il costo, se possiede meno di due carte; la carta si colloca accanto al Municipio dell'acquirente.
 
 Chi ha scelto il ruolo paga 1 credito in meno sull'azione scelta. Quando un giocatore rinnova l'ultimo tratto dissestato di una rete, la rete è completata e si colloca subito il segnalino Rete completata corrispondente accanto al tracciato della città.
 
@@ -331,7 +348,7 @@ Un Municipio che non ha ancora rinnovato il proprio tratto continua a pagarne l'
 - I crediti sulle carte ruolo si accumulano senza limite.
 - Le tessere grigie rimosse e gli edifici riconvertiti non tornano mai allo stato iniziale.
 - Ogni giocatore può rinnovare solo i propri due tratti di rete, uno per volta.
-- Il Monitoraggio satellitare non può essere ceduto.
+- Le carte Investimento non possono essere cedute; ognuno ne possiede al massimo due.
 - Le informazioni sono tutte pubbliche: crediti, punti e tessere di ogni giocatore sono visibili a tutti.
 
 ### 6.5 Tempo per mossa
@@ -343,10 +360,10 @@ Ogni volta che un giocatore deve decidere (scegliere un ruolo, oppure svolgere l
 I punti impatto si guadagnano in due modi.
 
 - **A ogni chiusura d'anno**, ogni giocatore guadagna 14 meno le emissioni correnti del proprio Municipio, cioè la riduzione totale ottenuta rispetto all'inizio della partita, comprensiva del bonus delle reti completate. Il valore va da 0 (nessun intervento) a 14 (Municipio a emissioni zero).
-- **A fine partita**, il possessore del Monitoraggio satellitare guadagna 3 punti per ogni edificio decarbonizzato del proprio Municipio (al massimo 6).
+- **A fine partita**, ogni giocatore aggiunge i punti delle proprie carte Investimento (sezione 4.7).
 - **Malus di tempo**: 1 punto per ogni 10 secondi oltre il tempo massimo per mossa (sezione 6.5), sottratto subito.
 
-Se la città ha fallito l'obiettivo cooperativo, il totale di ogni giocatore, comprensivo del bonus satellitare, viene dimezzato e arrotondato per difetto.
+Se la città ha fallito l'obiettivo cooperativo, il totale di ogni giocatore, comprensivo dei punti delle carte Investimento, viene dimezzato e arrotondato per difetto.
 
 ## 8. Vittoria e sconfitta
 
@@ -366,7 +383,7 @@ Se la città ha fallito l'obiettivo cooperativo, il totale di ogni giocatore, co
 
 **Le reti.** Rinnovare il proprio tratto rende subito 1 punto all'anno e avvicina il bonus di rete completata, che vale 1 punto all'anno per ogni giocatore. Ritardare il rinnovo per negare il bonus agli altri costa al ritardatario più di quanto costi agli avversari, perché egli perde sia il bonus sia la riduzione del proprio tratto.
 
-**Il satellite.** Il Monitoraggio satellitare costa 5 crediti, quanto cinque tessere Verde, e rende fino a 6 punti a fine partita, ma solo se il proprietario riconverte i propri edifici, l'intervento più costoso del gioco. È un investimento adatto a chi ha già un'economia avviata.
+**Gli investimenti.** Ogni carta Investimento vale di solito 4–7 punti a chi la compra: conviene quando premia qualcosa che il giocatore sta già facendo, o che può ancora fare negli anni rimasti. Una sola copia per carta e un massimo di due a testa fanno sì che nessuno possa accaparrarsi tutte le fonti di punti di fine partita. Il Patto dei sindaci rende solo se la città raggiunge la soglia: è una scommessa sulla cooperazione.
 
 **Cooperazione e competizione.** Il giocatore in testa ha interesse a raggiungere presto la soglia per chiudere la partita mentre è in vantaggio. Chi insegue non può frenare la città senza rinunciare ai propri punti, e un fallimento collettivo dimezza i punteggi di tutti senza cambiare l'ordine della classifica; l'unico modo efficace per recuperare è ridurre le proprie emissioni più in fretta degli altri.
 
@@ -428,7 +445,7 @@ Se Bruno avesse rinunciato a rinnovare la propria ferrovia, le emissioni sarebbe
 
 ### 10.5 Fine della partita
 
-Nel 2029 Carla acquista il Monitoraggio satellitare e riconverte entrambi i suoi edifici. Alla chiusura del 2029 le emissioni sono Anna 3, Bruno 3, Carla 5, per una città a 11, appena sopra la soglia; la partita prosegue. Alla chiusura del 2030 le emissioni sono Anna 2, Bruno 3, Carla 4, per una città a 9: la soglia è raggiunta e la città ha successo.
+Nel 2029 Carla acquista il Monitoraggio satellitare e riconverte entrambi i suoi edifici. (L'esempio è precedente alle carte Investimento e usa la vecchia regola del satellite: 3 punti per edificio; serve come caso di prova del calcolo finale.) Alla chiusura del 2029 le emissioni sono Anna 3, Bruno 3, Carla 5, per una città a 11, appena sopra la soglia; la partita prosegue. Alla chiusura del 2030 le emissioni sono Anna 2, Bruno 3, Carla 4, per una città a 9: la soglia è raggiunta e la città ha successo.
 
 | Giocatore | 2025 | 2026 | 2027 | 2028 | 2029 | 2030 | Satellite | Totale |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -466,8 +483,9 @@ Questa sezione traduce il regolamento in indicazioni per lo sviluppo dell'applic
 | Costo / rendita Energia | 3 / 2 |
 | Costo riconversione edificio | 4 |
 | Costo rinnovo tratto di rete | 2 |
-| Costo Monitoraggio satellitare | 5 |
-| Punti satellite per edificio decarbonizzato | 3 |
+| Carte Investimento scoperte | numero di giocatori + 1 |
+| Carte Investimento per giocatore | al massimo 2 |
+| Costi e punti delle carte Investimento | tabella della sezione 4.7 |
 | Sconto privilegio (Urbanista, Lavori pubblici) | 1, costo minimo 0 |
 | Bonus privilegio Bilancio | +1 |
 | Crediti Progettista europeo | 2 |
@@ -499,7 +517,9 @@ GameState {
   infraDeck: InfraTileId[]
   infraDisplay: InfraTileId[]
   infraDiscard: InfraTileId[]
-  satelliteOwner: playerIndex | null
+  investmentsOnTable: InvestmentId[]
+  investmentOwners: { [InvestmentId]: playerIndex | null }
+  successYear: number | null       // anno in cui la città ha raggiunto la soglia
   networkCompleted: { strada: boolean, ferrovia: boolean }
   players: Player[]
   log: LogEntry[]
@@ -533,29 +553,29 @@ Il proprietario dei tratti di rete coincide con il Municipio del giocatore: nell
 2. **ROLE\_SELECTION**: il giocatore `chooserIndex` sceglie un ruolo non presente in `rolesChosenThisYear`; incassa `roleCredits[ruolo]`, che torna a 0. Si costruisce `executionQueue` a partire da chi ha scelto, in senso orario. Per Progettista e Sindaco la coda contiene solo chi ha scelto.
 3. **ROLE\_EXECUTION**: ogni giocatore della coda esegue l'azione o rinuncia; l'interfaccia mostra solo le opzioni ammesse. Esaurita la coda, se tutti hanno scelto un ruolo si passa a YEAR\_END, altrimenti `chooserIndex` avanza in senso orario e si torna a ROLE\_SELECTION.
 4. **YEAR\_END**: accumulo sui ruoli non scelti, calcolo delle emissioni, assegnazione dei punti, verifica della fine; se la partita prosegue, rinnovo dell'esposizione, passaggio della Chiave se il Sindaco non è stato scelto, avanzamento dell'anno, `chooserIndex = keyHolder`.
-5. **GAME\_OVER**: bonus satellite, eventuale dimezzamento, classifica con gli spareggi della sezione 8.
+5. **GAME\_OVER**: punti delle carte Investimento, eventuale dimezzamento, classifica con gli spareggi della sezione 8.
 
 ### 11.5 Controlli di validità
 
 - Un ruolo già scelto nell'anno non è selezionabile.
 - Urbanista: azione ammessa solo se esistono tessere scoperte, una tessera grigia territoriale libera e crediti sufficienti per almeno una tessera scoperta, al netto dello sconto se il giocatore è chi ha scelto il ruolo.
-- Lavori pubblici: una sola azione per giocatore; riconversione solo su un edificio grigio proprio; rinnovo solo su un tratto proprio dissestato; satellite solo se `satelliteOwner` è nullo.
+- Lavori pubblici: una sola azione per giocatore; riconversione solo su un edificio grigio proprio; rinnovo solo su un tratto proprio dissestato; carta Investimento solo se è scoperta, non ancora presa e il giocatore ne possiede meno di due.
 - Dopo ogni rinnovo si verifica se tutti i tratti di quel tipo sono rinnovati; in caso positivo `networkCompleted` diventa vero e l'evento si registra nel log.
 - Le emissioni si calcolano con la formula della sezione 6.3, con minimo 0; i punti dell'anno sono `14 − emissions`.
 - I crediti non possono diventare negativi.
 
 ### 11.6 Interfaccia
 
-- Il tabellone occupa la parte centrale dello schermo e riproduce l'anello della sezione 3. Gli elementi che sul tavolo stanno al centro dell'anello (esposizione, carte ruolo con i crediti accumulati, satellite, segnalini rete, tracciato annuale, tracciato della città con la soglia evidenziata) sono in un'area comune a sinistra del tabellone, oppure sopra di esso sugli schermi meno larghi; l'anello è quindi stretto quanto le tessere rete e i Municipi sono più grandi.
+- Il tabellone occupa la parte centrale dello schermo e riproduce l'anello della sezione 3. Gli elementi che sul tavolo stanno al centro dell'anello (esposizione, carte ruolo con i crediti accumulati, carte Investimento, segnalini rete, tracciato annuale, tracciato della città con la soglia evidenziata) sono in un'area comune a sinistra del tabellone, oppure sopra di esso sugli schermi meno larghi; l'anello è quindi stretto quanto le tessere rete e i Municipi sono più grandi.
 - Un pulsante apre il manuale dei giocatori, in italiano e in inglese.
 - Il pannello del giocatore di turno mostra il tempo rimasto per la mossa e, oltre il limite, il malus accumulato.
 - Le tessere che cambiano stato (posa di un'infrastruttura, riconversione di un edificio, rinnovo di un tratto) hanno una breve animazione: la tessera grigia rimossa svanisce, le tessere a due facce si girano.
 - Al passaggio del puntatore, o con un tocco prolungato su schermi tattili, ogni tessera mostra nome, testo stampato e valori.
 - Un pannello per ogni giocatore riporta crediti, emissioni correnti, punti e rendita totale; il giocatore di turno è evidenziato.
 - Un registro testuale elenca le azioni dell'anno in corso, utile per la verifica delle regole durante le prove.
-- La schermata finale riporta il risultato della città, la classifica, i punti per anno di ogni giocatore e il bonus satellite.
+- La schermata finale riporta il risultato della città, la classifica, i punti per anno di ogni giocatore e i punti delle carte Investimento.
 - I valori di gioco non devono essere affidati solo al colore: icone e numeri restano sempre visibili.
 
 ### 11.7 Casi di prova
 
-Con la disposizione e l'ordine delle tessere della sezione 10, l'applicazione deve riprodurre esattamente le tabelle di fine anno 2025 e 2026 (crediti, emissioni, punti) e il calcolo delle emissioni dell'esempio 10.4, incluso il caso alternativo in cui Bruno non rinnova la ferrovia. Il punteggio finale della sezione 10.5 e la sua variante con fallimento servono a verificare bonus satellite, dimezzamento e spareggio.
+Con la disposizione e l'ordine delle tessere della sezione 10, l'applicazione deve riprodurre esattamente le tabelle di fine anno 2025 e 2026 (crediti, emissioni, punti) e il calcolo delle emissioni dell'esempio 10.4, incluso il caso alternativo in cui Bruno non rinnova la ferrovia. Il punteggio finale della sezione 10.5 e la sua variante con fallimento servono a verificare punti di fine partita, dimezzamento e spareggio.

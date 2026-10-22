@@ -33,7 +33,7 @@
   <li>al centro lo stemma.</li>
 </ul>
 <p>Ogni tratto di rete dissestato emette 1. In tutto: 8 dalle tessere territoriali, 4 dagli edifici e 2 dalle reti, cioè 14.</p>
-<p>A fianco del tabellone c'è l'area comune: anno in corso, emissioni della città con la soglia, satellite e segnalini delle reti, tessere infrastruttura scoperte (l'esposizione) e le cinque carte ruolo.</p>`
+<p>A fianco del tabellone c'è l'area comune: anno in corso, emissioni della città con la soglia, carte Investimento e segnalini delle reti, tessere infrastruttura scoperte (l'esposizione) e le cinque carte ruolo.</p>`
       },
       {
         id: 'preparazione',
@@ -74,7 +74,7 @@
   <dt>Urbanista</dt>
   <dd>Ogni giocatore può prendere una tessera dell'esposizione, pagarne il costo e posarla su una propria tessera grigia territoriale, che viene rimossa. Chi ha scelto il ruolo paga 1 in meno (minimo 0). L'esposizione non si ricostituisce durante l'anno.</dd>
   <dt>Assessore ai lavori pubblici</dt>
-  <dd>Ogni giocatore può fare una sola di queste azioni: riconvertire un proprio edificio (4 crediti, la tessera si gira sul lato decarbonizzato); rinnovare uno dei propri tratti di rete (2 crediti, la tessera si gira); acquistare il Monitoraggio satellitare (5 crediti, se nessuno lo ha ancora). Chi ha scelto il ruolo paga 1 in meno.</dd>
+  <dd>Ogni giocatore può fare una sola di queste azioni: riconvertire un proprio edificio (4 crediti, la tessera si gira sul lato decarbonizzato); rinnovare uno dei propri tratti di rete (2 crediti, la tessera si gira); acquistare una carta Investimento fra quelle sul tavolo non ancora prese. Chi ha scelto il ruolo paga 1 in meno.</dd>
   <dt>Assessore al bilancio</dt>
   <dd>Ogni giocatore incassa la rendita delle proprie infrastrutture. Chi ha scelto il ruolo incassa 1 credito in più.</dd>
   <dt>Progettista europeo</dt>
@@ -97,9 +97,20 @@
     <tr><td>Energia (fotovoltaico, minieolico, accumulo)</td><td>3</td><td>2</td></tr>
   </tbody>
 </table>
-<p><b>Edifici:</b> il lato grigio emette 2, quello decarbonizzato 0. Gli edifici decarbonizzati valgono per il satellite.</p>
+<p><b>Edifici:</b> il lato grigio emette 2, quello decarbonizzato 0. Gli edifici decarbonizzati valgono per il Monitoraggio satellitare.</p>
 <p><b>Reti:</b> un tratto dissestato emette 1, rinnovato 0. Quando <b>tutti</b> i tratti di una rete (strada o ferrovia) sono rinnovati, la rete è completata e ogni Municipio emette 1 in meno per il resto della partita.</p>
-<p><b>Monitoraggio satellitare:</b> una sola copia. A fine partita il proprietario guadagna 3 punti per ogni edificio decarbonizzato del proprio Municipio (al massimo 6).</p>`
+<p><b>Carte Investimento:</b> a inizio partita se ne scoprono a caso tante quanti sono i giocatori più uno. Si acquistano con l'Assessore ai lavori pubblici; ogni carta esiste in una sola copia e ognuno può averne al massimo 2. Danno punti a fine partita:</p>
+<table class="manual-table">
+  <thead><tr><th>Investimento</th><th>Costo</th><th>Punti a fine partita</th></tr></thead>
+  <tbody>
+    <tr><td>Monitoraggio satellitare</td><td>5</td><td>4 per ogni edificio decarbonizzato (max 8)</td></tr>
+    <tr><td>Partecipazione civica</td><td>5</td><td>2 per ogni infrastruttura Verde (max 8)</td></tr>
+    <tr><td>Sanità e istruzione</td><td>5</td><td>7 meno le emissioni del tuo Municipio</td></tr>
+    <tr><td>Economia circolare</td><td>5</td><td>3 per ogni area da 2 trasformata con Mobilità o Energia (max 6)</td></tr>
+    <tr><td>Patto dei sindaci</td><td>4</td><td>se la città raggiunge la soglia: 4, più 2 per ogni anno di anticipo (max 8)</td></tr>
+    <tr><td>Città digitale e dati aperti</td><td>5</td><td>2 per ogni tipo di intervento: Verde, Mobilità, Energia, edificio, rete (max 10)</td></tr>
+  </tbody>
+</table>`
       },
       {
         id: 'emissioni',
@@ -128,7 +139,7 @@
         html: `
 <ul>
   <li><b>A ogni fine anno</b> ogni giocatore guadagna 14 meno le emissioni del proprio Municipio: da 0 (nessun intervento) a 14 (Municipio a emissioni zero).</li>
-  <li><b>A fine partita</b> il proprietario del satellite guadagna 3 punti per ogni edificio decarbonizzato.</li>
+  <li><b>A fine partita</b> ognuno aggiunge i punti delle proprie carte Investimento.</li>
   <li>I malus di tempo si tolgono dal totale.</li>
 </ul>
 <p><b>Successo della città:</b> se alla chiusura di un anno le emissioni della città sono pari o sotto la soglia, la partita finisce subito, anche prima del 2030, e i punteggi restano interi.</p>
@@ -144,7 +155,7 @@
   <li><b>Dove posare:</b> un Verde da 1 credito sopra un Distributore riduce di 2. Le infrastrutture più care si ripagano solo con la rendita, cioè se l'Assessore al bilancio verrà scelto ancora.</li>
   <li><b>Scegliere i ruoli:</b> ogni ruolo aiuta tutti, ma chi lo sceglie ha il privilegio e decide quando succede. L'Urbanista quando gli altri sono senza crediti è quasi tutto per te; i ruoli ignorati accumulano crediti e diventano più appetibili.</li>
   <li><b>Le reti:</b> rinnovare il proprio tratto rende subito 1 punto l'anno e avvicina il bonus per tutti. Ritardare per negare il bonus costa più a te che agli altri.</li>
-  <li><b>Il satellite</b> vale fino a 6 punti, ma solo se riconverti i tuoi edifici: è un investimento per chi ha già un'economia avviata.</li>
+  <li><b>Gli investimenti</b> valgono di solito 4–7 punti: comprali quando la carta premia qualcosa che stai già facendo, o che puoi ancora fare negli anni che restano. Il Patto dei sindaci rende solo se la città ce la fa: è una scommessa sulla cooperazione.</li>
   <li><b>Cooperare e competere:</b> chi è in testa ha interesse a chiudere presto la partita raggiungendo la soglia; chi insegue recupera solo riducendo le proprie emissioni più in fretta.</li>
 </ul>`
       },

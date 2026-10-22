@@ -35,6 +35,10 @@
       roleCredits: 'Crediti sulla carta: {n}',
       chosenBy: 'Scelto da {player}',
       satellite: 'Satellite',
+      investments: 'Investimenti',
+      valueNow: 'Oggi per {player}',
+      pointsN: '{n} punti',
+      investmentNote: 'Ognuno può avere al massimo 2 investimenti.',
       ownedBy: 'Di {player}',
       available: 'Disponibile',
       networks: 'Reti',
@@ -52,10 +56,10 @@
       chooseRolePrompt: '{player}, scegli un ruolo.',
       urbanistaPrompt: '{player}: scegli una tessera dell\'esposizione, poi una tua tessera grigia su cui posarla.',
       urbanistaSlotPrompt: '{player}: scegli la tessera grigia su cui posare {tile} (costo {cost}).',
-      lavoriPrompt: '{player}: riconverti un edificio, rinnova un tratto di rete o acquista il satellite.',
+      lavoriPrompt: '{player}: riconverti un edificio, rinnova un tratto di rete o acquista un investimento.',
       reconvertOption: 'Riconverti {tile} · {cost}',
       renewOption: 'Rinnova {network} · {cost}',
-      satelliteOption: 'Acquista il satellite · {cost}',
+      investmentOption: 'Acquista {name} · {cost}',
       privilegeNote: 'Hai scelto il ruolo: −1 al costo.',
       roleAction: 'Per tutti',
       rolePrivilege: 'Privilegio',
@@ -72,7 +76,7 @@
       winner: 'Vince {names}',
       winners: 'Vittoria condivisa: {names}',
       partialWin: 'Una vittoria individuale in una città che ha fallito vale come un risultato parziale.',
-      satelliteBonus: 'Satellite',
+      investmentBonus: 'Investimenti',
       subtotal: 'Totale',
       halved: 'Dimezzato',
       final: 'Finale',
@@ -160,7 +164,32 @@
       sat_monitoraggio: {
         name: 'Monitoraggio satellitare',
         text: 'Il satellite osserva i tetti e il calore del Municipio e certifica gli edifici decarbonizzati.',
-        effect: 'A fine partita, 3 punti per ogni edificio decarbonizzato del Municipio proprietario.'
+        effect: 'A fine partita, 4 punti per ogni edificio decarbonizzato del tuo Municipio (massimo 8).'
+      },
+      inv_partecipazione: {
+        name: 'Partecipazione civica',
+        text: 'Assemblee di quartiere e patti di collaborazione: sono i cittadini a curare gli spazi verdi.',
+        effect: 'A fine partita, 2 punti per ogni infrastruttura Verde del tuo Municipio (massimo 8).'
+      },
+      inv_sanita: {
+        name: 'Sanità e istruzione',
+        text: 'Aria più pulita, meno malattie: ambulatori e scuole misurano i benefici del quartiere.',
+        effect: 'A fine partita, 7 punti meno le emissioni del tuo Municipio (minimo 0).'
+      },
+      inv_circolare: {
+        name: 'Economia circolare',
+        text: 'Riuso, riciclo e materiali recuperati: le fonti più inquinanti diventano risorse.',
+        effect: 'A fine partita, 3 punti per ogni area da 2 trasformata con Mobilità o Energia (massimo 6).'
+      },
+      inv_patto: {
+        name: 'Patto dei sindaci',
+        text: 'La città si impegna con le altre città europee a ridurre le proprie emissioni.',
+        effect: 'Se la città raggiunge la soglia: 4 punti, più 2 per ogni anno di anticipo sul 2030 (massimo 8).'
+      },
+      inv_digitale: {
+        name: 'Città digitale e dati aperti',
+        text: 'Sensori e dati aperti mostrano a tutti, in tempo reale, come cambia il quartiere.',
+        effect: 'A fine partita, 2 punti per ogni tipo di intervento fatto: Verde, Mobilità, Energia, edificio riqualificato, rete rinnovata (massimo 10).'
       }
     },
 
@@ -185,7 +214,7 @@
 
     role: {
       urbanista: { name: 'Urbanista', action: 'Posa un\'infrastruttura su una tessera grigia territoriale.', privilege: '−1 al costo.' },
-      lavori: { name: 'Assessore ai lavori pubblici', short: 'Lavori pubblici', action: 'Riconverte un edificio, oppure rinnova un tratto di rete, oppure acquista il satellite.', privilege: '−1 al costo.' },
+      lavori: { name: 'Assessore ai lavori pubblici', short: 'Lavori pubblici', action: 'Riconverte un edificio, oppure rinnova un tratto di rete, oppure acquista un investimento.', privilege: '−1 al costo.' },
       bilancio: { name: 'Assessore al bilancio', short: 'Bilancio', action: 'Incassa la rendita delle infrastrutture.', privilege: '+1 credito.' },
       progettista: { name: 'Progettista europeo', short: 'Progettista', action: 'Nessuna.', privilege: '2 crediti.' },
       sindaco: { name: 'Sindaco', action: 'Nessuna.', privilege: '1 credito e Chiave della città.' }
@@ -202,7 +231,7 @@
       placeInfra: '{player} posa {tile} su {grey} ({slot}) pagando {cost}: emissioni −{reduction}.',
       reconvert: '{player} riconverte {tile} pagando {cost}.',
       renew: '{player} rinnova il tratto di {network} pagando {cost}.',
-      buySatellite: '{player} acquista il Monitoraggio satellitare pagando {cost}.',
+      buyInvestment: '{player} acquista l’investimento {investment} pagando {cost}.',
       pass: '{player} rinuncia.',
       autoPass: '{player} non ha azioni possibili e rinuncia.',
       networkCompleted: 'Rete completata: {network}! −1 alle emissioni di ogni Municipio.',

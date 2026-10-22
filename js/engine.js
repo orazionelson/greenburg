@@ -10,7 +10,7 @@
   var R = BV.rng;
 
   // Bump when the catalogue or the state shape changes: older saves are ignored.
-  var STATE_VERSION = 3;
+  var STATE_VERSION = 4;
 
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
 
@@ -112,7 +112,9 @@
       infraDeck: [],
       infraDisplay: [],
       infraDiscard: [],
-      satelliteOwner: null,
+      investmentsOnTable: [],
+      investmentOwners: {},
+      successYear: null,
       networkCompleted: { strada: false, ferrovia: false },
       cityEmissions: 0,
       cityHistory: [],
@@ -178,6 +180,15 @@
     state.infraDeck = prefix.concat(R.shuffle(state, pool));
 
     state.keyHolder = opts.keyHolder != null ? opts.keyHolder : R.int(state, n);
+
+    // Investment cards on the table: players + 1, chosen at random.
+    state.investmentsOnTable = forced.investments
+      ? forced.investments.slice()
+      : R.shuffle(state, CAT.investments.map(function (c) { return c.id; })).slice(0, n + C.investmentsExtra);
+    state.investmentsOnTable.forEach(function (id) {
+      if (!CAT.investmentById[id]) fail('Unknown investment ' + id);
+      state.investmentOwners[id] = null;
+    });
     state.players.forEach(function (p, k) { p.emissions = computeEmissions(state, k); });
     state.cityEmissions = cityEmissions(state);
 
@@ -244,14 +255,53 @@
     return player.buildings.filter(function (b) { return b.side === 'decarbonizzato'; }).length;
   }
 
+  function ownedInvestments(state, i) {
+    return state.investmentsOnTable.filter(function (id) { return state.investmentOwners[id] === i; });
+  }
+
+  // End-of-game points of an investment card for player i (whether or not owned).
+  function investmentPoints(state, i, id) {
+    var card = CAT.investmentById[id];
+    var p = state.players[i];
+    var infra = p.territorial.filter(function (s) { return s.kind === 'infrastruttura'; });
+    var n;
+    switch (id) {
+      case 'sat_monitoraggio':
+        n = decarbonizedCount(p);
+        break;
+      case 'inv_partecipazione':
+        n = infra.filter(function (s) { return s.family === 'verde'; }).length;
+        break;
+      case 'inv_sanita':
+        return Math.max(0, card.base - computeEmissions(state, i));
+      case 'inv_circolare':
+        n = infra.filter(function (s) {
+          return s.family !== 'verde' && s.replaced && CAT.greyById[s.replaced].emission === 2;
+        }).length;
+        break;
+      case 'inv_patto':
+        if (!state.successYear) return 0;
+        return Math.min(card.max, card.base + card.per * (C.lastYear - state.successYear));
+      case 'inv_digitale':
+        n = ['verde', 'mobilita', 'energia'].filter(function (f) {
+          return infra.some(function (s) { return s.family === f; });
+        }).length;
+        if (decarbonizedCount(p) > 0) n++;
+        if (C.networks.some(function (net) { return p.network[net] === 'rinnovata'; })) n++;
+        break;
+      default:
+        fail('Unknown investment ' + id);
+    }
+    return Math.min(card.max, card.per * n);
+  }
+
   /* Final scores and ranking (sections 7-8).
-   * input: { citySuccess, satelliteOwner, players: [{ score, emissions, credits, decarbonized }] }
+   * input: { citySuccess, players: [{ score, emissions, credits, bonus }] }
+   * bonus = end-of-game investment points, added before any halving.
    * Ranking: score desc, then emissions asc, then credits desc; full ties share the rank. */
   function computeOutcome(input) {
     var players = input.players;
-    var bonus = players.map(function (p, i) {
-      return input.satelliteOwner === i ? C.satellitePointsPerBuilding * p.decarbonized : 0;
-    });
+    var bonus = players.map(function (p) { return p.bonus || 0; });
     var beforeHalving = players.map(function (p, i) { return p.score + bonus[i]; });
     var finalScores = beforeHalving.map(function (s) {
       return input.citySuccess ? s : Math.floor(s * C.failureFactor);
@@ -274,7 +324,7 @@
 
     return {
       citySuccess: !!input.citySuccess,
-      satelliteBonus: bonus,
+      investmentBonus: bonus,
       scoresBeforeHalving: beforeHalving,
       finalScores: finalScores,
       ranking: ranking,
@@ -328,8 +378,12 @@
       C.networks.forEach(function (net) {
         if (p.network[net] === 'dissestata' && nc <= p.credits) out.push({ type: 'renew', network: net });
       });
-      if (state.satelliteOwner == null && costFor(state, actor, C.satelliteCost) <= p.credits) {
-        out.push({ type: 'buySatellite' });
+      if (ownedInvestments(state, actor).length < C.investmentsPerPlayer) {
+        state.investmentsOnTable.forEach(function (id) {
+          if (state.investmentOwners[id] == null && costFor(state, actor, CAT.investmentById[id].cost) <= p.credits) {
+            out.push({ type: 'buyInvestment', id: id });
+          }
+        });
       }
     }
     out.push({ type: 'pass' });
@@ -338,7 +392,7 @@
 
   function sameAction(a, b) {
     return a.type === b.type && a.role === b.role && a.display === b.display &&
-      a.slot === b.slot && a.network === b.network;
+      a.slot === b.slot && a.network === b.network && a.id === b.id;
   }
 
   function isLegal(state, action) {
@@ -428,11 +482,11 @@
         log(state, 'log.renew', { player: actor, network: action.network, cost: cost });
         checkNetwork(state, action.network);
         break;
-      case 'buySatellite':
-        cost = costFor(state, actor, C.satelliteCost);
+      case 'buyInvestment':
+        cost = costFor(state, actor, CAT.investmentById[action.id].cost);
         pay(p, cost);
-        state.satelliteOwner = actor;
-        log(state, 'log.buySatellite', { player: actor, cost: cost });
+        state.investmentOwners[action.id] = actor;
+        log(state, 'log.buyInvestment', { player: actor, investment: action.id, cost: cost });
         break;
       case 'pass':
         log(state, 'log.pass', { player: actor, role: state.activeRole });
@@ -510,13 +564,22 @@
   }
 
   function gameOver(state, success) {
+    state.successYear = success ? state.year : null;
+    var detail = state.players.map(function (p, i) {
+      return ownedInvestments(state, i).map(function (id) {
+        return { id: id, points: investmentPoints(state, i, id) };
+      });
+    });
     state.outcome = computeOutcome({
       citySuccess: success,
-      satelliteOwner: state.satelliteOwner,
-      players: state.players.map(function (p) {
-        return { score: p.score, emissions: p.emissions, credits: p.credits, decarbonized: decarbonizedCount(p) };
+      players: state.players.map(function (p, i) {
+        return {
+          score: p.score, emissions: p.emissions, credits: p.credits,
+          bonus: detail[i].reduce(function (sum, d) { return sum + d.points; }, 0)
+        };
       })
     });
+    state.outcome.investmentDetail = detail;
     state.outcome.cityEmissions = state.cityEmissions;
     state.outcome.year = state.year;
     state.phase = 'GAME_OVER';
@@ -559,6 +622,8 @@
     computeEmissions: computeEmissions,
     cityEmissions: cityEmissions,
     computeOutcome: computeOutcome,
+    investmentPoints: investmentPoints,
+    ownedInvestments: ownedInvestments,
     incomeOf: incomeOf,
     decarbonizedCount: decarbonizedCount,
     costFor: costFor,

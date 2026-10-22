@@ -53,10 +53,16 @@
       role: v => esc(roleName(v)),
       tile: v => esc(tileName(v)),
       grey: v => esc(tileName(v)),
-      network: v => esc(t(`network.${v}.name`))
+      network: v => esc(t(`network.${v}.name`)),
+      investment: v => esc(t(`tile.${v}.name`))
     };
     Object.keys(p).forEach(k => { if (map[k]) p[k] = map[k](p[k]); });
     return t(entry.key, p);
+  }
+
+  function investmentFlags(i) {
+    return E.ownedInvestments(ui.state, i).map(id =>
+      `<img class="flag inv" src="${asset(id)}" alt="${esc(t(`tile.${id}.name`))}" title="${esc(t(`tile.${id}.name`))}" ${tip('investment', id)}>`).join('');
   }
 
   function legal() { return ui.state ? E.legalActions(ui.state) : []; }
@@ -159,7 +165,7 @@
     const top = cy - M / 2, left = cx - M / 2;
     const tagAbove = cy < g.H / 2;
     const flags = (st.keyHolder === pi ? `<img class="flag" src="${asset(`token_chiave`)}" alt="${esc(t('ui.keyHolder'))}" title="${esc(t('ui.keyHolder'))}">` : '') +
-      (st.satelliteOwner === pi ? `<img class="flag" src="${asset(`sat_monitoraggio`)}" alt="${esc(t('ui.satellite'))}" title="${esc(t('tile.sat_monitoraggio.name'))}">` : '');
+      investmentFlags(pi);
     return `<div class="municipio ${cur ? 'current' : ''}" style="left:${left}px;top:${top}px;--pc:${color(pi)}">
         <img class="mun-bg" src="${asset(`mun_${p.municipio}`)}" alt="">
         <div class="mun-grid">${cells}</div>
@@ -241,10 +247,15 @@
         </div>`;
     }).join('');
 
-    const satAct = acts.find(a => a.type === 'buySatellite');
-    const sat = st.satelliteOwner == null
-      ? `<div class="tile sat ${satAct ? 'selectable' : ''}" ${tip('satellite')} ${satAct ? `${actAttr(satAct)} role="button" tabindex="0"` : ''} aria-label="${esc(t('tile.sat_monitoraggio.name'))}">${tileImg('sat_monitoraggio', t('tile.sat_monitoraggio.name'))}</div>`
-      : `<div class="tile sat owned" ${tip('satellite')} style="--pc:${color(st.satelliteOwner)}">${tileImg('sat_monitoraggio', '')}<span class="owner">${esc(playerName(st.satelliteOwner))}</span></div>`;
+    const investments = st.investmentsOnTable.map(id => {
+      const owner = st.investmentOwners[id];
+      const name = t(`tile.${id}.name`);
+      if (owner != null) {
+        return `<div class="tile inv owned" ${tip('investment', id)} style="--pc:${color(owner)}" aria-label="${esc(name + ' – ' + playerName(owner))}">${tileImg(id, '')}<span class="owner">${esc(playerName(owner))}</span></div>`;
+      }
+      const buy = acts.find(a => a.type === 'buyInvestment' && a.id === id);
+      return `<div class="tile inv ${buy ? 'selectable' : ''}" ${tip('investment', id)} ${buy ? `${actAttr(buy)} role="button" tabindex="0"` : ''} aria-label="${esc(name)}">${tileImg(id, name)}</div>`;
+    }).join('');
     const tokens = C.networks.map(net => `<div class="token ${st.networkCompleted[net] ? 'done' : ''}" ${tip('token', net)}>
         <img src="${asset(`token_rete_${net}`)}" alt="${esc(t(`network.${net}.token`))}"></div>`).join('');
 
@@ -258,8 +269,8 @@
         <ol class="year-track" aria-label="${esc(t('ui.year'))}">${years.join('')}</ol>${city}
       </div>
       <div class="cp-block cp-extras">
-        <h3>${esc(t('ui.satellite'))} · ${esc(t('ui.networks'))}</h3>
-        <div class="cp-row">${sat}<div class="tokens">${tokens}</div></div>
+        <h3>${esc(t('ui.investments'))} · ${esc(t('ui.networks'))}</h3>
+        <div class="cp-row"><div class="cp-invest">${investments}</div><div class="tokens">${tokens}</div></div>
       </div>
       <div class="cp-block cp-display">
         <h3>${esc(t('ui.display'))} <span class="deck-count">${esc(t('ui.deck', { n: st.infraDeck.length }))}</span></h3>
@@ -364,9 +375,10 @@
           let label;
           if (x.type === 'reconvert') label = t('ui.reconvertOption', { tile: esc(buildingName(p.buildings[x.slot])), cost: coin(E.costFor(st, a, C.reconvertCost)) });
           else if (x.type === 'renew') label = t('ui.renewOption', { network: esc(t(`network.${x.network}.name`)), cost: coin(E.costFor(st, a, C.renewCost)) });
-          else label = t('ui.satelliteOption', { cost: coin(E.costFor(st, a, C.satelliteCost)) });
+          else label = t('ui.investmentOption', { name: `<b>${esc(t(`tile.${x.id}.name`))}</b>`, cost: coin(E.costFor(st, a, CAT.investmentById[x.id].cost)) });
           return `<button type="button" class="opt" ${actAttr(x)}>${label}</button>`;
-        }).join('')}</div>${privilege}`;
+        }).join('')}</div>${privilege}
+        ${acts.some(x => x.type === 'buyInvestment') ? `<p class="note">${esc(t('ui.investmentNote'))}</p>` : ''}`;
     }
     if (acts.some(x => x.type === 'pass')) {
       body += `<button type="button" class="btn btn-pass" ${actAttr({ type: 'pass' })}>${esc(t('ui.pass'))}</button>`;
@@ -387,7 +399,7 @@
         <div class="p-head"><span class="p-name">${esc(p.name)}</span>
           <span class="p-mun">${esc(t(`municipio.${p.municipio}.short`))}</span>
           ${st.keyHolder === i ? `<img class="flag" src="${asset(`token_chiave`)}" alt="${esc(t('ui.keyHolder'))}" title="${esc(t('ui.keyHolder'))}">` : ''}
-          ${st.satelliteOwner === i ? `<img class="flag" src="${asset(`sat_monitoraggio`)}" alt="${esc(t('ui.satellite'))}" title="${esc(t('tile.sat_monitoraggio.name'))}">` : ''}
+          ${investmentFlags(i)}
           ${a === i ? `<span class="p-turn">${esc(t('ui.current'))}</span>` : ''}</div>
         <dl class="p-stats">
           <div><dt>${esc(t('ui.credits'))}</dt><dd><span class="ico coin">${p.credits}</span></dd></div>
@@ -456,11 +468,14 @@
       row(t('ui.roleAction'), esc(t(`role.${a}.action`)));
       row(t('ui.rolePrivilege'), esc(t(`role.${a}.privilege`)));
       row(t('ui.credits'), coin(st.roleCredits[a]));
-    } else if (kind === 'satellite') {
-      img = 'sat_monitoraggio'; name = t('tile.sat_monitoraggio.name'); text = t('tile.sat_monitoraggio.text');
-      row(t('ui.cost'), coin(C.satelliteCost));
-      row(t('ui.effect'), esc(t('tile.sat_monitoraggio.effect')));
-      row(t('ui.owner'), st.satelliteOwner != null ? playerTag(st.satelliteOwner) : esc(t('ui.available')));
+    } else if (kind === 'investment') {
+      const owner = st.investmentOwners[a];
+      img = a; name = t(`tile.${a}.name`); text = t(`tile.${a}.text`);
+      row(t('ui.cost'), coin(CAT.investmentById[a].cost));
+      row(t('ui.effect'), esc(t(`tile.${a}.effect`)));
+      row(t('ui.owner'), owner != null ? playerTag(owner) : esc(t('ui.available')));
+      const who = owner != null ? owner : actor();
+      if (who != null) row(t('ui.valueNow', { player: playerName(who) }), esc(t('ui.pointsN', { n: E.investmentPoints(st, who, a) })));
     } else if (kind === 'token') {
       img = `token_rete_${a}`; name = t(`network.${a}.token`);
       text = st.networkCompleted[a] ? t('network.completedNote') : t('network.notCompletedNote');

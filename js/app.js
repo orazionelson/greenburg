@@ -259,14 +259,14 @@
     for (let y = C.firstYear; y <= C.lastYear; y++) years.push(y);
     const pen = state.players.some(p => p.timePenalty);
     const head = `<tr><th>${esc(t('ui.rank'))}</th><th>${esc(t('ui.player'))}</th>${years.map(y => `<th>${String(y).slice(2)}</th>`).join('')}
-      ${pen ? `<th>${esc(t('ui.timePenalty'))}</th>` : ''}<th>${esc(t('ui.satelliteBonus'))}</th><th>${esc(t('ui.subtotal'))}</th>${o.citySuccess ? '' : `<th>${esc(t('ui.halved'))}</th>`}</tr>`;
+      ${pen ? `<th>${esc(t('ui.timePenalty'))}</th>` : ''}<th>${esc(t('ui.investmentBonus'))}</th><th>${esc(t('ui.subtotal'))}</th>${o.citySuccess ? '' : `<th>${esc(t('ui.halved'))}</th>`}</tr>`;
     const body = o.ranking.map(r => {
       const p = state.players[r.player];
       return `<tr class="${r.rank === 1 ? 'winner' : ''}" style="--pc:${BV.ui.color(r.player)}">
         <td>${r.rank}</td><th scope="row"><span class="dot"></span>${esc(p.name)}</th>
         ${years.map((y, k) => `<td>${p.yearPoints[k] != null ? p.yearPoints[k] : '—'}</td>`).join('')}
         ${pen ? `<td>${p.timePenalty ? '−' + p.timePenalty : '—'}</td>` : ''}
-        <td>${o.satelliteBonus[r.player] ? '+' + o.satelliteBonus[r.player] : '—'}</td>
+        <td title="${esc(o.investmentDetail[r.player].map(d => t(`tile.${d.id}.name`) + ': ' + d.points).join(' · '))}">${o.investmentDetail[r.player].length ? '+' + o.investmentBonus[r.player] : '—'}</td>
         <td>${o.citySuccess ? `<b>${o.scoresBeforeHalving[r.player]}</b>` : o.scoresBeforeHalving[r.player]}</td>
         ${o.citySuccess ? '' : `<td><b>${o.finalScores[r.player]}</b></td>`}</tr>`;
     }).join('');
