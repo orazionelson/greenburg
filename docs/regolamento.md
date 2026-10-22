@@ -1,10 +1,10 @@
-# Borgo Verde – versione rapida
+# Borgo Verde
 
 Oct 20, 2026 · @Alfredo
 
 ## 1. Premessa
 
-Borgo Verde (il nome è provvisorio) è un gioco da tavolo per 3 o 4 giocatori, con una durata massima di 20 minuti e un'età consigliata a partire da 10 anni. Ogni giocatore governa un Municipio di una città immaginaria, Borgo Verde, che all'inizio della partita è inquinata, impermeabile e collegata da strade e ferrovie in cattivo stato. Nel corso di sei anni di gioco, dal 2025 al 2030, i giocatori trasformano i propri Municipi sostituendo le superfici e gli impianti inquinanti con infrastrutture verdi, mobilità sostenibile ed energia rinnovabile, riqualificando gli edifici e rinnovando le reti di trasporto che attraversano la città.
+Borgo Verde è un gioco da tavolo per 3 o 4 giocatori, con una durata massima di 20 minuti e un'età consigliata a partire da 10 anni. Ogni giocatore governa un Municipio di una città immaginaria, Borgo Verde, che all'inizio della partita è inquinata, impermeabile e collegata da strade e ferrovie in cattivo stato. Nel corso di sei anni di gioco, dal 2025 al 2030, i giocatori trasformano i propri Municipi sostituendo le superfici e gli impianti inquinanti con infrastrutture verdi, mobilità sostenibile ed energia rinnovabile, riqualificando gli edifici e rinnovando le reti di trasporto che attraversano la città.
 
 La logica del gioco procede per sottrazione. Ogni Municipio parte con un valore fisso di emissioni, e ogni intervento rimuove una fonte di emissione. Le emissioni funzionano come un flusso: a ogni fine anno la città emette in base a ciò che resta da trasformare, e ogni giocatore guadagna punti in proporzione alla riduzione già ottenuta nel proprio Municipio. Un intervento realizzato nel 2025 produce punti per sei anni, lo stesso intervento realizzato nel 2029 per due; i punti misurano quindi l'aria sana che il giocatore ha fatto guadagnare alla città nel tempo.
 
@@ -84,12 +84,12 @@ Ogni tessera Municipio è una tessera quadrata grande, divisa in una griglia di 
 
 Le caselle T1-T6 sono spazi territoriali e accolgono le tessere grigie territoriali, poi le infrastrutture. Le caselle E1 ed E2 sono spazi edilizi e accolgono le tessere edificio. Gli spazi sono stampati con un bordo sottile e una piccola sigla nell'angolo, visibile solo quando lo spazio è scoperto.
 
-| ID | Nome | Stemma | Testo stampato |
-| --- | --- | --- | --- |
-| mun\_castello | Municipio del Castello | Torre merlata | Il Municipio più antico, cresciuto intorno alle mura. |
-| mun\_ponte | Municipio del Ponte | Ponte ad arco su un torrente | Il Municipio che unisce le due sponde del torrente. |
-| mun\_mercato | Municipio del Mercato | Bilancia | Il Municipio delle botteghe e dei mercati settimanali. |
-| mun\_stazione | Municipio della Stazione | Ruota alata | Il Municipio nato intorno allo scalo ferroviario. |
+| Immagine | ID | Nome | Stemma | Testo stampato |
+| --- | --- | --- | --- | --- |
+| <img src="../assets/tiles/mun_castello.svg" width="80" alt="Municipio del Castello"> | mun\_castello | Municipio del Castello | Torre merlata | Il Municipio più antico, cresciuto intorno alle mura. |
+| <img src="../assets/tiles/mun_ponte.svg" width="80" alt="Municipio del Ponte"> | mun\_ponte | Municipio del Ponte | Ponte ad arco su un torrente | Il Municipio che unisce le due sponde del torrente. |
+| <img src="../assets/tiles/mun_mercato.svg" width="80" alt="Municipio del Mercato"> | mun\_mercato | Municipio del Mercato | Bilancia | Il Municipio delle botteghe e dei mercati settimanali. |
+| <img src="../assets/tiles/mun_stazione.svg" width="80" alt="Municipio della Stazione"> | mun\_stazione | Municipio della Stazione | Ruota alata | Il Municipio nato intorno allo scalo ferroviario. |
 
 **Disegno.** Lo sfondo di ogni tessera Municipio è una pianta urbana vista dall'alto, in toni neutri di carta antica, con un reticolo di vie sottili che corre fra le caselle e si raccorda ai bordi con le tessere rete. La casella centrale reca uno scudo araldico semplice, a due colori (verde e bianco per tutti i Municipi, così da segnalare l'appartenenza alla stessa città), con la figura propria del Municipio disegnata in linea bianca: la torre merlata con una finestra ad arco per il Castello, il ponte a tre arcate su acqua azzurra stilizzata per il Ponte, la bilancia a due piatti per il Mercato, la ruota alata per la Stazione. Sotto lo scudo, il nome del Municipio su un nastro. I bordi della tessera hanno colori distinti per i quattro Municipi (rosso mattone, azzurro, ocra, verde bottiglia), ripresi dalle pedine e dai cubi dei rispettivi giocatori.
 
@@ -97,20 +97,20 @@ Le caselle T1-T6 sono spazi territoriali e accolgono le tessere grigie territori
 
 Le tessere grigie sono di dodici tipi, in due copie ciascuno: otto tipi emettono 1 e quattro emettono 2. I tipi con lo stesso valore hanno lo stesso effetto e cambiano solo nel disegno e nel testo, per rendere ogni partita diversa senza aggiungere regole. Ogni Municipio riceve quattro tessere da 1 e due da 2 pescate a caso, quindi la somma è sempre 8 e ogni Municipio parte da 14 di emissione. Sul retro la tessera mostra solo il valore di emissione, per poterle separare prima di pescarle. Le tessere grigie territoriali non hanno costo né rendita; rappresentano superfici impermeabili o fonti fossili, e ciascuna emette a ogni fine anno il valore indicato finché resta sulla plancia. Quando un giocatore vi posa sopra un'infrastruttura, la tessera grigia viene rimossa dal gioco e le emissioni del Municipio scendono del suo valore. Le tessere con emissione 2 sono fonti dirette di emissione (combustione o rifiuti che fermentano); quelle con emissione 1 sono superfici impermeabili, degradate o inquinate.
 
-| ID | Nome | Emissione | Copie |
-| --- | --- | --- | --- |
-| gr\_parcheggio | Parcheggio a raso | 1 | 2 |
-| gr\_piazzale | Piazzale asfaltato | 1 | 2 |
-| gr\_cortile | Cortile cementato | 1 | 2 |
-| gr\_laghetto | Laghetto sporco | 1 | 2 |
-| gr\_bosco | Bosco abbandonato | 1 | 2 |
-| gr\_sfasciacarrozze | Sfasciacarrozze | 1 | 2 |
-| gr\_cantiere | Cantiere abbandonato | 1 | 2 |
-| gr\_argine | Argine cementato | 1 | 2 |
-| gr\_distributore | Distributore di carburante | 2 | 2 |
-| gr\_deposito | Deposito di autobus diesel | 2 | 2 |
-| gr\_discarica | Discarica indifferenziata | 2 | 2 |
-| gr\_fornace | Fornace di laterizi | 2 | 2 |
+| Immagine | ID | Nome | Emissione | Copie |
+| --- | --- | --- | --- | --- |
+| <img src="../assets/tiles/gr_parcheggio.svg" width="64" alt="Parcheggio a raso"> | gr\_parcheggio | Parcheggio a raso | 1 | 2 |
+| <img src="../assets/tiles/gr_piazzale.svg" width="64" alt="Piazzale asfaltato"> | gr\_piazzale | Piazzale asfaltato | 1 | 2 |
+| <img src="../assets/tiles/gr_cortile.svg" width="64" alt="Cortile cementato"> | gr\_cortile | Cortile cementato | 1 | 2 |
+| <img src="../assets/tiles/gr_laghetto.svg" width="64" alt="Laghetto sporco"> | gr\_laghetto | Laghetto sporco | 1 | 2 |
+| <img src="../assets/tiles/gr_bosco.svg" width="64" alt="Bosco abbandonato"> | gr\_bosco | Bosco abbandonato | 1 | 2 |
+| <img src="../assets/tiles/gr_sfasciacarrozze.svg" width="64" alt="Sfasciacarrozze"> | gr\_sfasciacarrozze | Sfasciacarrozze | 1 | 2 |
+| <img src="../assets/tiles/gr_cantiere.svg" width="64" alt="Cantiere abbandonato"> | gr\_cantiere | Cantiere abbandonato | 1 | 2 |
+| <img src="../assets/tiles/gr_argine.svg" width="64" alt="Argine cementato"> | gr\_argine | Argine cementato | 1 | 2 |
+| <img src="../assets/tiles/gr_distributore.svg" width="64" alt="Distributore di carburante"> | gr\_distributore | Distributore di carburante | 2 | 2 |
+| <img src="../assets/tiles/gr_deposito.svg" width="64" alt="Deposito di autobus diesel"> | gr\_deposito | Deposito di autobus diesel | 2 | 2 |
+| <img src="../assets/tiles/gr_discarica.svg" width="64" alt="Discarica indifferenziata"> | gr\_discarica | Discarica indifferenziata | 2 | 2 |
+| <img src="../assets/tiles/gr_fornace.svg" width="64" alt="Fornace di laterizi"> | gr\_fornace | Fornace di laterizi | 2 | 2 |
 
 **Parcheggio a raso.** Testo stampato: «Parcheggio asfaltato sempre pieno, che d'estate accumula calore e con la pioggia si allaga.» Disegno: un rettangolo d'asfalto grigio scuro, crepato in più punti, con le strisce bianche dei posti auto sbiadite e interrotte. Tre file di automobili parcheggiate in colori spenti (grigio, beige, un rosso scolorito), un parchimetro all'angolo, una pozzanghera con riflessi iridescenti di olio. In un vaso di cemento cresce un alberello stentato con poche foglie gialle. Sopra l'asfalto si vedono le linee ondulate del calore.
 
@@ -140,12 +140,12 @@ Le tessere grigie sono di dodici tipi, in due copie ciascuno: otto tipi emettono
 
 Le tessere edificio sono a due facce. Il lato grigio emette 2 a ogni fine anno; il lato decarbonizzato emette 0. Riconvertire un edificio costa 4 crediti e consiste nel girare la tessera sul lato decarbonizzato, che resta nello stesso spazio. Gli edifici decarbonizzati contano per il bonus del Monitoraggio satellitare.
 
-| ID | Lato grigio | Lato decarbonizzato | Emissione grigio / decarbonizzato | Costo di riconversione | Copie |
-| --- | --- | --- | --- | --- | --- |
-| ed\_condominio | Condominio anni Sessanta | Condominio riqualificato | 2 / 0 | 4 | 2 |
-| ed\_scuola | Scuola con caldaia a gasolio | Scuola sostenibile | 2 / 0 | 4 | 2 |
-| ed\_uffici | Palazzo per uffici | Uffici ad alta efficienza | 2 / 0 | 4 | 2 |
-| ed\_capannone | Capannone artigianale | Capannone fotovoltaico | 2 / 0 | 4 | 2 |
+| Immagine | ID | Lato grigio | Lato decarbonizzato | Emissione grigio / decarbonizzato | Costo di riconversione | Copie |
+| --- | --- | --- | --- | --- | --- | --- |
+| <img src="../assets/tiles/ed_condominio_front.svg" width="56" alt="lato grigio"> <img src="../assets/tiles/ed_condominio_back.svg" width="56" alt="lato decarbonizzato"> | ed\_condominio | Condominio anni Sessanta | Condominio riqualificato | 2 / 0 | 4 | 2 |
+| <img src="../assets/tiles/ed_scuola_front.svg" width="56" alt="lato grigio"> <img src="../assets/tiles/ed_scuola_back.svg" width="56" alt="lato decarbonizzato"> | ed\_scuola | Scuola con caldaia a gasolio | Scuola sostenibile | 2 / 0 | 4 | 2 |
+| <img src="../assets/tiles/ed_uffici_front.svg" width="56" alt="lato grigio"> <img src="../assets/tiles/ed_uffici_back.svg" width="56" alt="lato decarbonizzato"> | ed\_uffici | Palazzo per uffici | Uffici ad alta efficienza | 2 / 0 | 4 | 2 |
+| <img src="../assets/tiles/ed_capannone_front.svg" width="56" alt="lato grigio"> <img src="../assets/tiles/ed_capannone_back.svg" width="56" alt="lato decarbonizzato"> | ed\_capannone | Capannone artigianale | Capannone fotovoltaico | 2 / 0 | 4 | 2 |
 
 **Condominio anni Sessanta.** Testo stampato: «Sei piani di pareti non isolate e una caldaia centralizzata a gasolio.» Disegno: un blocco residenziale di sei piani visto di tre quarti, con la facciata grigia rigata da colature di sporco e infissi in alluminio a vetro singolo, alcuni aperti. Sui balconi stendini, scatoloni e condizionatori appesi alla ringhiera; dal camino sul tetto esce un pennacchio di fumo nero.
 
@@ -175,19 +175,19 @@ Le tessere infrastruttura formano un mazzo comune di 36 tessere, divise in tre f
 
 Il colore di fondo del cartiglio identifica la famiglia: verde prato per il Verde, azzurro per la Mobilità, giallo sole per l'Energia.
 
-| ID | Nome | Famiglia | Copie |
-| --- | --- | --- | --- |
-| inf\_parco | Parco urbano | Verde | 4 |
-| inf\_orto | Orto condiviso | Verde | 4 |
-| inf\_bosco | Bosco urbano | Verde | 4 |
-| inf\_giardino | Giardino della pioggia | Verde | 3 |
-| inf\_ciclostazione | Ciclostazione | Mobilità | 3 |
-| inf\_bus | Fermata del bus elettrico | Mobilità | 3 |
-| inf\_pedonale | Zona pedonale | Mobilità | 3 |
-| inf\_condivisa | Mobilità condivisa | Mobilità | 3 |
-| inf\_fotovoltaico | Campo fotovoltaico | Energia | 3 |
-| inf\_eolico | Minieolico urbano | Energia | 3 |
-| inf\_accumulo | Accumulo di comunità | Energia | 3 |
+| Immagine | ID | Nome | Famiglia | Copie |
+| --- | --- | --- | --- | --- |
+| <img src="../assets/tiles/inf_parco.svg" width="64" alt="Parco urbano"> | inf\_parco | Parco urbano | Verde | 4 |
+| <img src="../assets/tiles/inf_orto.svg" width="64" alt="Orto condiviso"> | inf\_orto | Orto condiviso | Verde | 4 |
+| <img src="../assets/tiles/inf_bosco.svg" width="64" alt="Bosco urbano"> | inf\_bosco | Bosco urbano | Verde | 4 |
+| <img src="../assets/tiles/inf_giardino.svg" width="64" alt="Giardino della pioggia"> | inf\_giardino | Giardino della pioggia | Verde | 3 |
+| <img src="../assets/tiles/inf_ciclostazione.svg" width="64" alt="Ciclostazione"> | inf\_ciclostazione | Ciclostazione | Mobilità | 3 |
+| <img src="../assets/tiles/inf_bus.svg" width="64" alt="Fermata del bus elettrico"> | inf\_bus | Fermata del bus elettrico | Mobilità | 3 |
+| <img src="../assets/tiles/inf_pedonale.svg" width="64" alt="Zona pedonale"> | inf\_pedonale | Zona pedonale | Mobilità | 3 |
+| <img src="../assets/tiles/inf_condivisa.svg" width="64" alt="Mobilità condivisa"> | inf\_condivisa | Mobilità condivisa | Mobilità | 3 |
+| <img src="../assets/tiles/inf_fotovoltaico.svg" width="64" alt="Campo fotovoltaico"> | inf\_fotovoltaico | Campo fotovoltaico | Energia | 3 |
+| <img src="../assets/tiles/inf_eolico.svg" width="64" alt="Minieolico urbano"> | inf\_eolico | Minieolico urbano | Energia | 3 |
+| <img src="../assets/tiles/inf_accumulo.svg" width="64" alt="Accumulo di comunità"> | inf\_accumulo | Accumulo di comunità | Energia | 3 |
 
 **Parco urbano.** Testo stampato: «Prato, alberi e panchine dove prima c'era cemento.» Disegno: un prato verde brillante attraversato da un sentiero curvo in ghiaia chiara, con tre grandi alberi dalla chioma ampia che proiettano ombre morbide. Panchine in legno, una piccola fontanella, una persona che passeggia con un cane e un bambino in bicicletta.
 
@@ -215,10 +215,10 @@ Il colore di fondo del cartiglio identifica la famiglia: verde prato per il Verd
 
 Le tessere rete sono rettangolari, lunghe quanto il lato di una tessera Municipio e larghe un terzo; due tessere affiancate (strada all'esterno, ferrovia all'interno) occupano un lato dell'anello. Ogni tessera ha due facce: il lato dissestato emette 1 a ogni fine anno, il lato rinnovato emette 0. Rinnovare un tratto costa 2 crediti e consiste nel girare la tessera. Quando tutti i tratti di una rete sono rinnovati, la rete è completata e ogni Municipio riduce le proprie emissioni di 1 per il resto della partita.
 
-| ID | Tipo | Lato dissestato | Lato rinnovato | Emissione | Costo di rinnovo | Copie |
-| --- | --- | --- | --- | --- | --- | --- |
-| rete\_strada\_\<municipio> | Strada | Strada dissestata | Strada rinnovata | 1 / 0 | 2 | 1 per Municipio |
-| rete\_ferrovia\_\<municipio> | Ferrovia | Ferrovia in abbandono | Ferrovia rinnovata | 1 / 0 | 2 | 1 per Municipio |
+| Immagine | ID | Tipo | Lato dissestato | Lato rinnovato | Emissione | Costo di rinnovo | Copie |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| <img src="../assets/tiles/rete_strada_front.svg" width="120" alt="lato dissestato"><br><img src="../assets/tiles/rete_strada_back.svg" width="120" alt="lato rinnovato"> | rete\_strada\_\<municipio> | Strada | Strada dissestata | Strada rinnovata | 1 / 0 | 2 | 1 per Municipio |
+| <img src="../assets/tiles/rete_ferrovia_front.svg" width="120" alt="lato dissestato"><br><img src="../assets/tiles/rete_ferrovia_back.svg" width="120" alt="lato rinnovato"> | rete\_ferrovia\_\<municipio> | Ferrovia | Ferrovia in abbandono | Ferrovia rinnovata | 1 / 0 | 2 | 1 per Municipio |
 
 **Strada dissestata.** Testo stampato: «Asfalto crepato, buche e code a ogni ora del giorno.» Disegno: una strada a due corsie che attraversa la tessera per il lungo, raccordandosi ai bordi con i Municipi adiacenti. L'asfalto è grigio scuro, solcato da crepe e buche piene d'acqua fangosa, con la segnaletica orizzontale quasi cancellata. Le auto sono incolonnate paraurti contro paraurti e fumano dagli scarichi; un lampione ha la lampada rotta, il marciapiede è sbrecciato, lungo il ciglio ci sono cartacce, bottiglie e un cartello stradale piegato. Sopra la carreggiata stagna una nube di smog giallastro.
 
@@ -232,14 +232,14 @@ Le tessere rete sono rettangolari, lunghe quanto il lato di una tessera Municipi
 
 Le carte Investimento rappresentano politiche pubbliche che il Municipio finanzia oltre agli interventi sul territorio. Ne esistono sei tipi, in una sola copia ciascuno. A inizio partita se ne scoprono a caso tante quanti sono i giocatori più uno; le altre tornano nella scatola. Si acquistano con l'Assessore ai lavori pubblici, ogni giocatore può possederne al massimo due e non si possono cedere. Danno punti solo a fine partita, prima dell'eventuale dimezzamento.
 
-| ID | Nome | Costo | Punti a fine partita |
-| --- | --- | --- | --- |
-| sat\_monitoraggio | Monitoraggio satellitare | 5 | 4 per ogni edificio decarbonizzato del proprio Municipio (massimo 8) |
-| inv\_partecipazione | Partecipazione civica | 5 | 2 per ogni infrastruttura Verde del proprio Municipio (massimo 8) |
-| inv\_sanita | Sanità e istruzione | 5 | 7 meno le emissioni del proprio Municipio (minimo 0) |
-| inv\_circolare | Economia circolare | 5 | 3 per ogni area da 2 trasformata con un'infrastruttura Mobilità o Energia (massimo 6) |
-| inv\_patto | Patto dei sindaci | 4 | Se la città raggiunge la soglia: 4, più 2 per ogni anno di anticipo sul 2030 (massimo 8) |
-| inv\_digitale | Città digitale e dati aperti | 5 | 2 per ogni tipo di intervento fatto almeno una volta: Verde, Mobilità, Energia, edificio riqualificato, tratto di rete rinnovato (massimo 10) |
+| Immagine | ID | Nome | Costo | Punti a fine partita |
+| --- | --- | --- | --- | --- |
+| <img src="../assets/tiles/sat_monitoraggio.svg" width="64" alt="Monitoraggio satellitare"> | sat\_monitoraggio | Monitoraggio satellitare | 5 | 4 per ogni edificio decarbonizzato del proprio Municipio (massimo 8) |
+| <img src="../assets/tiles/inv_partecipazione.svg" width="64" alt="Partecipazione civica"> | inv\_partecipazione | Partecipazione civica | 5 | 2 per ogni infrastruttura Verde del proprio Municipio (massimo 8) |
+| <img src="../assets/tiles/inv_sanita.svg" width="64" alt="Sanità e istruzione"> | inv\_sanita | Sanità e istruzione | 5 | 7 meno le emissioni del proprio Municipio (minimo 0) |
+| <img src="../assets/tiles/inv_circolare.svg" width="64" alt="Economia circolare"> | inv\_circolare | Economia circolare | 5 | 3 per ogni area da 2 trasformata con un'infrastruttura Mobilità o Energia (massimo 6) |
+| <img src="../assets/tiles/inv_patto.svg" width="64" alt="Patto dei sindaci"> | inv\_patto | Patto dei sindaci | 4 | Se la città raggiunge la soglia: 4, più 2 per ogni anno di anticipo sul 2030 (massimo 8) |
+| <img src="../assets/tiles/inv_digitale.svg" width="64" alt="Città digitale e dati aperti"> | inv\_digitale | Città digitale e dati aperti | 5 | 2 per ogni tipo di intervento fatto almeno una volta: Verde, Mobilità, Energia, edificio riqualificato, tratto di rete rinnovato (massimo 10) |
 
 Senso nel gioco: ogni carta premia una scelta diversa. Satellite ed Economia circolare spingono verso gli interventi più costosi, Partecipazione civica verso il Verde a basso costo, Sanità e istruzione premia il risultato finale, Città digitale una trasformazione equilibrata, Patto dei sindaci la cooperazione per raggiungere presto la soglia. Le simulazioni indicano un valore tipico di 4–7 punti per carta acquistata.
 
@@ -261,13 +261,13 @@ Le carte hanno lo stesso formato della tessera satellite: moneta del costo nell'
 
 Le carte ruolo sono carte verticali con l'illustrazione nella parte superiore e, sotto, il nome del ruolo, l'azione per tutti e il privilegio di chi lo sceglie. Sulle carte si accumulano i crediti dei ruoli non scelti.
 
-| ID | Ruolo | Azione per tutti | Privilegio |
-| --- | --- | --- | --- |
-| ruolo\_urbanista | Urbanista | Posa un'infrastruttura su una tessera grigia territoriale | −1 al costo |
-| ruolo\_lavori | Assessore ai lavori pubblici | Riconverte un edificio, oppure rinnova un tratto di rete, oppure acquista una carta Investimento | −1 al costo |
-| ruolo\_bilancio | Assessore al bilancio | Incassa la rendita delle infrastrutture | +1 credito |
-| ruolo\_progettista | Progettista europeo | Nessuna | 2 crediti |
-| ruolo\_sindaco | Sindaco | Nessuna | 1 credito e Chiave della città |
+| Immagine | ID | Ruolo | Azione per tutti | Privilegio |
+| --- | --- | --- | --- | --- |
+| <img src="../assets/tiles/ruolo_urbanista.svg" width="64" alt="Urbanista"> | ruolo\_urbanista | Urbanista | Posa un'infrastruttura su una tessera grigia territoriale | −1 al costo |
+| <img src="../assets/tiles/ruolo_lavori.svg" width="64" alt="Assessore ai lavori pubblici"> | ruolo\_lavori | Assessore ai lavori pubblici | Riconverte un edificio, oppure rinnova un tratto di rete, oppure acquista una carta Investimento | −1 al costo |
+| <img src="../assets/tiles/ruolo_bilancio.svg" width="64" alt="Assessore al bilancio"> | ruolo\_bilancio | Assessore al bilancio | Incassa la rendita delle infrastrutture | +1 credito |
+| <img src="../assets/tiles/ruolo_progettista.svg" width="64" alt="Progettista europeo"> | ruolo\_progettista | Progettista europeo | Nessuna | 2 crediti |
+| <img src="../assets/tiles/ruolo_sindaco.svg" width="64" alt="Sindaco"> | ruolo\_sindaco | Sindaco | Nessuna | 1 credito e Chiave della città |
 
 Disegni:
 
