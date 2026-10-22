@@ -1,94 +1,94 @@
-# Borgo Verde / Greenburg
+# Greenburg / Borgo Verde
 
-Prototipo digitale del gioco da tavolo *Borgo Verde* (nome provvisorio): 3 o 4
-giocatori sullo stesso dispositivo, a turno, per sei anni di gioco (2025-2030).
-Il regolamento di riferimento è in [`docs/regolamento.md`](docs/regolamento.md) (versione inglese in [`docs/rulebook.md`](docs/rulebook.md)),
-il piano di lavoro in [`docs/PLAN.md`](docs/PLAN.md).
+Digital prototype of the board game *Greenburg* (Italian: *Borgo Verde*): 3 or 4
+players taking turns on the same device, over six years of play (2025-2030).
+The reference rulebook is [`docs/rulebook.md`](docs/rulebook.md) (Italian
+original in [`docs/regolamento.md`](docs/regolamento.md)), the work plan is in
+[`docs/PLAN.md`](docs/PLAN.md).
 
-## Come si gioca
+## How to play
 
-Apri `index.html` con un doppio clic: non servono né un server né una
-compilazione, e nessun dato viene inviato in rete. La partita si salva da sola
-nel browser e si riprende dalla schermata iniziale.
+Double-click `index.html`: no server or build step is needed, and no data is
+sent over the network. The game saves itself in the browser and can be resumed
+from the start screen.
 
-- Le mosse possibili lampeggiano in giallo: si giocano cliccando sul tabellone
-  o usando i pulsanti del pannello a destra.
-- Passa il puntatore su una tessera, oppure tienila premuta su uno schermo
-  tattile, per vederne nome, testo stampato e valori.
-- Chi non ha mosse possibili rinuncia in automatico, e il registro lo annota.
-- Il seme casuale, facoltativo, riproduce la stessa preparazione.
-- Il pulsante **Manuale** apre le regole per i giocatori, in italiano e in inglese.
-- Ogni decisione ha un tempo massimo, scelto a inizio partita (2 minuti di default,
-  0 per giocare senza limite). Oltre il limite si perde 1 punto impatto ogni 10
-  secondi; il timer si ferma con le finestre aperte.
+- Possible moves flash yellow: play them by clicking on the board or with the
+  buttons in the right-hand panel.
+- Hover over a tile, or long-press it on a touch screen, to see its name,
+  printed text and values.
+- A player with no possible move passes automatically, and the log records it.
+- The optional random seed reproduces the same setup.
+- The **Rules** button opens the players' rules, in English and Italian.
+- Every decision has a time limit, chosen at the start of the game (2 minutes by
+  default, 0 to play without a limit). Past the limit you lose 1 impact point
+  every 10 seconds; the timer stops while a window is open.
 
-## Struttura
+## Structure
 
-| Percorso | Contenuto |
+| Path | Contents |
 | --- | --- |
-| `js/config.js` | Tutte le costanti di gioco (sezione 11.2), da tarare con le prove |
-| `js/catalog.js` | Catalogo delle tessere: ID, famiglie, emissioni, copie |
-| `js/engine.js` | Motore di gioco puro, senza DOM: lo stato è JSON, `applyAction` non modifica l'input |
-| `js/rng.js` | Generatore casuale riproducibile, con lo stato salvato nella partita |
-| `js/i18n/it.js`, `js/i18n/en.js` | Tutte le stringhe, una lingua per file |
-| `js/manual/it.js`, `js/manual/en.js` | Manuale dei giocatori |
-| `js/ui.js`, `js/app.js` | Tabellone, pannelli, scheda tessera, schermate iniziale e finale, salvataggio |
-| `assets/tiles/` | Immagini delle tessere, una per ID |
-| `tools/gen-placeholders.js` | Rigenera i segnaposto SVG |
-| `tests/` | Test del motore e delle lingue |
+| `js/config.js` | All the game constants (rulebook section 11.2), to be tuned through playtesting |
+| `js/catalog.js` | Tile catalogue: IDs, families, emissions, copies |
+| `js/engine.js` | Pure game engine, no DOM: the state is JSON, `applyAction` does not modify its input |
+| `js/rng.js` | Reproducible random generator, with its state saved in the game |
+| `js/i18n/it.js`, `js/i18n/en.js` | All the strings, one language per file |
+| `js/manual/it.js`, `js/manual/en.js` | Players' rules |
+| `js/ui.js`, `js/app.js` | Board, panels, tile card, start and final screens, saving |
+| `assets/tiles/` | Tile images, one per ID |
+| `tools/gen-placeholders.js` | Regenerates the SVG placeholders |
+| `tests/` | Engine and language tests |
 
-## Test
+## Tests
 
 ```
 npm test
 ```
 
-Non servono dipendenze, basta Node 18 o successivo. I test riproducono gli
-esempi del capitolo 10, come chiede la sezione 11.7:
+No dependencies are needed, just Node 18 or later. The tests reproduce the
+examples in chapter 10 of the rulebook, as section 11.7 requires:
 
-- le tabelle di fine 2025 e 2026 (crediti, emissioni, punti, città, Chiave,
-  crediti accumulati sui ruoli);
-- il completamento della rete ferroviaria del 2028, anche nella variante in
-  cui Bruno non rinnova;
-- il calcolo finale del 10.5 e la sua variante con fallimento.
+- the end-of-year tables for 2025 and 2026 (credits, emissions, points, city,
+  Key, credits piled up on the roles);
+- the completion of the railway network in 2028, including the variant in
+  which Bruno does not renew;
+- the final calculation in 10.5 and its failure variant.
 
-L'esempio 10.5 non è giocabile con le regole attuali (Carla farebbe tre azioni
-dei Lavori pubblici nello stesso anno), quindi si verifica solo il calcolo dei
-punteggi a partire dai punti annui. Oltre agli esempi, 300 partite casuali
-complete controllano gli invarianti, e altri test verificano che le due lingue
-abbiano le stesse chiavi e che ogni immagine del catalogo esista.
+Example 10.5 cannot be played with the current rules (Carla would take three
+Public Works actions in the same year), so only the score calculation from the
+yearly points is checked. Besides the examples, 300 complete random games check
+the invariants, and further tests verify that both languages have the same keys
+and that every image in the catalogue exists.
 
-## Pubblicare una nuova versione
+## Releasing a new version
 
-GitHub Pages fa tenere i file in cache ai browser per qualche minuto. Per evitare
-che dopo un aggiornamento qualcuno si ritrovi la pagina nuova con gli script
-vecchi, ogni file JS, CSS e immagine viene richiesto con il numero di versione
-nell'indirizzo (`js/app.js?v=0.3.0`). Prima di ogni rilascio si alza la versione:
+GitHub Pages lets browsers cache files for a few minutes. To avoid anyone
+getting the new page with the old scripts after an update, every JS, CSS and
+image file is requested with the version number in its address
+(`js/app.js?v=0.5.0`). Bump the version before each release:
 
 ```
-npm version minor     # oppure patch; aggiorna index.html e js/config.js
+npm version minor     # or patch; updates index.html and js/config.js
 ```
 
-Il comando esegue `tools/set-version.js`, che copia la versione di
-`package.json` nei riferimenti di `index.html` e in `js/config.js`. Un test
-controlla che le tre versioni coincidano.
+The command runs `tools/set-version.js`, which copies the version from
+`package.json` into the references in `index.html` and into `js/config.js`. A
+test checks that the three versions match.
 
-## Grafica
+## Graphics
 
-Ogni tessera è il file `assets/tiles/<ID>.svg`. Le tessere a due facce usano
-`_front` per il lato iniziale (grigio o dissestato) e `_back` per il lato
-trasformato (decarbonizzato o rinnovato), ad esempio `ed_scuola_front.svg` e
-`rete_strada_back.svg`. Per mettere le illustrazioni definitive basta
-sostituire i file tenendo lo stesso nome; vanno bene anche altri formati, se
-si aggiorna l'estensione in `js/ui.js`.
+Each tile is the file `assets/tiles/<ID>.svg`. Double-sided tiles use `_front`
+for the initial side (grey or run-down) and `_back` for the transformed side
+(decarbonised or renewed), for example `ed_scuola_front.svg` and
+`rete_strada_back.svg`. To add the final illustrations, just replace the files
+keeping the same names; other formats work too, as long as the extension is
+updated in `js/ui.js`.
 
-I segnaposto non contengono parole, solo il disegno, le icone e i numeri: i
-nomi li scrive l'app nella lingua scelta. Se le illustrazioni definitive avranno
-già il cartiglio stampato, imposta `CONFIG.ui.tileOverlay = false` per non
-sovrapporre il nome.
+The placeholders contain no words, only the drawing, icons and numbers: the app
+writes the names in the chosen language. If the final illustrations already
+have the caption printed on them, set `CONFIG.ui.tileOverlay = false` so the
+name is not overlaid.
 
-L'esposizione, le carte ruolo e i tracciati stanno in un'area comune accanto
-al tabellone, quindi l'anello è stretto quanto le tessere rete (proporzione 3:1,
-lunghe quanto il lato di un Municipio). Nel triangolo a 3 giocatori i lati in
-alto hanno un piccolo raccordo, perché i Municipi quadrati coprono di più i lati
-obliqui.
+The display, role cards and tracks sit in a common area next to the board, so
+the ring is only as wide as the network tiles (3:1 ratio, as long as the side
+of a district). In the 3-player triangle the top sides have a small joint,
+because the square districts overlap the slanted sides more.
