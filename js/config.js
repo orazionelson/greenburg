@@ -5,7 +5,7 @@
   var BV = root.BV = root.BV || {};
 
   BV.CONFIG = {
-    version: '0.6.0',                // kept in sync with package.json by tools/set-version.js
+    version: '0.7.0',                // kept in sync with package.json by tools/set-version.js
 
     playerCounts: [3, 4],
     firstYear: 2025,
@@ -49,7 +49,8 @@
       autoPass: true,                // skip players with no legal action
       longPressMs: 450,
       storageKey: 'borgoVerde.save',
-      langKey: 'borgoVerde.lang'
+      langKey: 'borgoVerde.lang',
+      soundKey: 'borgoVerde.sound'
     }
   };
 })(typeof globalThis !== 'undefined' ? globalThis : this);

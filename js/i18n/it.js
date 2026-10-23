@@ -102,6 +102,8 @@
       timeLimitHint: '0 = senza limite. Oltre il limite si perde 1 punto impatto ogni 10 secondi.',
       manual: 'Manuale',
       readManual: 'Leggi il manuale',
+      soundOn: 'Attiva i suoni',
+      soundOff: 'Disattiva i suoni',
       close: 'Chiudi'
     },
 

@@ -553,6 +553,7 @@
     if (sel) {
       const d = +sel.getAttribute('data-select-display');
       ui.selectedDisplay = ui.selectedDisplay === d ? null : d;
+      if (ui.selectedDisplay != null) BV.sound.play('take');
       render();
       return true;
     }

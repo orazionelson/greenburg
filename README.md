@@ -19,6 +19,10 @@ from the start screen.
 - A player with no possible move passes automatically, and the log records it.
 - The optional random seed reproduces the same setup.
 - The **Rules** button opens the players' rules, in English and Italian.
+- Sounds announce each player's turn and go with tiles being taken, laid and
+  turned over. They are synthesised in the browser (`js/sound.js`, no audio
+  files); the speaker button in the top bar turns them off, and the choice is
+  remembered.
 - Every decision has a time limit, chosen at the start of the game (2 minutes by
   default, 0 to play without a limit). Past the limit you lose 1 impact point
   every 10 seconds; the timer stops while a window is open.
@@ -60,6 +64,7 @@ npm run print-pdf
 | `js/i18n/it.js`, `js/i18n/en.js` | All the strings, one language per file |
 | `js/manual/it.js`, `js/manual/en.js` | Players' rules |
 | `js/ui.js`, `js/app.js` | Board, panels, tile card, start and final screens, saving |
+| `js/sound.js` | Sound effects, synthesised with the Web Audio API |
 | `print.html`, `js/print.js`, `css/print.css` | Print-and-play sheets |
 | `print-and-play/` | Ready-made print-and-play PDFs, one per language |
 | `assets/tiles/` | Tile images, one per ID |
@@ -93,7 +98,7 @@ and that every image in the catalogue exists.
 GitHub Pages lets browsers cache files for a few minutes. To avoid anyone
 getting the new page with the old scripts after an update, every JS, CSS and
 image file is requested with the version number in its address
-(`js/app.js?v=0.6.0`). Bump the version before each release:
+(`js/app.js?v=0.7.0`). Bump the version before each release:
 
 ```
 npm version minor     # or patch; updates index.html and js/config.js

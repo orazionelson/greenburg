@@ -47,6 +47,8 @@ a.btn { display: inline-block; color: var(--ink); text-decoration: none; text-al
 .btn-big { padding: 11px 24px; font-size: 1.05rem; }
 .topbar .btn { background: rgba(255, 255, 255, 0.12); color: #fff; border-color: rgba(255, 255, 255, 0.35); }
 .topbar .btn:hover { background: rgba(255, 255, 255, 0.22); }
+.btn-icon { display: inline-flex; align-items: center; justify-content: center; padding: 6px 9px; }
+.btn-icon svg { display: block; }
 
 /* -------------------------------------------------------------- layout */
 /* Wide screens: common area | board | sidebar.
@@ -421,6 +423,11 @@ a.btn { display: inline-block; color: var(--ink); text-decoration: none; text-al
 @media (max-width: 700px) {
   .manual-body { flex-direction: column; }
   .manual-toc { flex: 0 0 auto; max-height: 30%; border-right: 0; border-bottom: 1px solid var(--line); }
+  .topbar { gap: 8px; padding: 6px 10px; }
+  .topbar h1 { font-size: 1.05rem; }
+  .topbar-actions { gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+  .topbar .btn { padding: 6px 9px; }
+  .topbar select { padding: 5px 4px; }
 }
 .setup-form .btn:not(.btn-primary) { align-self: center; }
 
