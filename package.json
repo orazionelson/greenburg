@@ -1,6 +1,6 @@
 {
   "name": "borgo-verde",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "description": "Borgo Verde / Greenburg – board game prototype in HTML5 (hot seat, 3-4 players)",
   "scripts": {

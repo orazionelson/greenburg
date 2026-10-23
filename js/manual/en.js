@@ -167,6 +167,7 @@
   <li>Possible moves flash yellow: play them by clicking the board or with the buttons in the right-hand panel.</li>
   <li>For the Urban Planner, first pick a tile from the display, then the grey tile to build on.</li>
   <li>Hover over a tile, or long-press it on a touch screen, to see its name, text and values.</li>
+  <li>A sound announces the start of each player's turn, and others go with tiles being taken, laid and turned over. The speaker button at the top turns them off.</li>
   <li>The game saves itself in the browser and can be resumed from the start screen.</li>
 </ul>`
       }

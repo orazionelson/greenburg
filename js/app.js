@@ -9,6 +9,7 @@
   const $ = id => document.getElementById(id);
 
   let state = null;
+  let announceTurn = false;   // play the turn sound when the open window closes
   let setupDraft = { playerCount: 4, names: [], seed: '', minutes: String(C.turnTimeLimit / 60) };
 
   // ------------------------------------------------------------- storage
@@ -43,7 +44,13 @@
     const focus = card.querySelector('[autofocus], .btn-primary, button, input');
     if (focus) focus.focus();
   }
-  function closeModal() { $('modal').hidden = true; }
+  function closeModal() {
+    $('modal').hidden = true;
+    if (announceTurn) {
+      announceTurn = false;
+      if (actor(state) != null) BV.sound.play('turn');
+    }
+  }
 
   // -------------------------------------------------------------- chrome
 
@@ -61,7 +68,30 @@
     sel.innerHTML = BV.i18n.languages().map(code =>
       `<option value="${code}" ${code === BV.i18n.lang ? 'selected' : ''}>${esc(BV.LANG[code].meta.label)}</option>`).join('');
     $('btn-results').hidden = !(state && state.phase === 'GAME_OVER');
+    applySound();
     BV.ui.render();
+  }
+
+  // --------------------------------------------------------------- sound
+
+  const SPEAKER = '<path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/>';
+  const WAVES = '<path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>';
+  const MUTED = '<path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+
+  function applySound() {
+    const on = BV.sound.enabled;
+    const label = t(on ? 'ui.soundOff' : 'ui.soundOn');
+    const b = $('btn-sound');
+    b.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">${SPEAKER}${on ? WAVES : MUTED}</svg>`;
+    b.title = label;
+    b.setAttribute('aria-label', label);
+  }
+
+  function toggleSound() {
+    BV.sound.setEnabled(!BV.sound.enabled);
+    store(C.ui.soundKey, BV.sound.enabled ? null : 'off');
+    applySound();
+    BV.sound.play('take');
   }
 
   // --------------------------------------------------------------- setup
@@ -127,6 +157,7 @@
     const resume = card.querySelector('[data-setup="resume"]');
     if (resume) resume.addEventListener('click', () => {
       state = savedGame();
+      announceTurn = true;
       closeModal();
       resetTimer();
       BV.ui.setState(state);
@@ -144,6 +175,7 @@
     const limit = isFinite(minutes) && minutes >= 0 ? Math.round(minutes * 60) : C.turnTimeLimit;
     state = E.createGame({ playerCount: n, names, seed: seedNum, autoPass: C.ui.autoPass, turnTimeLimit: limit });
     save();
+    announceTurn = true;
     closeModal();
     resetTimer();
     BV.ui.setState(state);
@@ -151,6 +183,13 @@
   }
 
   // ------------------------------------------------------------ actions
+
+  // Sound of each action that takes or turns over a tile or card.
+  const ACTION_SOUND = { placeInfra: 'place', reconvert: 'flip', renew: 'flip', buyInvestment: 'take' };
+
+  function actor(s) {
+    return s && s.phase !== 'GAME_OVER' ? E.currentActor(s) : null;
+  }
 
   function onAction(action) {
     const prev = state;
@@ -163,11 +202,16 @@
     save();
     resetTimer();
     BV.ui.setState(state, prev);
+    const sound = ACTION_SOUND[action.type];
+    if (sound) BV.sound.play(sound);
     if (state.phase === 'GAME_OVER') {
       $('btn-results').hidden = false;
       setTimeout(showResults, 700);
     } else if (state.year !== prev.year) {
+      announceTurn = true;
       setTimeout(() => showYearEnd(prev.year), 700);
+    } else if (actor(state) !== actor(prev)) {
+      BV.sound.play('turn', sound ? 0.3 : 0);
     }
   }
 
@@ -297,6 +341,7 @@
   function init() {
     const lang = load(C.ui.langKey) || ((navigator.language || 'it').toLowerCase().indexOf('it') === 0 ? 'it' : 'en');
     BV.i18n.setLang(lang);
+    BV.sound.setEnabled(load(C.ui.soundKey) !== 'off');
     BV.ui.init({ onAction, onUi });
 
     $('lang-select').addEventListener('change', e => {
@@ -312,6 +357,7 @@
       showSetup();
     });
     $('btn-results').addEventListener('click', showResults);
+    $('btn-sound').addEventListener('click', toggleSound);
     $('btn-manual').addEventListener('click', openManual);
     $('manual-close').addEventListener('click', closeManual);
     $('manual').addEventListener('click', e => { if (e.target === $('manual')) closeManual(); });

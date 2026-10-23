@@ -102,6 +102,8 @@
       timeLimitHint: '0 = no limit. Over the limit you lose 1 impact point every 10 seconds.',
       manual: 'Rules',
       readManual: 'Read the rules',
+      soundOn: 'Turn sound on',
+      soundOff: 'Turn sound off',
       close: 'Close'
     },
 

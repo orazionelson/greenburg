@@ -167,6 +167,7 @@
   <li>Le mosse possibili lampeggiano in giallo: si giocano cliccando sul tabellone o con i pulsanti del pannello a destra.</li>
   <li>Per l'Urbanista si sceglie prima una tessera dell'esposizione, poi la tessera grigia su cui posarla.</li>
   <li>Passa il puntatore su una tessera, oppure tienila premuta su uno schermo tattile, per vederne nome, testo e valori.</li>
+  <li>Un suono annuncia l'inizio del turno di ogni giocatore, altri accompagnano le tessere prese, posate e girate. Il pulsante con l'altoparlante, in alto, li disattiva.</li>
   <li>La partita si salva da sola nel browser e si riprende dalla schermata iniziale.</li>
 </ul>`
       }
